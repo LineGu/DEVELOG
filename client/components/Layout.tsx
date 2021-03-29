@@ -1,13 +1,14 @@
-import React, { ReactNode } from 'react'
-import Link from 'next/link'
-import Head from 'next/head'
+import React, { ReactElement, ReactNode } from 'react';
+import Link from 'next/link';
+import Head from 'next/head';
+import { REPLCommand } from 'repl';
 
 type Props = {
-  children?: ReactNode
-  title?: string
-}
+  children?: ReactNode;
+  title?: string;
+};
 
-const Layout = ({ children, title = 'This is the default title' }: Props) => (
+const Layout = ({ children, title = 'This is the default title' }: Props): ReactElement => (
   <div>
     <Head>
       <title>{title}</title>
@@ -17,15 +18,15 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
     <header>
       <nav>
         <Link href="/">
-          <a>Home</a>
+          <a href="#!">Home</a>
         </Link>{' '}
         |{' '}
         <Link href="/about">
-          <a>About</a>
+          <a href="#!">About</a>
         </Link>{' '}
         |{' '}
         <Link href="/users">
-          <a>Users List</a>
+          <a href="#!">Users List</a>
         </Link>{' '}
         | <a href="/api/users">Users API</a>
       </nav>
@@ -36,6 +37,6 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
       <span>I'm here to stay (Footer)</span>
     </footer>
   </div>
-)
+);
 
-export default Layout
+export default Layout;
