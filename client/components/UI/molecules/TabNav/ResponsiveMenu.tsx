@@ -2,9 +2,18 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { IoIosMenu } from 'react-icons/io';
 
+type ResponsiveMenuProps = {
+  onClick: () => void;
+};
+
 const StyledResonsiveMenu = styled.div`
   position: absolute;
   display: none;
+  &:hover {
+    color: #000000;
+    cursor: pointer;
+  }
+
   @media (max-width: 960px) {
     display: block;
     margin-bottom: 1%;
@@ -20,9 +29,9 @@ const StyledIcon = styled(IoIosMenu)`
   max-height: 40px;
 `;
 
-function ResponsiveMenu(): ReactElement {
+function ResponsiveMenu({ onClick }: ResponsiveMenuProps): ReactElement {
   return (
-    <StyledResonsiveMenu>
+    <StyledResonsiveMenu onClick={onClick}>
       <StyledIcon />
     </StyledResonsiveMenu>
   );

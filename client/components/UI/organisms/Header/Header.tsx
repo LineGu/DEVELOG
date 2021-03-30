@@ -9,6 +9,7 @@ const StyledHeaderSection = styled.header`
   width: 100%;
   height: 15%;
   background-color: #f1efff;
+  border-bottom: 1px solid #878282;
   @media (max-width: 960px) {
     height: 10%;
   }

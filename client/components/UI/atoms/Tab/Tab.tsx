@@ -12,6 +12,11 @@ const StyledTab = styled.div`
   opacity: ${(props) => (props.color === '#c17fce' ? '100%' : '60%')};
   text-decoration: ${(props) => (props.color === '#c17fce' ? 'underline' : 'none')};
   margin-left: 20px;
+
+  &:hover {
+    opacity: 100%;
+    cursor: pointer;
+  }
 `;
 
 function Tab({ tagName, currentTag }: Props): ReactElement {
