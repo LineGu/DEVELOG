@@ -21,7 +21,7 @@
     "strictFunctionTypes": true /* Enable strict checking of function types. */,
     "strictBindCallApply": true /* Enable strict 'bind', 'call', and 'apply' methods on functions. */,
     "strictPropertyInitialization": true /* Enable strict checking of property initialization in classes. */,
-    "target": "esnext",
+    "target": "ESNext",
     "checkJs": true,
     "noImplicitThis": true /* Raise error on 'this' expressions with an implied 'any' type. */,
             //"noUncheckedIndexedAccess": true /* Include 'undefined' in index signature results */,
@@ -32,6 +32,6 @@
     "sourceMap": true,
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts","**/*.tsx","**/*.jsx", "pages/_app.", "pages/_app.js"]
+  "include": ["**/*.ts","**/*.tsx","**/*.jsx","pages/_app.","pages/_app.js", "components/UI/molecules/TabNav"]
 }
 

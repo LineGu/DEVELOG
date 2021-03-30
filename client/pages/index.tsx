@@ -1,9 +1,6 @@
 import React, { ReactElement } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
-import styled from 'styled-components';
-import Layout from '../components/Layout';
-import Header from '../components/header';
+import Header from '../components/UI/organisms/Header/index';
 
 const IndexPage = (): ReactElement => {
   return (
@@ -25,11 +22,7 @@ const IndexPage = (): ReactElement => {
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Header currentTag="ABOUT" />
-      <footer>
-        <hr />
-        <span>I'm here to stay (Footer)</span>
-      </footer>
+      <Header currentTag="PORTFOLIO" />
     </div>
   );
 };
