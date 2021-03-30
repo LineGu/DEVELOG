@@ -9,6 +9,9 @@ const StyledHeaderSection = styled.header`
   width: 100%;
   height: 19.2%;
   background-color: #f1efff;
+  @media (max-width: 600px) {
+    height: 12.2%;
+  }
 `;
 
 type Props = {
