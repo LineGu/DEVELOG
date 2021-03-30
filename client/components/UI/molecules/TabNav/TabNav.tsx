@@ -1,15 +1,19 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import Tab from '../../atoms/Tag/index';
+import Tab from '../../atoms/Tab/index';
+import ResponsiveMenu from './ResponsiveMenu';
 
-export const StyledTagListBox = styled.nav`
+export const StyledTabNav = styled.nav`
   display: flex;
-  width: 26.7%;
   font-size: 22px;
   font-weight: 500;
   color: #707070;
-  margin-left: 22.5%;
-  margin-top: 8%;
+  margin-right: 1%;
+  margin-bottom: 2%;
+
+  @media (max-width: 960px) {
+    display: none;
+  }
 `;
 
 const tagList: string[] = ['ABOUT', 'PORTFOLIO', 'BLOG', 'CONTACT', 'LOGIN'];
@@ -18,14 +22,17 @@ type Props = {
   currentTag: string;
 };
 
-function TagList({ currentTag }: Props): ReactElement {
+function TabNav({ currentTag }: Props): ReactElement {
   return (
-    <StyledTagListBox>
-      {tagList.map((tag: string, index: number) => (
-        <Tab tagName={tag} currentTag={currentTag} key={index} />
-      ))}
-    </StyledTagListBox>
+    <>
+      <StyledTabNav>
+        {tagList.map((tag: string, index: number) => (
+          <Tab tagName={tag} currentTag={currentTag} key={index} />
+        ))}
+      </StyledTabNav>
+      <ResponsiveMenu />
+    </>
   );
 }
 
-export default TagList;
+export default TabNav;

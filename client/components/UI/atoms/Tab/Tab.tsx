@@ -14,7 +14,7 @@ const StyledTab = styled.div`
   margin-left: 20px;
 `;
 
-function Tag({ tagName, currentTag }: Props): ReactElement {
+function Tab({ tagName, currentTag }: Props): ReactElement {
   const color = tagName === currentTag ? '#c17fce' : '#707070';
   return (
     <Link href="/">
@@ -23,4 +23,4 @@ function Tag({ tagName, currentTag }: Props): ReactElement {
   );
 }
 
-export default Tag;
+export default Tab;
