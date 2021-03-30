@@ -1,8 +1,7 @@
-import React, { ReactElement, useContext } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import BlogMark from '../../atoms/BlogMark/index';
 import TabNav from '../../molecules/TabNav/index';
-import { WidthContext } from '../../../../utils/widthProvider';
 
 const StyledHeaderSection = styled.header`
   display: flex;
@@ -15,12 +14,12 @@ const StyledHeaderSection = styled.header`
   }
 `;
 
-const StyledHeaderBaseLine = styled.div<BaseLineProps>`
+const StyledHeaderBaseLine = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   position: relative;
-  width: ${(props) => -(0.03684 * props.width) + 136}%;
+  width: calc(15.1515vw + 848.4848px);
   height: 100%;
   @media (max-width: 960px) {
     justify-content: center;
@@ -31,16 +30,10 @@ type Props = {
   currentTag: string;
 };
 
-type BaseLineProps = {
-  width: number;
-};
-
 function Header({ currentTag }: Props): ReactElement {
-  const { width } = useContext(WidthContext);
-
   return (
     <StyledHeaderSection>
-      <StyledHeaderBaseLine width={width}>
+      <StyledHeaderBaseLine>
         <BlogMark />
         <TabNav currentTag={currentTag} />
       </StyledHeaderBaseLine>

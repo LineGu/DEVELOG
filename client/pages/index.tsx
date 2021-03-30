@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react';
 import Head from 'next/head';
 import Header from '../components/UI/organisms/Header/index';
-import WidthProvider from '../utils/widthProvider';
 
 const IndexPage = (): ReactElement => {
   return (
@@ -23,9 +22,7 @@ const IndexPage = (): ReactElement => {
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <WidthProvider>
-        <Header currentTag="PORTFOLIO" />
-      </WidthProvider>
+      <Header currentTag="PORTFOLIO" />
     </div>
   );
 };
