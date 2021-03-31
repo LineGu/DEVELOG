@@ -15,6 +15,15 @@ export const StyledTabNav = styled.nav`
   @media (max-width: 960px) {
     display: none;
   }
+
+  @keyframes left {
+    0% {
+      transform: translate3d(100%, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
 `;
 
 const TabNavBox = styled.div`
@@ -23,26 +32,22 @@ const TabNavBox = styled.div`
     position: absolute;
     flex-direction: column;
     right: calc(7.6vw - 26px);
-    top: 94%;
-    background-color: #d0d0d0;
-    border-radius: 0.4em;
-    padding: 1%;
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    top: 99%;
 
-    &:after {
-      border-top: 0px solid #f1efff;
-      border-left: 7px solid #f1efff;
-      border-right: 7px solid #f1efff;
-      border-bottom: 10px solid #d0d0d0;
-      content: '';
-      position: absolute;
-      top: -10px;
-      left: 79%;
-    }
+    animation-name: left;
+    animation-duration: 0.8s;
+    animation-iteration-count: initial;
+    animation-delay: 0s;
+    animation-timing-function: ease-out;
 
     & > div {
-      border-bottom: 1px solid #878282;
-      font-size: 1.1rem;
+      text-align: center;
+      padding: 9px;
+      margin: 10px calc(10px - 1.2vw) 0 0;
+      background-color: #d0d0d0;
+      text-decoration: none;
+      box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+      font-size: 1.7vh;
     }
   }
 `;
