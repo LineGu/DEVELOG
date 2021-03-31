@@ -1,11 +1,12 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
+import Theme from '@theme/index';
 
 const StyledBlogMark = styled.span`
   font-size: 7.68vh;
   font-weight: 800;
-  color: ${(props) => props.color ?? '#707070'};
-  @media (max-width: 960px) {
+  color: ${(props) => props.color ?? Theme.BASE};
+  @media (max-width: ${Theme.BP.PC}) {
     font-size: 7vh;
   }
 `;
@@ -13,7 +14,7 @@ const StyledBlogMark = styled.span`
 function BlogMark(): ReactElement {
   return (
     <StyledBlogMark>
-      Develo<StyledBlogMark color="#c17fce">g</StyledBlogMark>
+      Develo<StyledBlogMark color={Theme.POINT}>g</StyledBlogMark>
     </StyledBlogMark>
   );
 }

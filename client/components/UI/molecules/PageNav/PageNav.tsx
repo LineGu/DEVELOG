@@ -2,13 +2,14 @@ import React, { ReactElement, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import pageLinkList from '@utils/pageLinkList';
 import LinkButton from '@atoms/LinkButton/index';
+import Theme from '@theme/index';
 import ResponsiveMenu from './ResponsiveMenu';
 
 const StyledPageNav = styled.nav`
   display: flex;
   font-size: 22px;
   font-weight: 500;
-  color: #707070;
+  color: ${Theme.BASE};
 
   margin-right: 1vw;
   margin-bottom: 3%;
@@ -16,8 +17,7 @@ const StyledPageNav = styled.nav`
   & > div {
     margin-left: 20px;
   }
-
-  @media (max-width: 960px) {
+  @media (max-width: ${Theme.BP.PC}) {
     display: none;
   }
 `;
@@ -40,19 +40,10 @@ const ResponsiveControlBox = styled.div`
       text-align: center;
       padding: 9px;
       margin: 10px calc(10px - 1.2vw) 0 0;
-      background-color: #d0d0d0;
+      background-color: ${Theme.LINK_MODAL};
       text-decoration: none;
       box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
       font-size: 1.7vh;
-    }
-  }
-
-  @keyframes left {
-    0% {
-      transform: translate3d(100%, 0, 0);
-    }
-    50% {
-      transform: translate3d(0, 0, 0);
     }
   }
 `;

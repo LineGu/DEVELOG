@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import MenuIcon from '@atoms/menuIcon/index';
+import Theme from '@theme/index';
 
 type ResponsiveMenuProps = {
   onClick: () => void;
@@ -10,15 +11,15 @@ const StyledResonsiveMenu = styled.div`
   position: absolute;
   display: none;
   &:hover {
-    color: #000000;
+    color: ${Theme.BLACK};
     cursor: pointer;
   }
 
-  @media (max-width: 960px) {
+  @media (max-width: ${Theme.BP.PC}) {
     display: block;
     margin-bottom: 1%;
     left: 90vw;
-    color: #707070;
+    color: ${Theme.BASE};
   }
 `;
 

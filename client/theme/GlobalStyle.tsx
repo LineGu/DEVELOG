@@ -13,6 +13,15 @@ function GlobalStyle(): ReactElement {
         margin: 0;
         padding: 0;
       }
+
+      @keyframes left {
+        0% {
+          transform: translate3d(100%, 0, 0);
+        }
+        50% {
+          transform: translate3d(0, 0, 0);
+        }
+      }
     `}</style>
   );
 }

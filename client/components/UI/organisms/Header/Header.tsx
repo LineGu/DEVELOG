@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import BlogMark from '@atoms/BlogMark/index';
 import PageNav from '@molecules/PageNav/PageNav';
+import Theme from '@theme/index';
 
 type Props = {
   currentPage: string;
@@ -12,9 +13,9 @@ const StyledHeaderSection = styled.header`
   justify-content: center;
   width: 100%;
   height: 15%;
-  background-color: #f1efff;
-  border-bottom: 1px solid #878282;
-  @media (max-width: 960px) {
+  background-color: ${Theme.HEADER_BACK};
+  border-bottom: 1px solid ${Theme.BASE};
+  @media (max-width: ${Theme.BP.PC}) {
     height: 10%;
   }
 `;
@@ -26,7 +27,7 @@ const StyledHeaderBaseLine = styled.div`
   position: relative;
   width: calc(15.1515vw + 848.4848px);
   height: 100%;
-  @media (max-width: 960px) {
+  @media (max-width: ${Theme.BP.PC}) {
     justify-content: center;
   }
   & > span {
