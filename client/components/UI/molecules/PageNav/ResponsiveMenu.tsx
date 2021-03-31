@@ -11,15 +11,15 @@ const StyledResonsiveMenu = styled.div`
   position: absolute;
   display: none;
   &:hover {
-    color: ${Theme.BLACK};
+    color: ${() => Theme.BLACK};
     cursor: pointer;
   }
 
-  @media (max-width: ${Theme.BP.PC}) {
+  @media (max-width: ${() => Theme.PC}) {
     display: block;
     margin-bottom: 1%;
     left: 90vw;
-    color: ${Theme.BASE};
+    color: ${() => Theme.BASE};
   }
 `;
 

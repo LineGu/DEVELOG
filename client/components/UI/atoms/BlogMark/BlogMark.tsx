@@ -6,7 +6,7 @@ const StyledBlogMark = styled.span`
   font-size: 7.68vh;
   font-weight: 800;
   color: ${(props) => props.color ?? Theme.BASE};
-  @media (max-width: ${Theme.BP.PC}) {
+  @media (max-width: ${Theme.PC}) {
     font-size: 7vh;
   }
 `;
