@@ -9,6 +9,9 @@ const StyledBlogMark = styled.span`
   @media (max-width: ${Theme.PC}) {
     font-size: 7vh;
   }
+  &::selection {
+    background: none;
+  }
 `;
 
 function BlogMark(): ReactElement {

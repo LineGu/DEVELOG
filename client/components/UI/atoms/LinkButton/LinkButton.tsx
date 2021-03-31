@@ -17,6 +17,9 @@ const StyledLink = styled.div`
     opacity: 100%;
     cursor: pointer;
   }
+  &::selection {
+    background: none;
+  }
 `;
 
 function LinkButton({ linkName, currentPage }: LinkProps): ReactElement {

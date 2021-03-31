@@ -3,18 +3,14 @@ import Theme, { LightMode, DarkMode, ThemeType } from './index';
 
 type themeContextType = {
   mode?: string;
-  changeMode: () => void;
+  changeMode?: () => void;
 };
 
 type providerPropsType = {
   children: ReactNode;
 };
 
-export const ThemeContext = createContext<themeContextType>({
-  changeMode: () => {
-    const a = 1;
-  },
-});
+export const ThemeContext = createContext<themeContextType>({});
 
 function ThemeModeProvider({ children }: providerPropsType): ReactElement {
   const [mode, setMode] = useState('LightMode');

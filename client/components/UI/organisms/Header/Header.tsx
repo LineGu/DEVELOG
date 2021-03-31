@@ -1,9 +1,10 @@
 import React, { ReactElement, useContext } from 'react';
+import Link from 'next/link';
 import styled from 'styled-components';
-import BlogMark from '@atoms/BlogMark/index';
 import PageNav from '@molecules/PageNav/PageNav';
 import Theme from '@theme/index';
 import { ThemeContext } from '@theme/themeProvider';
+import BlogMarkLink from '../BlogMarkLink/index';
 
 type HeaderProps = {
   currentPage: string;
@@ -35,6 +36,9 @@ const StyledHeaderBaseLine = styled.div`
     margin-left: 3%;
     margin-bottom: 1%;
   }
+  &>span: hover {
+    cursor: pointer;
+  }
 `;
 
 function Header({ currentPage }: HeaderProps): ReactElement {
@@ -44,7 +48,7 @@ function Header({ currentPage }: HeaderProps): ReactElement {
     <>
       <StyledHeaderSection>
         <StyledHeaderBaseLine>
-          <BlogMark />
+          <BlogMarkLink />
           <PageNav currentPage={currentPage} />
         </StyledHeaderBaseLine>
       </StyledHeaderSection>

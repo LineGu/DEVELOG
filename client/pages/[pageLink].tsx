@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext } from 'react';
+import React, { ReactElement } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Header from '@organisms/Header/index';
