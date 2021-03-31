@@ -2,11 +2,9 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 
 const StyledBlogMark = styled.span`
-  font-size: 77px;
+  font-size: 7.68vh;
   font-weight: 800;
   color: ${(props) => props.color ?? '#707070'};
-  margin-left: ${(props) => (props.color ? '0%' : '3%')};
-  margin-bottom: 1%;
   @media (max-width: 960px) {
     font-size: 7vh;
   }

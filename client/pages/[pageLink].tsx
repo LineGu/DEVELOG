@@ -1,20 +1,22 @@
 import React, { ReactElement } from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
+import Header from '@organisms/Header/index';
 import GlobalStyle from '@theme/GlobalStyle';
-import Header from '@organisms/Header';
 
-const IndexPage = (): ReactElement => {
+const SomePage = (): ReactElement => {
+  const router = useRouter();
   return (
-    <div>
+    <>
       <GlobalStyle />
       <Head>
         <title>DEVELOG</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Header currentPage="" />
-    </div>
+      <Header currentPage={`${router.query.pageLink}`} />
+    </>
   );
 };
 
-export default IndexPage;
+export default SomePage;

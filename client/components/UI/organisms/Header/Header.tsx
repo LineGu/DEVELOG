@@ -1,7 +1,11 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import BlogMark from '../../atoms/BlogMark/index';
-import TabNav from '../../molecules/TabNav/index';
+import BlogMark from '@atoms/BlogMark/index';
+import PageNav from '@molecules/PageNav/PageNav';
+
+type Props = {
+  currentPage: string;
+};
 
 const StyledHeaderSection = styled.header`
   display: flex;
@@ -25,18 +29,18 @@ const StyledHeaderBaseLine = styled.div`
   @media (max-width: 960px) {
     justify-content: center;
   }
+  & > span {
+    margin-left: 3%;
+    margin-bottom: 1%;
+  }
 `;
 
-type Props = {
-  currentTag: string;
-};
-
-function Header({ currentTag }: Props): ReactElement {
+function Header({ currentPage }: Props): ReactElement {
   return (
     <StyledHeaderSection>
       <StyledHeaderBaseLine>
         <BlogMark />
-        <TabNav currentTag={currentTag} />
+        <PageNav currentPage={currentPage} />
       </StyledHeaderBaseLine>
     </StyledHeaderSection>
   );

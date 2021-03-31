@@ -17,6 +17,8 @@ module.exports = {
     'import/prefer-default-export': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
     'react/require-default-props': 'off',
+    'import/no-unresolved': 'off',
+
     // airbnb ESLint 구성의 문제를 해결하기 위함
     'import/extensions': [
       'error',

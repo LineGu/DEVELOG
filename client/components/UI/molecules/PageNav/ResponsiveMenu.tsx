@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import { IoIosMenu } from 'react-icons/io';
+import MenuIcon from '@atoms/menuIcon/index';
 
 type ResponsiveMenuProps = {
   onClick: () => void;
@@ -22,17 +22,10 @@ const StyledResonsiveMenu = styled.div`
   }
 `;
 
-const StyledIcon = styled(IoIosMenu)`
-  width: 8vw;
-  height: 8vw;
-  max-width: 40px;
-  max-height: 40px;
-`;
-
 function ResponsiveMenu({ onClick }: ResponsiveMenuProps): ReactElement {
   return (
     <StyledResonsiveMenu onClick={onClick}>
-      <StyledIcon />
+      <MenuIcon />
     </StyledResonsiveMenu>
   );
 }

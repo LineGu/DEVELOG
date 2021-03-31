@@ -1,9 +1,10 @@
 import React, { ReactElement, useState, useCallback } from 'react';
 import styled from 'styled-components';
-import Tab from '../../atoms/Tab/index';
+import pageLinkList from '@utils/pageLinkList';
+import LinkButton from '@atoms/LinkButton/index';
 import ResponsiveMenu from './ResponsiveMenu';
 
-export const StyledTabNav = styled.nav`
+const StyledPageNav = styled.nav`
   display: flex;
   font-size: 22px;
   font-weight: 500;
@@ -12,21 +13,16 @@ export const StyledTabNav = styled.nav`
   margin-right: 1%;
   margin-bottom: 2%;
 
+  & > div {
+    margin-left: 20px;
+  }
+
   @media (max-width: 960px) {
     display: none;
   }
-
-  @keyframes left {
-    0% {
-      transform: translate3d(100%, 0, 0);
-    }
-    50% {
-      transform: translate3d(0, 0, 0);
-    }
-  }
 `;
 
-const TabNavBox = styled.div`
+const ResponsiveControlBox = styled.div`
   .mobile {
     display: block;
     position: absolute;
@@ -50,32 +46,40 @@ const TabNavBox = styled.div`
       font-size: 1.7vh;
     }
   }
+
+  @keyframes left {
+    0% {
+      transform: translate3d(100%, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
 `;
 
-const tagList: string[] = ['ABOUT', 'PORTFOLIO', 'BLOG', 'CONTACT', 'LOGIN'];
-
-type Props = {
-  currentTag: string;
+type TabNavProps = {
+  currentPage: string;
 };
 
-function TabNav({ currentTag }: Props): ReactElement {
+function PageNav({ currentPage }: TabNavProps): ReactElement {
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
-  const onClickNav = useCallback(() => {
+  const onClickMenu = useCallback(() => {
     setIsMobile(!isMobile);
   }, [isMobile]);
+
   return (
     <>
-      <ResponsiveMenu onClick={onClickNav} />
-      <TabNavBox>
-        <StyledTabNav className={isMobile ? 'mobile' : ''}>
-          {tagList.map((tag: string, index: number) => (
-            <Tab tagName={tag} currentTag={currentTag} key={index} />
+      <ResponsiveMenu onClick={onClickMenu} />
+      <ResponsiveControlBox>
+        <StyledPageNav className={isMobile ? 'mobile' : ''}>
+          {pageLinkList.map((linkName: string, index: number) => (
+            <LinkButton linkName={linkName} currentPage={currentPage} key={index} />
           ))}
-        </StyledTabNav>
-      </TabNavBox>
+        </StyledPageNav>
+      </ResponsiveControlBox>
     </>
   );
 }
 
-export default TabNav;
+export default PageNav;
