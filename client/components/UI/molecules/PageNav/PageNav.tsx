@@ -10,8 +10,8 @@ const StyledPageNav = styled.nav`
   font-weight: 500;
   color: #707070;
 
-  margin-right: 1%;
-  margin-bottom: 2%;
+  margin-right: 1vw;
+  margin-bottom: 3%;
 
   & > div {
     margin-left: 20px;
