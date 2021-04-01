@@ -1,4 +1,4 @@
-import React, { useState, ReactElement, createContext, ReactNode } from 'react';
+import React, { useState, ReactElement, createContext, ReactNode, useEffect } from 'react';
 import Theme, { LightMode, DarkMode, ThemeType } from './index';
 
 type themeContextType = {
@@ -13,10 +13,15 @@ type providerPropsType = {
 export const ThemeContext = createContext<themeContextType>({});
 
 function ThemeModeProvider({ children }: providerPropsType): ReactElement {
-  const [mode, setMode] = useState('LightMode');
-
+  const defaultMode = 'LightMode';
+  const [mode, setMode] = useState(defaultMode);
+  useEffect(() => {
+    const initMode = window.localStorage.getItem('theme') ?? 'LightMode';
+    setMode(initMode);
+  }, []);
   const changeMode = () => {
     const newMode = mode === 'LightMode' ? 'DarkMode' : 'LightMode';
+    window.localStorage.setItem('theme', `${newMode}`);
     setMode(newMode);
   };
 
