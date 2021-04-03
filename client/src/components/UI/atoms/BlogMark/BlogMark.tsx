@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import Theme from '@theme/index';
 
 const StyledBlogMark = styled.span`
+  font-family: 'PT Sans';
   font-size: 7.68vh;
-  font-weight: 600;
+  font-weight: 300;
+
   color: ${(props) => props.color ?? Theme.BASE};
   @media (max-width: ${Theme.PC}) {
     font-size: 7vh;

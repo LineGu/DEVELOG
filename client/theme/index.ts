@@ -39,7 +39,7 @@ export const DarkMode: ThemeType = {
   LINK_MODAL: '#d0d0d0',
   BLACK: '#000000',
   WHITE: '#ffffff',
-  HEADER_BACK: '#191919',
+  HEADER_BACK: '#707070',
   TOGGLE_BACK: '#000000',
   TOGGLE_BTN: '#ffffff',
   MODE: '#707070',

@@ -32,12 +32,12 @@
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {
-      "@pages/*": ["components/UI/pages/*"],
-      "@atoms/*": ["components/UI/atoms/*"],
-      "@molecules/*": ["components/UI/molecules/*"],
-      "@organisms/*": ["components/UI/organisms/*"],
-      "@utils/*": ["utils/*"],
-      "@theme/*": ["theme/*"],
+      "@pages/*": ["src/components/UI/pages/*"],
+      "@atoms/*": ["src/components/UI/atoms/*"],
+      "@molecules/*": ["src/components/UI/molecules/*"],
+      "@organisms/*": ["src/components/UI/organisms/*"],
+      "@utils/*": ["src/utils/*"],
+      "@theme/*": ["src/theme/*"],
     }
   },
   "exclude": ["node_modules"],

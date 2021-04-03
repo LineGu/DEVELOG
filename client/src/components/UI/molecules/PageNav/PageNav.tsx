@@ -7,8 +7,8 @@ import ResponsiveMenu from './ResponsiveMenu';
 
 const StyledPageNav = styled.nav`
   display: flex;
-  font-size: 22px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 400;
   color: ${() => Theme.BASE};
 
   margin-right: 1vw;
