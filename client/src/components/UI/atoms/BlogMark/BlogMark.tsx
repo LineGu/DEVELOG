@@ -4,7 +4,7 @@ import Theme from '@theme/index';
 
 const StyledBlogMark = styled.span`
   font-size: 7.68vh;
-  font-weight: 800;
+  font-weight: 600;
   color: ${(props) => props.color ?? Theme.BASE};
   @media (max-width: ${Theme.PC}) {
     font-size: 7vh;
