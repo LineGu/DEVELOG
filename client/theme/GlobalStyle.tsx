@@ -6,8 +6,7 @@ function GlobalStyle(): ReactElement {
       html,
       body,
       body > div:first-child,
-      div#__next,
-      div#__next > div {
+      div#__next {
         width: 100%;
         height: 100%;
         margin: 0;

@@ -5,7 +5,7 @@ import Header from '@organisms/Header/index';
 import GlobalStyle from '@theme/GlobalStyle';
 import ThemeModeProvider from '@theme/themeProvider';
 
-const SomePage = (): ReactElement => {
+function SomePage(): ReactElement {
   const router = useRouter();
 
   return (
@@ -19,7 +19,7 @@ const SomePage = (): ReactElement => {
       <Header currentPage={`${router.query.pageLink}`} />
     </ThemeModeProvider>
   );
-};
+}
 
 // SomePage.getInitialProps = () => {
 //   const theme = Themes.checkMode('DarkMode');

@@ -1,9 +1,9 @@
 import React, { ReactElement, useContext } from 'react';
-import Link from 'next/link';
 import styled from 'styled-components';
 import PageNav from '@molecules/PageNav/PageNav';
 import Theme from '@theme/index';
 import { ThemeContext } from '@theme/themeProvider';
+import ThemeButton from '@molecules/ThemeBtn/index';
 import BlogMarkLink from '../BlogMarkLink/index';
 
 type HeaderProps = {
@@ -52,7 +52,7 @@ function Header({ currentPage }: HeaderProps): ReactElement {
           <PageNav currentPage={currentPage} />
         </StyledHeaderBaseLine>
       </StyledHeaderSection>
-      <button onClick={changeMode}>aaaa</button>
+      <ThemeButton onClick={changeMode} />
     </>
   );
 }
