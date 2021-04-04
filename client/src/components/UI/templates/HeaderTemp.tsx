@@ -1,14 +1,15 @@
-import React, { ReactElement } from 'react';
-import { useRouter } from 'next/router';
+import React, { ReactElement, ReactNode } from 'react';
 import Head from 'next/head';
 import Header from '@organisms/Header/index';
 import GlobalStyle from '@theme/GlobalStyle';
 import ThemeModeProvider from '@theme/themeProvider';
-import MovingBox from '@molecules/MovingBox/index';
 
-function SomePage(): ReactElement {
-  const router = useRouter();
+type IHeaderTempProps = {
+  currentPage: string;
+  children?: ReactNode;
+};
 
+function HeaderTemp({ currentPage, children }: IHeaderTempProps): ReactElement {
   return (
     <ThemeModeProvider>
       <GlobalStyle />
@@ -21,16 +22,10 @@ function SomePage(): ReactElement {
           rel="stylesheet"
         />
       </Head>
-      <Header currentPage={`${router.query.pageLink}`} />
-      <MovingBox />
+      <Header currentPage={`${currentPage}`} />
+      {children}
     </ThemeModeProvider>
   );
 }
 
-// SomePage.getInitialProps = () => {
-//   const theme = Themes.checkMode('DarkMode');
-//   console.log(theme);
-//   return { theme };
-// };+
-
-export default SomePage;
+export default HeaderTemp;

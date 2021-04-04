@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import MenuIcon from '@atoms/menuIcon/index';
+import MenuIcon from '@atoms/MenuIcon/index';
 import Theme from '@theme/index';
 
 type ResponsiveMenuProps = {

@@ -38,6 +38,7 @@
       "@organisms/*": ["src/components/UI/organisms/*"],
       "@utils/*": ["src/utils/*"],
       "@theme/*": ["src/theme/*"],
+      "@templates/*": ["src/components/UI/templates/*"]
     }
   },
   "exclude": ["node_modules"],
