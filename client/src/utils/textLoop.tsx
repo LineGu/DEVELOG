@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { ThemeContext } from '@theme/themeProvider';
 import Theme from '@theme/index';
 
 type ReturnType = {
@@ -9,10 +10,12 @@ type ReturnType = {
 };
 
 const useTextLoop = (introList: string[]): ReturnType => {
+  useContext(ThemeContext);
   const [margin, setMargin] = useState<string>('100%');
   const [color, setColor] = useState<string>(Theme.POINT);
   const [opacity, setOpacity] = useState<string>('100%');
   const [intro, setIntro] = useState<string>(introList[0]);
+
   useEffect(() => {
     let mounted = true;
     let newColor = color;

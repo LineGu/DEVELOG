@@ -38,12 +38,16 @@ const ResponsiveControlBox = styled.div`
 
     & > div {
       text-align: center;
+      opacity: 100%;
       padding: 9px;
       margin: 10px calc(10px - 1.2vw) 0 0;
       background-color: ${() => Theme.LINK_MODAL};
       text-decoration: none;
       box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
       font-size: 1.7vh;
+    }
+    & > div:hover {
+      color: ${() => Theme.HOVER_POINT};
     }
   }
 `;

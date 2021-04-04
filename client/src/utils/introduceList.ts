@@ -5,6 +5,6 @@ const introList: string[] = [
   '새로운 기술을 빠르게 #습득#하며/이 과정을 즐거워합니다.',
 ];
 
-export const pointString: string[] = ['강현구', '소통', '열정', '애정', '습득'];
+export const pointWord: string[] = ['강현구', '소통', '열정', '애정', '습득'];
 
 export default introList;

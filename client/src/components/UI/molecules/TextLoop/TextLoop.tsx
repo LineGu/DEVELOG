@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import useTextLoop from '@utils/textLoop';
 import Theme from '@theme/index';
-import introList, { pointString } from '@utils/introduceList';
+import introList, { pointWord } from '@utils/introduceList';
 
 const StyledTextLoop = styled.div<{ margin: string; color: string }>`
   display: flex;
@@ -11,6 +11,7 @@ const StyledTextLoop = styled.div<{ margin: string; color: string }>`
   align-items: center;
   width: 100%;
   height: 50%;
+
   .left {
     border-top: 1px solid ${(props) => props.color};
     border-bottom: 1px solid ${(props) => (props.color === Theme.POINT ? Theme.BLACK : Theme.POINT)};
@@ -32,7 +33,6 @@ const StyledSlideBox = styled.div`
 
 const StyledTextBox = styled.span<{ opacity: string }>`
   position: absolute;
-  z-index: 2;
   font-size: 4vh;
   font-family: 'PT Sans';
   letter-spacing: 2px;
@@ -40,6 +40,7 @@ const StyledTextBox = styled.span<{ opacity: string }>`
   text-align: center;
   transition: opacity 0.5s ease 0s;
   opacity: ${(props) => props.opacity};
+  color: ${() => Theme.INTRO};
 `;
 
 const StyledPointText = styled.span`
@@ -57,12 +58,12 @@ function TextLoop(): ReactElement {
       <StyledSlideBox className="right" />
       {
         <StyledTextBox opacity={opacity}>
-          {beforeIntroduce.map((introduce) =>
-            pointString.includes(introduce) ? <StyledPointText>{introduce}</StyledPointText> : introduce,
+          {beforeIntroduce.map((introduce, index) =>
+            pointWord.includes(introduce) ? <StyledPointText key={index}>{introduce}</StyledPointText> : introduce,
           )}
           <br />
-          {afterIntroduce.map((introduce) =>
-            pointString.includes(introduce) ? <StyledPointText>{introduce}</StyledPointText> : introduce,
+          {afterIntroduce.map((introduce, index) =>
+            pointWord.includes(introduce) ? <StyledPointText key={index}>{introduce}</StyledPointText> : introduce,
           )}
         </StyledTextBox>
       }

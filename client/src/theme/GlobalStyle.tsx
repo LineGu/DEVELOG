@@ -1,6 +1,9 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useContext } from 'react';
+import { ThemeContext } from '@theme/themeProvider';
 
 function GlobalStyle(): ReactElement {
+  const { mode } = useContext(ThemeContext);
+
   return (
     <style global jsx>{`
       html,
@@ -12,6 +15,7 @@ function GlobalStyle(): ReactElement {
         margin: 0;
         padding: 0;
         font-family: 'Noto Sans KR';
+        background-color: ${mode === 'DarkMode' ? '#242424' : '#ffffff'};
       }
 
       @keyframes left {

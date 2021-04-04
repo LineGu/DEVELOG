@@ -22,6 +22,7 @@ function HeaderTemp({ currentPage, children }: IHeaderTempProps): ReactElement {
           rel="stylesheet"
         />
       </Head>
+
       <Header currentPage={`${currentPage}`} />
       {children}
     </ThemeModeProvider>

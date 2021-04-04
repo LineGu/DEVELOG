@@ -20,6 +20,7 @@ export const LightMode: ThemeType = {
   BASE: '#707070',
   POINT: '#c17fce',
   LINK_MODAL: '#d0d0d0',
+  HOVER_POINT: '#c17fce',
   BLACK: '#000000',
   WHITE: '#ffffff',
   HEADER_BACK: '#ffffff',
@@ -27,6 +28,7 @@ export const LightMode: ThemeType = {
   TOGGLE_BTN: '#707070',
   MODE: '#6D656E',
   MODE_MARK: '#FFB33A',
+  INTRO: '#000000',
 };
 
 export const DarkMode: ThemeType = {
@@ -36,14 +38,16 @@ export const DarkMode: ThemeType = {
   MOBILE: '480px',
   BASE: '#ffffff',
   POINT: '#c17fce',
-  LINK_MODAL: '#d0d0d0',
+  LINK_MODAL: '#8E8E8E',
+  HOVER_POINT: '#000000',
   BLACK: '#000000',
   WHITE: '#ffffff',
-  HEADER_BACK: '#191919',
+  HEADER_BACK: '#242424',
   TOGGLE_BACK: '#000000',
   TOGGLE_BTN: '#ffffff',
   MODE: '#707070',
   MODE_MARK: '#FFB33A',
+  INTRO: '#ffffff',
 };
 
 export default Theme;

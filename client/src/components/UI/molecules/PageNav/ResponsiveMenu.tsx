@@ -9,6 +9,7 @@ type ResponsiveMenuProps = {
 
 const StyledResonsiveMenu = styled.div`
   position: absolute;
+
   display: none;
   &:hover {
     color: ${() => Theme.BLACK};

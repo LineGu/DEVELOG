@@ -9,13 +9,14 @@ type LinkProps = {
 };
 
 const StyledLink = styled.div`
+  position: relative;
+  z-index: 3;
   color: ${(props) => props.color};
-  opacity: ${(props) => (props.color === Theme.POINT ? '100%' : '60%')};
   text-decoration: ${(props) => (props.color === Theme.POINT ? 'underline' : 'none')};
 
   &:hover {
-    opacity: 100%;
     cursor: pointer;
+    color: ${(props) => (props.color === Theme.POINT ? Theme.POINT : Theme.LINK_MODAL)};
   }
   &::selection {
     background: none;

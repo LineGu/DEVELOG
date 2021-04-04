@@ -12,6 +12,7 @@ type HeaderProps = {
 
 const StyledHeaderSection = styled.header`
   display: flex;
+  z-index: 3;
   justify-content: center;
   width: 100%;
   height: 15%;
