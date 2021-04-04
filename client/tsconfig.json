@@ -38,7 +38,9 @@
       "@organisms/*": ["src/components/UI/organisms/*"],
       "@utils/*": ["src/utils/*"],
       "@theme/*": ["src/theme/*"],
-      "@templates/*": ["src/components/UI/templates/*"]
+      "@templates/*": ["src/components/UI/templates/*"],
+      "@img/*": ["public/assets/imgs/*"],
+
     }
   },
   "exclude": ["node_modules"],

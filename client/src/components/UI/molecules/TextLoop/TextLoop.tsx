@@ -10,7 +10,8 @@ const StyledTextLoop = styled.div<{ margin: string; color: string }>`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 50%;
+  height: 60vmin;
+  margin-top: 30px;
 
   .left {
     border-top: 1px solid ${(props) => props.color};
@@ -33,10 +34,10 @@ const StyledSlideBox = styled.div`
 
 const StyledTextBox = styled.span<{ opacity: string }>`
   position: absolute;
-  font-size: 4vh;
+  font-size: 4vmin;
   font-family: 'PT Sans';
   letter-spacing: 2px;
-  line-height: 7vh;
+  line-height: 7vmin;
   text-align: center;
   transition: opacity 0.5s ease 0s;
   opacity: ${(props) => props.opacity};
@@ -45,6 +46,16 @@ const StyledTextBox = styled.span<{ opacity: string }>`
 
 const StyledPointText = styled.span`
   color: ${() => Theme.POINT};
+`;
+
+const StyledBackground = styled.img`
+  position: absolute;
+  opacity: 60%;
+  width: 90vmax;
+  height: 135%;
+  z-index: 0;
+  pointer-events: none;
+  transition: opacity 0.5s;
 `;
 
 function TextLoop(): ReactElement {
@@ -56,6 +67,7 @@ function TextLoop(): ReactElement {
     <StyledTextLoop margin={margin} color={color}>
       <StyledSlideBox className="left" />
       <StyledSlideBox className="right" />
+      <StyledBackground src="https://i.ibb.co/Wz7KF2D/background.png" alt="background" />
       {
         <StyledTextBox opacity={opacity}>
           {beforeIntroduce.map((introduce, index) =>

@@ -10,14 +10,16 @@ type ThemeButtonProps = {
 
 const StyledToggle = styled.div`
   display: flex;
+  position: absolute;
   justify-content: flex-start;
   align-items: center;
-  margin: 10px 0 0 10px;
+  margin: 76vh 0 0 4vw;
   background-color: ${() => Theme.TOGGLE_BACK};
   border-radius: 50%;
   border: 1px solid ${() => Theme.BASE};
   width: 31px;
   height: 31px;
+
   flex-wrap: nowrap;
   overflow: hidden;
 
@@ -42,7 +44,7 @@ const StyledToggle = styled.div`
     border-radius: 1em;
     width: 130px;
     height: 30px;
-    transition: width 0.5s;
+    transition: width 0.5s ease;
     justify-content: flex-end;
     cursor: pointer;
     div > .sunImg {
