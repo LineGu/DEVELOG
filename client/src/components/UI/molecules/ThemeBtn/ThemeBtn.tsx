@@ -10,7 +10,7 @@ type ThemeButtonProps = {
 
 const StyledToggle = styled.div`
   display: flex;
-  position: absolute;
+  position: fixed;
   justify-content: flex-start;
   align-items: center;
   margin: 76vh 0 0 4vw;
@@ -19,6 +19,7 @@ const StyledToggle = styled.div`
   border: 1px solid ${() => Theme.BASE};
   width: 31px;
   height: 31px;
+  z-index: 10;
 
   flex-wrap: nowrap;
   overflow: hidden;

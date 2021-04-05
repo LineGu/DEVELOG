@@ -51,8 +51,8 @@ const StyledPointText = styled.span`
 const StyledBackground = styled.img`
   position: absolute;
   opacity: 60%;
-  width: 90vmax;
-  height: 135%;
+  width: 100vmin;
+  height: 100%;
   z-index: 0;
   pointer-events: none;
   transition: opacity 0.5s;
@@ -67,7 +67,7 @@ function TextLoop(): ReactElement {
     <StyledTextLoop margin={margin} color={color}>
       <StyledSlideBox className="left" />
       <StyledSlideBox className="right" />
-      <StyledBackground src="https://i.ibb.co/Wz7KF2D/background.png" alt="background" />
+      <StyledBackground src="https://i.ibb.co/R7zTtyz/background.png" alt="background" />
       {
         <StyledTextBox opacity={opacity}>
           {beforeIntroduce.map((introduce, index) =>
