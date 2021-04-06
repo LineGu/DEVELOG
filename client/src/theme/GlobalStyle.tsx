@@ -17,15 +17,6 @@ function GlobalStyle(): ReactElement {
         font-family: 'Noto Sans KR';
         background-color: ${mode === 'DarkMode' ? '#242424' : '#ffffff'};
       }
-
-      @keyframes left {
-        0% {
-          transform: translate3d(100%, 0, 0);
-        }
-        50% {
-          transform: translate3d(0, 0, 0);
-        }
-      }
     `}</style>
   );
 }

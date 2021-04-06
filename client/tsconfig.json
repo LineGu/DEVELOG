@@ -32,15 +32,17 @@
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {
-      "@pages/*": ["src/components/UI/pages/*"],
-      "@atoms/*": ["src/components/UI/atoms/*"],
-      "@molecules/*": ["src/components/UI/molecules/*"],
-      "@organisms/*": ["src/components/UI/organisms/*"],
+      "@pages/*": ["src/components/pages/*"],
+      "@atoms/*": ["src/components/atoms/*"],
+      "@molecules/*": ["src/components/molecules/*"],
+      "@organisms/*": ["src/components/organisms/*"],
       "@utils/*": ["src/utils/*"],
       "@theme/*": ["src/theme/*"],
-      "@templates/*": ["src/components/UI/templates/*"],
+      "@templates/*": ["src/components/templates/*"],
       "@img/*": ["public/assets/imgs/*"],
       "@hook/*": ["src/hooks/*"],
+      "@icons/*": ["src/components/icons/*"],
+
 
     }
   },
