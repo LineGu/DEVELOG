@@ -5,10 +5,7 @@ import introduceList from '@utils/introduceList';
 import Theme from '@theme/index';
 import FocusBox from '@atoms/FocusBox/index';
 import IntroduceText from '@atoms/IntroduceText/index';
-
-interface ITextBoxProps {
-  opacity: string;
-}
+import { IDynamicStyledProps } from '@interfaces';
 
 const StyledFocusBox = styled(FocusBox)`
   margin-top: 30px;
@@ -24,7 +21,7 @@ const StyledBackground = styled.img`
   transition: opacity 0.5s;
 `;
 
-const StyledTextBox = styled.span<ITextBoxProps>`
+const StyledTextBox = styled.span<IDynamicStyledProps>`
   position: absolute;
   opacity: ${({ opacity }) => opacity};
   color: ${() => Theme.INTRO};
@@ -37,13 +34,13 @@ const StyledTextBox = styled.span<ITextBoxProps>`
 `;
 
 function IntroduceBox(): ReactElement {
-  const { margin, color, opacity, introduce } = useTextLoop(introduceList);
+  const { margin, color, opacity, introduce: introduceText } = useTextLoop(introduceList);
 
   return (
     <StyledFocusBox margin={margin} color={color}>
       <StyledBackground src={Theme.INTRO_BG} alt="background" />
       <StyledTextBox opacity={opacity}>
-        <IntroduceText introduce={introduce} />
+        <IntroduceText introduce={introduceText} />
       </StyledTextBox>
     </StyledFocusBox>
   );

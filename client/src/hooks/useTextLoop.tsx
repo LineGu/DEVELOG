@@ -1,63 +1,28 @@
-import { useState, useEffect, useContext } from 'react';
-import { ThemeContext } from '@theme/themeProvider';
+import { useState, useEffect } from 'react';
 import Theme from '@theme/index';
+import { IDynamicStyledProps, IColorProps } from '@interfaces';
+import animateIntroduceText from '@utils/animateText';
+import useDependencyTheme from './useDependencyTheme';
 
-interface IReturnType {
-  margin: string;
-  color: string;
-  opacity: string;
+interface ITextLoopReturn extends IDynamicStyledProps, IColorProps {
   introduce: string;
 }
 
-const useTextLoop = (introduceList: string[]): IReturnType => {
-  useContext(ThemeContext);
+const useTextLoop = (introduceList: string[]): ITextLoopReturn => {
+  useDependencyTheme();
   const [margin, setMargin] = useState<string>('100%');
   const [color, setColor] = useState<string>(Theme.POINT);
   const [opacity, setOpacity] = useState<string>('100%');
   const [introduce, setIntro] = useState<string>(introduceList[0]);
 
   useEffect(() => {
-    let mounted = true;
-    let newColor = color;
-    let currentListIndex = 1;
-
-    setMargin('1%');
-    const timerToSetTiming = setTimeout(() => {
-      if (!mounted) {
-        clearTimeout(timerToSetTiming);
-        return;
-      }
-      setMargin('100%');
-      setOpacity('0%');
-      const timerToHide = setInterval(() => {
-        if (!mounted) {
-          clearInterval(timerToHide);
-          return;
-        }
-        setMargin('100%');
-        setOpacity('0%');
-      }, 4000);
-    }, 3000);
-
-    const timerToShow = setInterval(() => {
-      if (!mounted) {
-        clearInterval(timerToShow);
-        return;
-      }
-      setMargin('1%');
-      newColor = newColor === Theme.BLACK ? Theme.POINT : Theme.BLACK;
-      setColor(newColor);
-      setOpacity('100%');
-      setIntro(introduceList[currentListIndex]);
-
-      currentListIndex += 1;
-      const isOverList = currentListIndex > introduceList.length - 1;
-      currentListIndex = isOverList ? 0 : currentListIndex;
-    }, 4000);
-
-    return function cleanUp() {
-      mounted = false;
-    };
+    let isMounted = true;
+    const propsOfAnimateFunc = { textList: introduceList, isMounted, color, setMargin, setColor, setOpacity, setIntro };
+    animateIntroduceText(propsOfAnimateFunc);
+    function cleanUp() {
+      isMounted = false;
+    }
+    return cleanUp;
   }, []);
 
   return { margin, color, opacity, introduce };

@@ -1,14 +1,11 @@
-import React, { ReactElement, useContext } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import PageNav from 'src/components/molecules/PageNav/PageNav';
 import Theme from '@theme/index';
-import { ThemeContext } from '@theme/themeProvider';
 import ThemeButton from '@molecules/ThemeBtn/index';
+import useDependencyTheme from '@hook/useDependencyTheme';
+import { ILinkPageProps } from '@interfaces';
 import BlogMarkLink from '../BlogMarkLink/index';
-
-interface IHeaderProps {
-  currentPage: string;
-}
 
 const StyledHeaderSection = styled.header`
   display: flex;
@@ -42,8 +39,8 @@ const StyledHeaderBaseLine = styled.div`
   }
 `;
 
-function Header({ currentPage }: IHeaderProps): ReactElement {
-  const { changeMode } = useContext(ThemeContext);
+function Header({ currentPage }: ILinkPageProps): ReactElement {
+  const { changeMode } = useDependencyTheme();
 
   return (
     <>

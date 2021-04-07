@@ -1,16 +1,9 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { DiCss3 } from 'react-icons/di';
+import { IIconProps } from '@interfaces';
 
-interface IStyledIconProps {
-  margin: string;
-}
-
-interface IIconProps extends IStyledIconProps {
-  className?: string;
-}
-
-const StyledCss = styled(DiCss3)<IStyledIconProps>`
+const StyledCss = styled(DiCss3)<IIconProps>`
   width: 12vw;
   height: 12vw;
   color: #006baf;

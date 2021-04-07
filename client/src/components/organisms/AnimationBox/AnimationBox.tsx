@@ -1,17 +1,17 @@
-import React, { ReactElement, useState, useCallback, useContext } from 'react';
+import React, { ReactElement, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import TechnicalStackBox from '@molecules/TechnicalStackBox/index';
 import useScroll from '@hook/useScroll';
+import useDependencyTheme from '@hook/useDependencyTheme';
 import Theme from '@theme/index';
 import { DownArrowIcon } from '@icons/index';
-import { ThemeContext } from '@theme/themeProvider';
 
-interface IAnimationBoxProps {
+interface IScrollAnimationProps {
   scroll: number;
   height: string;
 }
 
-const StyledAnimationBox = styled.div<IAnimationBoxProps>`
+const StyledAnimationBox = styled.div<IScrollAnimationProps>`
   display: flex;
   position: relative;
   justify-content: center;
@@ -85,8 +85,8 @@ const StyledTitle = styled.span`
 `;
 
 function AnimationBox(): ReactElement {
+  useDependencyTheme();
   const { position } = useScroll();
-  useContext(ThemeContext);
   const [isShowAnimation, setIsShowAnimation] = useState(false);
 
   const controlAnimationBox = useCallback((): void => {

@@ -1,16 +1,9 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { SiMysql } from 'react-icons/si';
+import { IIconProps } from '@interfaces';
 
-interface IStyledIconProps {
-  margin: string;
-}
-
-interface IIconProps extends IStyledIconProps {
-  className?: string;
-}
-
-const StyledMysql = styled(SiMysql)<IStyledIconProps>`
+const StyledMysql = styled(SiMysql)<IIconProps>`
   width: 12vw;
   height: 12vw;
   color: #196c89;

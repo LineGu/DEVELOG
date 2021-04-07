@@ -3,11 +3,8 @@ import styled from 'styled-components';
 import pageLinkList from '@utils/pageLinkList';
 import LinkButton from '@atoms/LinkButton/index';
 import Theme from '@theme/index';
+import { ILinkPageProps } from '@interfaces';
 import ResponsiveMenu from './ResponsiveMenu';
-
-interface ITabNavProps {
-  currentPage: string;
-}
 
 const StyledPageNav = styled.nav`
   display: flex;
@@ -26,7 +23,7 @@ const StyledPageNav = styled.nav`
 `;
 
 const ResponsiveControlBox = styled.div`
-  .mobile {
+  .showModal {
     display: block;
     position: absolute;
     flex-direction: column;
@@ -55,19 +52,19 @@ const ResponsiveControlBox = styled.div`
   }
 `;
 
-function PageNav({ currentPage }: ITabNavProps): ReactElement {
-  const [isMobile, setIsMobile] = useState<boolean>(false);
+function PageNav({ currentPage }: ILinkPageProps): ReactElement {
+  const [isShowingLinkModal, setIsShowingLinkModal] = useState<boolean>(false);
 
   const onClickMenu = useCallback(() => {
-    setIsMobile(!isMobile);
-  }, [isMobile]);
+    setIsShowingLinkModal(!isShowingLinkModal);
+  }, [isShowingLinkModal]);
 
   return (
     <>
       <ResponsiveMenu onClick={onClickMenu} />
       <ResponsiveControlBox>
-        <StyledPageNav className={isMobile ? 'mobile' : ''}>
-          {pageLinkList.map((linkName: string, index: number) => (
+        <StyledPageNav className={isShowingLinkModal ? 'showModal' : ''}>
+          {pageLinkList.map((linkName, index) => (
             <LinkButton linkName={linkName} currentPage={currentPage} key={index} />
           ))}
         </StyledPageNav>

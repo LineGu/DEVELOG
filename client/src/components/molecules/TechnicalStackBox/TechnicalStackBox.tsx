@@ -2,17 +2,14 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import IconBox from '@atoms/IconBox/index';
 import { MysqlIcon, NextIcon, ReduxIcon, ReactIcon, CssIcon, HtmlIcon, JsIcon } from '@icons/index';
-
-interface ITechnicalStackBoxProps {
-  className: string;
-}
+import { IComponentProps } from '@interfaces';
 
 const StyledTechnicalStackBox = styled(IconBox)`
   top: 55%;
   right: 100%;
 `;
 
-function TechnicalStackBox({ className }: ITechnicalStackBoxProps): ReactElement {
+function TechnicalStackBox({ className }: IComponentProps): ReactElement {
   return (
     <StyledTechnicalStackBox className={className}>
       <MysqlIcon margin={'0 0 0 0'} />

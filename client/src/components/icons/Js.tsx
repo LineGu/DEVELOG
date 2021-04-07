@@ -1,16 +1,9 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { DiJsBadge } from 'react-icons/di';
+import { IIconProps } from '@interfaces';
 
-interface IStyledIconProps {
-  margin: string;
-}
-
-interface IIconProps extends IStyledIconProps {
-  className?: string;
-}
-
-const StyledJs = styled(DiJsBadge)<IStyledIconProps>`
+const StyledJs = styled(DiJsBadge)<IIconProps>`
   width: 10vw;
   height: 10vw;
   color: #ffb33a;

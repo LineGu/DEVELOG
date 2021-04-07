@@ -1,12 +1,9 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
+import { IColorProps } from '@interfaces';
 
-interface IBlogMarkProps {
-  color?: string;
-}
-
-const StyledBlogMark = styled.span<IBlogMarkProps>`
+const StyledBlogMark = styled.span<IColorProps>`
   color: ${({ color }) => color ?? Theme.BASE};
   font-family: 'PT Sans';
   font-size: 7.68vh;

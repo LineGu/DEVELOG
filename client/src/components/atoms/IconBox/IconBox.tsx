@@ -1,11 +1,7 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
-
-interface IIconBoxProps {
-  children: ReactNode;
-  className: string;
-}
+import { IComponentProps } from '@interfaces';
 
 const StyledIconBox = styled.div`
   display: flex;
@@ -15,7 +11,7 @@ const StyledIconBox = styled.div`
   border-bottom: 1px solid ${() => Theme.POINT};
 `;
 
-function IconBox({ children, className }: IIconBoxProps): ReactElement {
+function IconBox({ children, className }: IComponentProps): ReactElement {
   return <StyledIconBox className={className}>{children}</StyledIconBox>;
 }
 

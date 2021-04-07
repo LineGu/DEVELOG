@@ -5,8 +5,9 @@ interface IUseScrollProps {
 }
 
 const useScroll: () => IUseScrollProps = () => {
+  const initialHeight = 1000;
   const [scroll, setScroll] = useState<number>(0);
-  const screenHeight = useRef<number>(1000);
+  const screenHeight = useRef<number>(initialHeight);
 
   const notifyLocation = useCallback(() => {
     setScroll(document.documentElement.scrollTop);

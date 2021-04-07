@@ -12,15 +12,15 @@ const StyledPointText = styled.span`
 `;
 
 function IntroduceText({ introduce }: IIntroduceTextProps): ReactElement {
-  const sentenceDivided = introduce.split('/');
+  const sentencesDividedByLine = introduce.split('/');
   return (
     <>
-      {sentenceDivided.map((sentence, sentenseIndex) => {
-        const wordDivided = sentence.split('#');
+      {sentencesDividedByLine.map((sentence, sentenseIndex) => {
+        const wordsDivided = sentence.split('#');
 
         return (
           <Fragment key={sentenseIndex}>
-            {wordDivided.map((word, wordIndex) =>
+            {wordsDivided.map((word, wordIndex) =>
               pointWord.includes(word) ? <StyledPointText key={wordIndex}>{word}</StyledPointText> : word,
             )}
             <br />

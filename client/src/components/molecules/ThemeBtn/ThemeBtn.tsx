@@ -3,10 +3,7 @@ import styled from 'styled-components';
 import Theme from '@theme/index';
 import { ThemeContext } from '@theme/themeProvider';
 import { SunIcon, MoonIcon } from '@icons/index';
-
-interface IThemeButtonProps {
-  onClick: (() => void) | undefined;
-}
+import { IButtonProps } from '@interfaces';
 
 const StyledToggle = styled.div`
   display: flex;
@@ -94,7 +91,7 @@ const StyledModeText = styled.span`
   opacity: 100%;
 `;
 
-function ThemeButton({ onClick }: IThemeButtonProps): ReactElement {
+function ThemeButton({ onClick }: IButtonProps): ReactElement {
   const { mode } = useContext(ThemeContext);
   const [currentMode, newMode] = mode === 'LightMode' ? ['Light', 'Dark'] : ['Dark', 'Light'];
 

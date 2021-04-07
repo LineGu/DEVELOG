@@ -2,17 +2,9 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import Theme from '@theme/index';
+import { ILinkPageProps, IColorProps } from '@interfaces';
 
-interface ILinkButtonProps {
-  linkName: string;
-  currentPage: string;
-}
-
-interface ILinkProps {
-  color: string;
-}
-
-const StyledLink = styled.div<ILinkProps>`
+const StyledLink = styled.div<IColorProps>`
   position: relative;
   z-index: 3;
   color: ${({ color }) => color};
@@ -27,11 +19,11 @@ const StyledLink = styled.div<ILinkProps>`
   }
 `;
 
-function LinkButton({ linkName, currentPage }: ILinkButtonProps): ReactElement {
-  const color = linkName === currentPage ? Theme.POINT : Theme.BASE;
+function LinkButton({ linkName, currentPage }: ILinkPageProps): ReactElement {
+  const textColor = linkName?.toLowerCase() === currentPage ? Theme.POINT : Theme.BASE;
   return (
-    <Link href={`/${linkName}`}>
-      <StyledLink color={color}>{linkName}</StyledLink>
+    <Link href={`/${linkName?.toLowerCase()}`}>
+      <StyledLink color={textColor}>{linkName}</StyledLink>
     </Link>
   );
 }

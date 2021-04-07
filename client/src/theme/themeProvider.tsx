@@ -1,19 +1,15 @@
 import React, { useState, ReactElement, createContext, ReactNode, useEffect } from 'react';
+import { IThemeContextType } from '@interfaces';
 import Theme, { LightMode, DarkMode, ThemeType } from './index';
 
-interface IThemeContextType {
-  mode?: string;
-  changeMode?: () => void;
-}
-
-interface ProviderPropsType {
+interface IProviderProps {
   children: ReactNode;
   defaultMode: string;
 }
 
 export const ThemeContext = createContext<IThemeContextType>({});
 
-function ThemeModeProvider({ children, defaultMode }: ProviderPropsType): ReactElement {
+function ThemeModeProvider({ children, defaultMode }: IProviderProps): ReactElement {
   const [mode, setMode] = useState(defaultMode);
 
   useEffect(() => {

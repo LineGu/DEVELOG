@@ -1,18 +1,9 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
+import { IDynamicStyledProps, IComponentProps } from '@interfaces';
 
-interface IFocusBoxCssProps {
-  margin: string;
-  color: string;
-}
-
-interface IFocusBoxProps extends IFocusBoxCssProps {
-  children: ReactNode;
-  className?: string;
-}
-
-const StyledFocusBox = styled.div<IFocusBoxCssProps>`
+const StyledFocusBox = styled.div<IDynamicStyledProps>`
   display: flex;
   position: relative;
   justify-content: center;
@@ -39,7 +30,7 @@ const StyledSlideBox = styled.div`
   border-bottom: 1px solid ${() => Theme.BLACK};
 `;
 
-function FocusBox({ children, margin, color, className }: IFocusBoxProps): ReactElement {
+function FocusBox({ children, margin, color, className }: IComponentProps & IDynamicStyledProps): ReactElement {
   return (
     <StyledFocusBox className={className} margin={margin} color={color}>
       <StyledSlideBox className="left" />

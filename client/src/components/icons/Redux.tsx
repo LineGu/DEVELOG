@@ -1,16 +1,9 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { SiRedux } from 'react-icons/si';
+import { IIconProps } from '@interfaces';
 
-interface IStyledIconProps {
-  margin: string;
-}
-
-interface IIconProps extends IStyledIconProps {
-  className?: string;
-}
-
-const StyledRedux = styled(SiRedux)<IStyledIconProps>`
+const StyledRedux = styled(SiRedux)<IIconProps>`
   width: 10vw;
   height: 10vw;
   color: #1e1e29;

@@ -42,8 +42,7 @@
       "@img/*": ["public/assets/imgs/*"],
       "@hook/*": ["src/hooks/*"],
       "@icons/*": ["src/components/icons/*"],
-
-
+      "@interfaces": ["src/interfaces/index"],
     }
   },
   "exclude": ["node_modules"],

@@ -1,16 +1,9 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { DiHtml5 } from 'react-icons/di';
+import { IIconProps } from '@interfaces';
 
-interface IStyledIconProps {
-  margin: string;
-}
-
-interface IIconProps extends IStyledIconProps {
-  className?: string;
-}
-
-const StyledHtml = styled(DiHtml5)<IStyledIconProps>`
+const StyledHtml = styled(DiHtml5)<IIconProps>`
   width: 12vw;
   height: 12vw;
   color: #006baf;
