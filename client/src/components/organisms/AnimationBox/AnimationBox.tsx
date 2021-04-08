@@ -14,6 +14,7 @@ interface IScrollAnimationProps {
 const StyledAnimationBox = styled.div<IScrollAnimationProps>`
   display: flex;
   position: relative;
+  z-index: 5;
   justify-content: center;
   width: 100%;
   height: ${({ height }) => height};
@@ -97,7 +98,7 @@ function AnimationBox(): ReactElement {
   }, [isShowAnimation]);
 
   return (
-    <StyledAnimationBox scroll={position} height={isShowAnimation ? '5000%' : '0%'}>
+    <StyledAnimationBox scroll={position} height={isShowAnimation ? '5000%' : '22%'}>
       <div className="scrollInducer" onClick={controlAnimationBox}>
         <DownArrowIcon className="downArrow" />
         <span>
