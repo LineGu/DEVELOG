@@ -1,6 +1,6 @@
 import React, { ReactElement, useState, useCallback } from 'react';
 import styled from 'styled-components';
-import pageLinkList from '@utils/pageLinkList';
+import pageLinkList from '@construction/pageLinkList';
 import LinkButton from '@atoms/LinkButton/index';
 import Theme from '@theme/index';
 import { ILinkPageProps } from '@interfaces';

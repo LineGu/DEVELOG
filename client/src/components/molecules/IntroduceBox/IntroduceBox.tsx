@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import useTextLoop from '@hook/useTextLoop';
-import introduceList from '@utils/introduceList';
+import introduceList from '@construction/introduceList';
 import Theme from '@theme/index';
 import FocusBox from '@atoms/FocusBox/index';
 import IntroduceText from '@atoms/IntroduceText/index';

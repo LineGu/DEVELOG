@@ -1,6 +1,6 @@
 import React, { Fragment, ReactElement } from 'react';
 import styled from 'styled-components';
-import { pointWord } from '@utils/introduceList';
+import { pointWord } from '@construction/introduceList';
 import Theme from '@theme/index';
 
 interface IIntroduceTextProps {

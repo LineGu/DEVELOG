@@ -1,64 +1,56 @@
 import { Dispatch, SetStateAction } from 'react';
 import { IColorProps } from '@interfaces';
 import Theme from '@theme/index';
+import { fadeInTextBox, fadeOutTextBox } from '@utils/fadeText';
 
-interface IAnimateProps extends IColorProps {
-  textList: string[];
+interface IFadeInOutProps {
   isMounted: boolean;
   setMargin: Dispatch<SetStateAction<string>>;
-  setColor: Dispatch<SetStateAction<string>>;
   setOpacity: Dispatch<SetStateAction<string>>;
+}
+
+interface IChangeOrderProps extends IColorProps {
+  isMounted: boolean;
+  textList: string[];
+  setColor: Dispatch<SetStateAction<string>>;
   setIntro: Dispatch<SetStateAction<string>>;
 }
 
-const REPEAT_START_TIMING = 3000;
+interface IChangeOrderFunc {
+  (props: IChangeOrderProps): void;
+}
+
+interface IAnimateTextFunc {
+  (props: IFadeInOutProps & IChangeOrderProps): void;
+}
+
 const TEXT_PERIOD = 4000;
+const MINIMUM_GAP_BOXES = '1%';
 
-const animateIntroduceText: (props: IAnimateProps) => void = ({
-  textList,
-  isMounted,
-  color,
-  setMargin,
-  setColor,
-  setOpacity,
-  setIntro,
-}) => {
-  let newColor = color;
+const changeNextOrder: IChangeOrderFunc = ({ isMounted, color, textList, setColor, setIntro }) => {
   let currentListIndex = 1;
-
-  setMargin('1%');
-  const setTimingText = setTimeout(() => {
+  let newColor = color;
+  const timerToChange = setInterval(() => {
     if (!isMounted) {
-      clearTimeout(setTimingText);
+      clearInterval(timerToChange);
       return;
     }
-    setMargin('100%');
-    setOpacity('0%');
-    const hideText = setInterval(() => {
-      if (!isMounted) {
-        clearInterval(hideText);
-        return;
-      }
-      setMargin('100%');
-      setOpacity('0%');
-    }, TEXT_PERIOD);
-  }, REPEAT_START_TIMING);
-
-  const timerToShow = setInterval(() => {
-    if (!isMounted) {
-      clearInterval(timerToShow);
-      return;
-    }
-    setMargin('1%');
     newColor = newColor === Theme.BLACK ? Theme.POINT : Theme.BLACK;
     setColor(newColor);
-    setOpacity('100%');
     setIntro(textList[currentListIndex]);
-
     currentListIndex += 1;
     const isOverList = currentListIndex > textList.length - 1;
     currentListIndex = isOverList ? 0 : currentListIndex;
   }, TEXT_PERIOD);
+};
+
+const animateIntroduceText: IAnimateTextFunc = (props) => {
+  const { textList, isMounted, color, setMargin, setColor, setOpacity, setIntro } = props;
+  setMargin(MINIMUM_GAP_BOXES);
+
+  fadeOutTextBox({ isMounted, setMargin, setOpacity });
+  fadeInTextBox({ isMounted, setMargin, setOpacity });
+  changeNextOrder({ isMounted, color, textList, setColor, setIntro });
 };
 
 export default animateIntroduceText;

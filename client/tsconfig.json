@@ -39,13 +39,14 @@
       "@utils/*": ["src/utils/*"],
       "@theme/*": ["src/theme/*"],
       "@templates/*": ["src/components/templates/*"],
-      "@img/*": ["public/assets/imgs/*"],
+      "@img/*": ["public/assets/images/*"],
       "@hook/*": ["src/hooks/*"],
       "@icons/*": ["src/components/icons/*"],
       "@interfaces": ["src/interfaces/index"],
+      "@construction/*": ["src/assets/construction/*"],
     }
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts","**/*.tsx","**/*.jsx","pages/_app.","pages/_app.js", "components/UI/molecules/PageNav"]
+  "include": ["**/*.ts","**/*.tsx","**/*.jsx"]
 }
 
