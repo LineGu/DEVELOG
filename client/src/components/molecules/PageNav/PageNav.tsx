@@ -1,26 +1,9 @@
 import React, { ReactElement, useState, useCallback } from 'react';
 import styled from 'styled-components';
-import pageLinkList from '@construction/pageLinkList';
-import LinkButton from '@atoms/LinkButton/index';
 import Theme from '@theme/index';
 import { ILinkPageProps } from '@interfaces';
 import ResponsiveMenu from './ResponsiveMenu';
-
-const StyledPageNav = styled.nav`
-  display: flex;
-  margin-right: 1vw;
-  margin-bottom: 3%;
-  color: ${() => Theme.BASE};
-  font-size: 20px;
-  font-weight: 400;
-
-  & > div {
-    margin-left: 20px;
-  }
-  @media (max-width: ${() => Theme.PC}) {
-    display: none;
-  }
-`;
+import StaticPageNav from './StaticPageNav';
 
 const ResponsiveControlBox = styled.div`
   .showModal {
@@ -71,11 +54,7 @@ function PageNav({ currentPage }: ILinkPageProps): ReactElement {
     <>
       <ResponsiveMenu onClick={onClickMenu} />
       <ResponsiveControlBox>
-        <StyledPageNav className={isShowingLinkModal ? 'showModal' : ''}>
-          {pageLinkList.map((linkName, index) => (
-            <LinkButton linkName={linkName} currentPage={currentPage} key={index} />
-          ))}
-        </StyledPageNav>
+        <StaticPageNav className={isShowingLinkModal ? 'showModal' : ''} currentPage={currentPage} />
       </ResponsiveControlBox>
     </>
   );

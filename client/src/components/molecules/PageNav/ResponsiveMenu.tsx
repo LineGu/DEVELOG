@@ -12,7 +12,7 @@ const StyledResonsiveMenu = styled.div`
   position: absolute;
 
   &:hover {
-    color: ${() => Theme.BLACK};
+    opacity: 50%;
     cursor: pointer;
   }
 

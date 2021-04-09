@@ -58,9 +58,13 @@ const StyledAnimationBox = styled.div<IScrollAnimationProps>`
   }
   .thirdTitle {
     visibility: ${({ scroll }) => (scroll < 930 ? 'hidden' : 'visible')};
-    top: 60%;
+    top: 57vh;
     left: ${({ scroll }) => (scroll < 1400 ? '' : scroll - 1360)}%;
     opacity: ${({ scroll }) => 0.4 * (scroll - 930)}%;
+
+    @media (max-width: ${() => Theme.PC}) {
+      top: 45%;
+    }
   }
 
   .webTitle {
@@ -68,6 +72,14 @@ const StyledAnimationBox = styled.div<IScrollAnimationProps>`
     top: 45%;
     right: 15%;
     opacity: ${({ scroll }) => 0.4 * (scroll - 1650)}%;
+    @media (max-width: ${() => Theme.HDPC}) {
+      top: 40%;
+      right: 10%;
+    }
+    @media (max-width: ${() => Theme.PC}) {
+      top: 40%;
+      right: 10%;
+    }
   }
 
   .mobileTitle {
@@ -75,12 +87,23 @@ const StyledAnimationBox = styled.div<IScrollAnimationProps>`
     top: 40%;
     right: 10%;
     opacity: ${({ scroll }) => 0.4 * (scroll - 2300)}%;
+    @media (max-width: ${() => Theme.HDPC}) {
+      top: 25%;
+      right: 10%;
+    }
+    @media (max-width: ${() => Theme.PC}) {
+      top: 30%;
+      right: 10%;
+    }
   }
 
   .modeTitle {
     visibility: ${({ scroll }) => (scroll < 2900 || scroll > 3300 ? 'hidden' : 'visible')};
     top: 16%;
     opacity: ${({ scroll }) => 0.5 * (scroll - 2900)}%;
+    @media (max-width: ${() => Theme.PC}) {
+      top: 23%;
+    }
   }
 
   .feedbackTitle {
@@ -104,7 +127,7 @@ const StyledAnimationBox = styled.div<IScrollAnimationProps>`
   .downArrow {
     position: absolute;
     z-index: 6;
-    visibility: ${({ height }) => (height === '5000%' ? 'hidden' : 'visible')};
+    visibility: ${({ height }) => (height === '3930%' ? 'hidden' : 'visible')};
     margin: 3em 0 0 0;
     color: ${() => Theme.INTRO};
   }
@@ -192,6 +215,13 @@ const StyledStaticPageNav = styled(StaticPageNav)<IScrollAnimationProps>`
   & > div {
     margin-right: 2vw;
   }
+  @media (max-width: ${() => Theme.PC}) {
+    display: flex;
+    width: 90%;
+    & > div {
+      margin-right: 1vw;
+    }
+  }
 `;
 
 function AnimationBox(): ReactElement {
@@ -205,7 +235,6 @@ function AnimationBox(): ReactElement {
       setTimeout(() => document.documentElement.scrollTo({ top: 170, left: 0, behavior: 'smooth' }), 100);
     }
   }, [isShowAnimation]);
-
   return (
     <StyledAnimationBox scroll={position} height={isShowAnimation ? '3930%' : '0%'}>
       <div className="scrollInducer" onClick={controlAnimationBox}>
