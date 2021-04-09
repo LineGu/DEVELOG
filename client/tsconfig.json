@@ -39,7 +39,7 @@
       "@utils/*": ["src/utils/*"],
       "@theme/*": ["src/theme/*"],
       "@templates/*": ["src/components/templates/*"],
-      "@img/*": ["public/assets/images/*"],
+      "@img/*": ["src/assets/images/*"],
       "@hook/*": ["src/hooks/*"],
       "@icons/*": ["src/components/icons/*"],
       "@interfaces": ["src/interfaces/index"],

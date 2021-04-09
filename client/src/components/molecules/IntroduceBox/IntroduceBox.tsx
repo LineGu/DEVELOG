@@ -9,6 +9,9 @@ import { IDynamicStyledProps } from '@interfaces';
 
 const StyledFocusBox = styled(FocusBox)`
   margin-top: 30px;
+  @media (max-width: ${() => Theme.PC}) {
+    top: 17vh;
+  }
 `;
 
 const StyledBackground = styled.img`

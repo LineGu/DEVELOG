@@ -9,3 +9,8 @@ export { default as CssIcon } from './Css';
 export { default as HtmlIcon } from './Html';
 export { default as JsIcon } from './Js';
 export { default as DownArrowIcon } from './DownArrow';
+export { default as ScrollIcon } from './Scroll';
+export { default as UpArrowIcon } from './UpArrow';
+export { default as MacIcon } from './Mac';
+export { default as PhoneIcon } from './IPhone';
+export { default as DarkPhoneIcon } from './DarkPhone';

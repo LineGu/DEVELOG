@@ -16,7 +16,9 @@ const StyledHeaderSection = styled.header`
   background-color: ${() => Theme.HEADER_BACK};
   border-bottom: 0px solid ${() => Theme.BASE};
   @media (max-width: ${() => Theme.PC}) {
+    position: absolute;
     height: 10%;
+    top: 3vh;
   }
 `;
 

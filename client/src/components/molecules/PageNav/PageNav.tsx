@@ -50,6 +50,14 @@ const ResponsiveControlBox = styled.div`
       color: ${() => Theme.HOVER_POINT};
     }
   }
+  @keyframes left {
+    0% {
+      transform: translate3d(100%, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
 `;
 
 function PageNav({ currentPage }: ILinkPageProps): ReactElement {
