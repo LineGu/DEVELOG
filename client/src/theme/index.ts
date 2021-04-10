@@ -30,6 +30,9 @@ export const LightMode: ThemeType = {
   MODE_MARK: '#FFB33A',
   INTRO: '#000000',
   INTRO_BG: 'https://i.ibb.co/R7zTtyz/background.png',
+  CODE_BOX: '#F5F7F8',
+  EMPHASIS: '#5A5A5A',
+  CODE: `#C0CAD2`,
 };
 
 export const DarkMode: ThemeType = {
@@ -50,6 +53,9 @@ export const DarkMode: ThemeType = {
   MODE_MARK: '#FFB33A',
   INTRO: '#ffffff',
   INTRO_BG: 'https://i.ibb.co/R7zTtyz/background.png',
+  CODE_BOX: '#444444',
+  EMPHASIS: '#5A5A5A',
+  CODE: `#C0CAD2`,
 };
 
 export default Theme;
