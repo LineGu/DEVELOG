@@ -1,5 +1,5 @@
 interface IButtonProps {
-  onClick: (() => void) | undefined;
+  onClick: ((event?: Event) => void) | undefined;
 }
 
 export default IButtonProps;
