@@ -10,6 +10,9 @@ import {
   BsLink45Deg,
   BsFillImageFill,
   BsBlockquoteLeft,
+  BsTable,
+  BsCode,
+  BsCheckBox,
 } from 'react-icons/bs';
 import { IButtonProps } from '@interfaces';
 
@@ -18,6 +21,7 @@ const StyledEditButtonBox = styled.div`
   -webkit-box-align: center;
   align-items: center;
   margin: 0 0 2.5rem 3rem;
+  pointer-events: none;
 
   .h3,
   .italic {
@@ -26,6 +30,7 @@ const StyledEditButtonBox = styled.div`
   }
 
   & > svg {
+    pointer-events: visibleFill;
     width: 2rem;
     height: 2rem;
     margin: 0 1rem;
@@ -45,7 +50,12 @@ interface IEditButtonProps {
 
 function EditButtonBox({ onClick }: IEditButtonProps): ReactElement {
   return (
-    <StyledEditButtonBox>
+    <StyledEditButtonBox
+      onMouseDown={(event) => {
+        event.stopPropagation();
+        event.preventDefault();
+      }}
+    >
       <BsTypeH1 className="h1" onClick={(event) => onClick(event)} />
       <BsTypeH2 className="h2" onClick={(event) => onClick(event)} />
       <BsTypeH3 className="h3" onClick={(event) => onClick(event)} />
@@ -54,6 +64,9 @@ function EditButtonBox({ onClick }: IEditButtonProps): ReactElement {
       <BsLink45Deg className="link" onClick={(event) => onClick(event)} />
       <BsFillImageFill className="img" onClick={(event) => onClick(event)} />
       <BsBlockquoteLeft className="quote" onClick={(event) => onClick(event)} />
+      <BsTable className="table" onClick={(event) => onClick(event)} />
+      <BsCode className="code" onClick={(event) => onClick(event)} />
+      <BsCheckBox className="checkbox" onClick={(event) => onClick(event)} />
     </StyledEditButtonBox>
   );
 }

@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 import SyntaxHighlighter from 'react-syntax-highlighter';
@@ -9,6 +9,7 @@ import Theme from '@theme/index';
 import ThemeButton from '@molecules/ThemeBtn/index';
 import EditButtonBox from '@molecules/EditButtonBox/index';
 import Button from '@atoms/Button/index';
+import editInputText, { findFrontOfLine } from '@utils/editInputText';
 
 const StyledPostBox = styled.div`
   display: flex;
@@ -16,6 +17,8 @@ const StyledPostBox = styled.div`
   word-wrap: break-word;
   white-space: pre-wrap;
   word-break: normal;
+  pointer-events: none;
+
   .editArea {
     width: 50%;
     height: 100vh;
@@ -35,6 +38,7 @@ const StyledPostBox = styled.div`
     padding: 10vh 6vw;
     outline: none;
     overflow-y: scroll;
+    pointer-events: auto;
     color: ${() => Theme.INTRO};
 
     h1 {
@@ -81,6 +85,9 @@ const StyledPostBox = styled.div`
       padding: 0.15rem 0.5rem;
       margin: 0 0.2rem 0 0.5rem;
     }
+    & > *::selection {
+      background-color: inherit;
+    }
 
     @media (max-width: ${() => Theme.TABLET}) {
       display: none;
@@ -93,6 +100,7 @@ const StyledMarkdownArea = styled.textarea`
   height: 68vh;
   padding-left: 3vw;
   font-size: 1.4rem;
+  pointer-events: auto;
 
   background-color: ${() => Theme.HEADER_BACK};
 
@@ -105,6 +113,10 @@ const StyledMarkdownArea = styled.textarea`
     width: 100%;
     border: none;
   }
+
+  &::selection {
+    background-color: #dfdfdf;
+  }
 `;
 
 const TextAreaForTitle = styled.textarea`
@@ -115,13 +127,14 @@ const TextAreaForTitle = styled.textarea`
   border: none;
   outline: none;
   resize: none;
+  pointer-events: auto;
   background-color: ${() => Theme.HEADER_BACK};
   &::placeholder {
     color: #a2acb4;
   }
 `;
 
-const TextAreaForTag = styled.input`
+const TextAreaForTag = styled.input<{ value: string }>`
   font-size: 1.5em;
   font-weight: 400;
   border: none;
@@ -129,13 +142,19 @@ const TextAreaForTag = styled.input`
   resize: none;
   margin-left: 0.4rem;
   padding-bottom: 0.7rem;
+  pointer-events: auto;
   background-color: ${() => Theme.HEADER_BACK};
   &::placeholder {
+    color: #a2acb4;
+  }
+  &::selection {
+    background-color: #dfdfdf;
     color: #a2acb4;
   }
 `;
 
 const StyledThemeButton = styled(ThemeButton)`
+  pointer-events: auto;
   bottom: 7vh;
 `;
 
@@ -199,26 +218,12 @@ const StyledButton = styled(Button)`
   margin-right: 0.8em;
 `;
 
-const findCursorPoint = (element: EventTarget): number => {
-  const cursorPoint = element.selectionStart;
-  return cursorPoint;
-};
+const findCursorPoint = (element: HTMLTextAreaElement): number[] => {
+  const cursorPointStart = element?.selectionStart;
+  const cursorPointEnd = element?.selectionEnd;
+  const cursorPosition = [cursorPointStart, cursorPointEnd];
 
-const findFrontOfLine = (string: string, cursorPosition: number): number => {
-  let findingIndex = cursorPosition;
-  let isFindFront = true;
-  while (isFindFront) {
-    if (string[findingIndex] === '\n') {
-      isFindFront = false;
-      findingIndex += 1;
-      break;
-    }
-    if (findingIndex === 0) {
-      break;
-    }
-    findingIndex -= 1;
-  }
-  return findingIndex;
+  return cursorPosition;
 };
 
 function PostBox(): ReactElement {
@@ -226,8 +231,23 @@ function PostBox(): ReactElement {
   const [title, setTitle] = useState('');
   const [tagInput, setTagInput] = useState('');
   const [tagList, setTagList] = useState<string[]>([]);
-  const [cursorPosition, setCursorPosition] = useState(0);
+  const isEditText = useRef([false, [0, 0]]);
+  const [cursorPosition, setCursorPosition] = useState([0, 0]);
   const { changeMode } = useDependencyTheme();
+  const inputAreaElem = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (isEditText.current[0]) {
+      const cursorToGo = isEditText.current[1];
+      const [startPosition, endPosition] = cursorToGo as number[];
+
+      inputAreaElem.current?.focus();
+      inputAreaElem.current?.setSelectionRange(startPosition, endPosition);
+      isEditText.current = [false, [0, 0]];
+      setCursorPosition(findCursorPoint(inputAreaElem.current as HTMLTextAreaElement));
+    }
+  }, [input]);
+
   return (
     <StyledPostBox>
       <div className="editArea">
@@ -235,6 +255,7 @@ function PostBox(): ReactElement {
           placeholder="제목을 입력하세요"
           value={title}
           onChange={(event) => setTitle(event.target.value)}
+          spellCheck="false"
         />
         <hr />
         <StyledTagContainer>
@@ -253,6 +274,7 @@ function PostBox(): ReactElement {
           ))}
           <TextAreaForTag
             placeholder="태그를 추가하세요"
+            spellCheck="false"
             value={tagInput}
             onChange={(event) => {
               const newTag = event.target.value;
@@ -272,51 +294,28 @@ function PostBox(): ReactElement {
 
         <EditButtonBox
           onClick={(event) => {
-            const iconClicked = event.currentTarget.className.baseVal;
-            const positionToInsert = findFrontOfLine(input, cursorPosition);
-            let insertText = '';
-            switch (iconClicked) {
-              case 'h1':
-                insertText = '# ';
-                break;
-
-              case 'h2':
-                insertText = '## ';
-                break;
-
-              case 'h3':
-                insertText = '### ';
-                break;
-
-              case 'bold':
-                insertText = '**텍스트**';
-                break;
-
-              case 'italic':
-                insertText = '_텍스트_';
-                break;
-
-              case 'quote':
-                insertText = '> ';
-                break;
-
-              default:
-                break;
-            }
-            const newInput = input.slice(0, positionToInsert) + insertText + input.slice(positionToInsert);
-            setInput(newInput);
+            const cursorPositionToGo = editInputText({ event, input, setInput, cursorPosition });
+            isEditText.current = [true, cursorPositionToGo];
+            inputAreaElem.current?.focus();
           }}
         />
         <StyledMarkdownArea
           className="textInput"
+          spellCheck="false"
           placeholder="이야기를 적어보세요.."
           value={input}
-          onChange={(event) => setInput(event.target.value)}
-          onClick={(event) => setCursorPosition(findCursorPoint(event.target))}
+          onChange={(event) => {
+            setInput(event.target.value);
+          }}
+          onClick={() => setCursorPosition(findCursorPoint(inputAreaElem.current as HTMLTextAreaElement))}
           onKeyUp={(event) => {
-            const cursorFinder = setTimeout(() => setCursorPosition(findCursorPoint(event.target)), 400);
+            const cursorFinder = setTimeout(
+              () => setCursorPosition(findCursorPoint(inputAreaElem.current as HTMLTextAreaElement)),
+              400,
+            );
             event.target.addEventListener('keyup', () => clearTimeout(cursorFinder));
           }}
+          ref={inputAreaElem}
         />
       </div>
       <ReactMarkdown
