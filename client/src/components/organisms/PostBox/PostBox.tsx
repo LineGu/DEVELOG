@@ -85,6 +85,10 @@ const StyledPostBox = styled.div`
       padding: 0.15rem 0.5rem;
       margin: 0 0.2rem 0 0.5rem;
     }
+    img {
+      width: 25em;
+      height: 15em;
+    }
     & > *::selection {
       background-color: inherit;
     }
@@ -129,6 +133,7 @@ const TextAreaForTitle = styled.textarea`
   resize: none;
   pointer-events: auto;
   background-color: ${() => Theme.HEADER_BACK};
+  color: ${() => Theme.INTRO};
   &::placeholder {
     color: #a2acb4;
   }
@@ -144,6 +149,7 @@ const TextAreaForTag = styled.input<{ value: string }>`
   padding-bottom: 0.7rem;
   pointer-events: auto;
   background-color: ${() => Theme.HEADER_BACK};
+  color: ${() => Theme.INTRO};
   &::placeholder {
     color: #a2acb4;
   }
@@ -187,7 +193,7 @@ const StyledTagContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: space-beetween;
-  margin: 1.2rem 0 1.2rem 2rem;
+  margin: 1.2rem 0 1.2rem 2.5vw;
 `;
 
 const StyledTagUnit = styled.div`
@@ -196,7 +202,7 @@ const StyledTagUnit = styled.div`
   font-weight: 600;
   margin: 0 3rem 0.7rem 0.5rem;
   color: ${() => Theme.MODE_MARK};
-
+  pointer-events: auto;
   &:hover {
     opacity: 60%;
     cursor: pointer;
@@ -233,9 +239,9 @@ function PostBox(): ReactElement {
   const [tagList, setTagList] = useState<string[]>([]);
   const isEditText = useRef([false, [0, 0]]);
   const [cursorPosition, setCursorPosition] = useState([0, 0]);
+  const [imageUrl, setImageUrl] = useState<string>('');
   const { changeMode } = useDependencyTheme();
   const inputAreaElem = useRef<HTMLTextAreaElement>(null);
-
   useEffect(() => {
     if (isEditText.current[0]) {
       const cursorToGo = isEditText.current[1];
@@ -247,6 +253,14 @@ function PostBox(): ReactElement {
       setCursorPosition(findCursorPoint(inputAreaElem.current as HTMLTextAreaElement));
     }
   }, [input]);
+
+  useEffect(() => {
+    if (imageUrl === null || imageUrl.length === 0) return;
+
+    const newInput = `${input.slice(0, cursorPosition[0])}![](${imageUrl})${input.slice(cursorPosition[0])}`;
+    setInput(newInput);
+    setImageUrl('');
+  }, [imageUrl]);
 
   return (
     <StyledPostBox>
@@ -278,10 +292,10 @@ function PostBox(): ReactElement {
             value={tagInput}
             onChange={(event) => {
               const newTag = event.target.value;
-              if (newTag[0] !== '#') return;
-              setTagInput(newTag);
+              if (newTag[0] === '#' || newTag.length === 0) setTagInput(newTag);
             }}
             onKeyDown={(event) => {
+              if (event.currentTarget.value.length < 2) return;
               if ((event.key === ' ' || event.key === 'Enter') && tagInput[0] === '#') {
                 const tagListCopied: string[] = [...tagList];
                 tagListCopied.push(tagInput.slice(1));
@@ -298,6 +312,7 @@ function PostBox(): ReactElement {
             isEditText.current = [true, cursorPositionToGo];
             inputAreaElem.current?.focus();
           }}
+          getImageUrl={setImageUrl}
         />
         <StyledMarkdownArea
           className="textInput"
