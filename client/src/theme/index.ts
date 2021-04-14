@@ -34,6 +34,7 @@ export const LightMode: ThemeType = {
   EMPHASIS: '#5A5A5A',
   CODE: `#C0CAD2`,
   SUBMIT_BTN: '#86c975',
+  QUOTE_BOX: 'rgb(248, 249, 250)',
 };
 
 export const DarkMode: ThemeType = {
@@ -58,6 +59,7 @@ export const DarkMode: ThemeType = {
   EMPHASIS: '#5A5A5A',
   CODE: `#C0CAD2`,
   SUBMIT_BTN: '#86c975',
+  QUOTE_BOX: 'rgb(248, 249, 250)',
 };
 
 export default Theme;

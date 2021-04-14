@@ -1,15 +1,15 @@
 import React, { ReactElement, useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import ReactMarkdown from 'react-markdown';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { atelierCaveLight, a11yDark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
-import gfm from 'remark-gfm';
 import useDependencyTheme from '@hook/useDependencyTheme';
 import Theme from '@theme/index';
 import ThemeButton from '@molecules/ThemeBtn/index';
 import EditButtonBox from '@molecules/EditButtonBox/index';
 import Button from '@atoms/Button/index';
-import editInputText, { findFrontOfLine } from '@utils/editInputText';
+import editInputText from '@utils/editInputText';
+import WritingArea from '@molecules/WritingArea/index';
+import PostTitleInput from '@molecules/PostTitleInput/index';
+import TagAddingBox from '@organisms/TagAddingBox/index';
+import MarkdownPreview from '@molecules/MarkdownPreview/index';
 
 const StyledPostBox = styled.div`
   display: flex;
@@ -30,183 +30,37 @@ const StyledPostBox = styled.div`
       border: 4px solid ${() => Theme.EMPHASIS};
       padding-bottm: 300px;
     }
-  }
-  .preview {
-    width: 50%;
-    height: 79vh;
-    font-size: 1.2rem;
-    padding: 10vh 6vw;
-    outline: none;
-    overflow-y: scroll;
-    pointer-events: auto;
-    color: ${() => Theme.INTRO};
 
-    h1 {
-      padding-bottom: 1rem;
-      border-bottom: 1px solid ${() => Theme.LINK_MODAL};
+    .tagModal {
+      top: 13.5em;
     }
-    table {
-      border-collapse: collapse;
-      font-size: 1rem;
-      & th {
-        border: 1px solid ${() => Theme.BASE};
-        border-bottom: 2px solid ${() => Theme.INTRO};
-        padding: 0.8rem 1.4rem;
-      }
-      & td {
-        border: 1px solid ${() => Theme.BASE};
-        border-top: none;
-        padding: 0.8rem;
+
+    .show {
+      animation-name: bounce;
+      animation-duration: 0.5s;
+
+      @keyframes bounce {
+        0% {
+          transform: translate(0%, -50%);
+          opacity: 0;
+        }
+        40% {
+          transform: translate(0%, 0%);
+        }
+        55% {
+          transform: translate(0%, -5%);
+        }
+        100% {
+          opacity: 1;
+        }
       }
     }
-    a {
-      color: ${() => Theme.MODE_MARK};
-      text-decoration: none;
-    }
-    blockquote {
-      margin: 0;
-      padding: 0.2em;
-      padding-left: 3em;
-      line-height: 2rem;
-      border-left: 0.4em ${() => Theme.POINT} solid;
-    }
-    hr {
-      width: 100%;
-      margin: 2rem 0;
-      color: ${() => Theme.BASE};
-      opacity: 60%;
-    }
-    p > code {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: ${() => Theme.CODE};
-      background-color: ${() => Theme.EMPHASIS};
-      border-radius: 0.3em;
-      padding: 0.15rem 0.5rem;
-      margin: 0 0.2rem 0 0.5rem;
-    }
-    img {
-      width: 25em;
-      height: 15em;
-    }
-    & > *::selection {
-      background-color: inherit;
-    }
-
-    @media (max-width: ${() => Theme.TABLET}) {
-      display: none;
-    }
-  }
-`;
-
-const StyledMarkdownArea = styled.textarea`
-  width: 100%;
-  height: 68vh;
-  padding-left: 3vw;
-  font-size: 1.4rem;
-  pointer-events: auto;
-
-  background-color: ${() => Theme.HEADER_BACK};
-
-  color: ${() => Theme.INTRO};
-  border: none;
-
-  outline: none;
-  resize: none;
-  @media (max-width: ${() => Theme.TABLET}) {
-    width: 100%;
-    border: none;
-  }
-
-  &::selection {
-    background-color: #dfdfdf;
-  }
-`;
-
-const TextAreaForTitle = styled.textarea`
-  width: 100%;
-  font-size: 3.5em;
-  font-weight: 700;
-  padding: 5vh 0 0 3vw;
-  border: none;
-  outline: none;
-  resize: none;
-  pointer-events: auto;
-  background-color: ${() => Theme.HEADER_BACK};
-  color: ${() => Theme.INTRO};
-  &::placeholder {
-    color: #a2acb4;
-  }
-`;
-
-const TextAreaForTag = styled.input<{ value: string }>`
-  font-size: 1.5em;
-  font-weight: 400;
-  border: none;
-  outline: none;
-  resize: none;
-  margin-left: 0.4rem;
-  padding-bottom: 0.7rem;
-  pointer-events: auto;
-  background-color: ${() => Theme.HEADER_BACK};
-  color: ${() => Theme.INTRO};
-  &::placeholder {
-    color: #a2acb4;
-  }
-  &::selection {
-    background-color: #dfdfdf;
-    color: #a2acb4;
   }
 `;
 
 const StyledThemeButton = styled(ThemeButton)`
   pointer-events: auto;
   bottom: 7vh;
-`;
-
-interface ICodeBoxProps {
-  value: string;
-  language: string;
-  className: string;
-}
-
-const CodeBox = ({ value, language }: ICodeBoxProps): ReactElement => {
-  const { mode } = useDependencyTheme();
-  const style = mode === 'LightMode' ? atelierCaveLight : a11yDark;
-  return (
-    <SyntaxHighlighter
-      language={language ?? ''}
-      style={style}
-      customStyle={{
-        lineHeight: '1.4em',
-        fontSize: '1.2em',
-        borderRadius: '0.5em',
-        backgroundColor: Theme.CODE_BOX,
-      }}
-    >
-      {value ?? ''}
-    </SyntaxHighlighter>
-  );
-};
-
-const StyledTagContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: space-beetween;
-  margin: 1.2rem 0 1.2rem 2.5vw;
-`;
-
-const StyledTagUnit = styled.div`
-  height: 1.7rem;
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin: 0 3rem 0.7rem 0.5rem;
-  color: ${() => Theme.MODE_MARK};
-  pointer-events: auto;
-  &:hover {
-    opacity: 60%;
-    cursor: pointer;
-  }
 `;
 
 const StyledButtonBox = styled.div`
@@ -221,7 +75,12 @@ const StyledButtonBox = styled.div`
 `;
 
 const StyledButton = styled(Button)`
+  pointer-events: auto;
   margin-right: 0.8em;
+  &:hover {
+    opacity: 50%;
+    cursor: pointer;
+  }
 `;
 
 const findCursorPoint = (element: HTMLTextAreaElement): number[] => {
@@ -234,14 +93,20 @@ const findCursorPoint = (element: HTMLTextAreaElement): number[] => {
 
 function PostBox(): ReactElement {
   const [input, setInput] = useState('');
-  const [title, setTitle] = useState('');
-  const [tagInput, setTagInput] = useState('');
-  const [tagList, setTagList] = useState<string[]>([]);
   const isEditText = useRef([false, [0, 0]]);
   const [cursorPosition, setCursorPosition] = useState([0, 0]);
   const [imageUrl, setImageUrl] = useState<string>('');
   const { changeMode } = useDependencyTheme();
   const inputAreaElem = useRef<HTMLTextAreaElement>(null);
+
+  const propsAboutTextComponent = { input, setInput, setCursorPosition, findCursorPoint, inputAreaElem };
+
+  const editTextByButton = (event: React.MouseEvent<SVGElement, MouseEvent>) => {
+    const cursorPositionToGo = editInputText({ event, input, setInput, cursorPosition });
+    isEditText.current = [true, cursorPositionToGo];
+    inputAreaElem.current?.focus();
+  };
+
   useEffect(() => {
     if (isEditText.current[0]) {
       const cursorToGo = isEditText.current[1];
@@ -255,7 +120,7 @@ function PostBox(): ReactElement {
   }, [input]);
 
   useEffect(() => {
-    if (imageUrl === null || imageUrl.length === 0) return;
+    if (imageUrl === null || imageUrl === undefined || imageUrl.length === 0) return;
 
     const newInput = `${input.slice(0, cursorPosition[0])}![](${imageUrl})${input.slice(cursorPosition[0])}`;
     setInput(newInput);
@@ -265,84 +130,21 @@ function PostBox(): ReactElement {
   return (
     <StyledPostBox>
       <div className="editArea">
-        <TextAreaForTitle
-          placeholder="제목을 입력하세요"
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
-          spellCheck="false"
-        />
+        <PostTitleInput />
         <hr />
-        <StyledTagContainer>
-          {tagList.map((tag, index) => (
-            <StyledTagUnit
-              key={index}
-              onClick={() => {
-                const tagIndex = index;
-                const tagListCopied: string[] = [...tagList];
-                tagListCopied.splice(tagIndex, 1);
-                setTagList(tagListCopied);
-              }}
-            >
-              {tag}
-            </StyledTagUnit>
-          ))}
-          <TextAreaForTag
-            placeholder="태그를 추가하세요"
-            spellCheck="false"
-            value={tagInput}
-            onChange={(event) => {
-              const newTag = event.target.value;
-              if (newTag[0] === '#' || newTag.length === 0) setTagInput(newTag);
-            }}
-            onKeyDown={(event) => {
-              if (event.currentTarget.value.length < 2) return;
-              if ((event.key === ' ' || event.key === 'Enter') && tagInput[0] === '#') {
-                const tagListCopied: string[] = [...tagList];
-                tagListCopied.push(tagInput.slice(1));
-                setTagList(tagListCopied);
-                setTagInput('');
-              }
-            }}
-          />
-        </StyledTagContainer>
-
-        <EditButtonBox
-          onClick={(event) => {
-            const cursorPositionToGo = editInputText({ event, input, setInput, cursorPosition });
-            isEditText.current = [true, cursorPositionToGo];
-            inputAreaElem.current?.focus();
-          }}
-          getImageUrl={setImageUrl}
-        />
-        <StyledMarkdownArea
-          className="textInput"
-          spellCheck="false"
-          placeholder="이야기를 적어보세요.."
-          value={input}
-          onChange={(event) => {
-            setInput(event.target.value);
-          }}
-          onClick={() => setCursorPosition(findCursorPoint(inputAreaElem.current as HTMLTextAreaElement))}
-          onKeyUp={(event) => {
-            const cursorFinder = setTimeout(
-              () => setCursorPosition(findCursorPoint(inputAreaElem.current as HTMLTextAreaElement)),
-              400,
-            );
-            event.target.addEventListener('keyup', () => clearTimeout(cursorFinder));
-          }}
-          ref={inputAreaElem}
-        />
+        <TagAddingBox />
+        <EditButtonBox onClick={(event) => editTextByButton(event)} setImageUrl={setImageUrl} />
+        <WritingArea className="textInput" propsAboutTextComponent={propsAboutTextComponent} />
       </div>
-      <ReactMarkdown
-        plugins={[[gfm, { tableCellPadding: 'true' }]]}
-        source={title === '' ? input : `# ${title}\n${input}`}
-        className="preview"
-        renderers={{ code: CodeBox }}
-      />
+      <MarkdownPreview input={input} />
       <StyledThemeButton onClick={changeMode} />
       <StyledButtonBox>
-        <StyledButton className="save">임시저장</StyledButton>
-        <StyledButton className="submit">등록</StyledButton>
+        <StyledButton onClick={() => console.log('임시저장')} className="save">
+          임시저장
+        </StyledButton>
+        <StyledButton onClick={() => console.log('등록')} className="submit">
+          등록
+        </StyledButton>
       </StyledButtonBox>
     </StyledPostBox>
   );

@@ -44,6 +44,7 @@
       "@icons/*": ["src/components/icons/*"],
       "@interfaces": ["src/interfaces/index"],
       "@construction/*": ["src/assets/construction/*"],
+      "@message": ["src/assets/construction/message.ts"],
     }
   },
   "exclude": ["node_modules"],

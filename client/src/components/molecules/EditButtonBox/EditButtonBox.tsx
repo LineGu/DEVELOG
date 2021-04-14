@@ -1,4 +1,4 @@
-import React, { ReactElement, Dispatch, SetStateAction, useRef, RefObject } from 'react';
+import React, { ReactElement, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
 import {
@@ -14,9 +14,7 @@ import {
   BsCode,
   BsCheckBox,
 } from 'react-icons/bs';
-import { IButtonProps } from '@interfaces';
 import axios from 'axios';
-import PostPageComponent from '@pages/Post';
 
 const StyledEditButtonBox = styled.div`
   display: flex;
@@ -54,8 +52,13 @@ const StyledEditButtonBox = styled.div`
 
 interface IEditButtonProps {
   onClick: (event: React.MouseEvent<SVGElement, MouseEvent>) => void;
-  getImageUrl: Dispatch<SetStateAction<string>>;
+  setImageUrl: Dispatch<SetStateAction<string>>;
 }
+
+const headerOption = {
+  Authorization: 'Client-ID 3c6eb25140b4f20',
+  Accept: 'application/json',
+};
 
 const upload = async (file: File): Promise<string> => {
   if (file && file.size > 5000000) {
@@ -65,22 +68,20 @@ const upload = async (file: File): Promise<string> => {
   const formData = new FormData();
   formData.append('image', file);
 
-  const imgUrl: string = await fetch('https://api.imgur.com/3/image', {
-    method: 'POST',
-    headers: {
-      Authorization: 'Client-ID 3c6eb25140b4f20',
-      Accept: 'application/json',
-    },
-    body: formData,
-  })
-    .then((response) => response.json())
-    .then((response) => response.data.link)
-    .catch(() => console.log('업로드 실패'));
+  const imgUrl: string = await axios
+    .post('https://api.imgur.com/3/image', formData, {
+      headers: headerOption,
+      onUploadProgress: (ProgressEvent) => {
+        console.log(`uploading${Math.round((ProgressEvent.loaded / ProgressEvent.total) * 100)}%`);
+      },
+    })
+    .then((response) => response.data.data.link)
+    .catch((err) => console.log(err));
 
   return imgUrl;
 };
 
-function EditButtonBox({ onClick, getImageUrl }: IEditButtonProps): ReactElement {
+function EditButtonBox({ onClick, setImageUrl }: IEditButtonProps): ReactElement {
   return (
     <StyledEditButtonBox
       onMouseDown={(event) => {
@@ -108,8 +109,9 @@ function EditButtonBox({ onClick, getImageUrl }: IEditButtonProps): ReactElement
         onChange={async (event) => {
           const fileList = event.target.files;
           if (fileList === null) return;
+
           const imgUrl = await upload(fileList[0]);
-          getImageUrl(imgUrl);
+          setImageUrl(imgUrl);
         }}
         multiple
       />

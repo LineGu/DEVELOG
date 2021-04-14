@@ -23,10 +23,6 @@ interface IInsertSideProps {
   iconClicked: string;
 }
 
-interface IInsertControlProps extends IInsertFrontProps {
-  setInput: Dispatch<SetStateAction<string>>;
-}
-
 export const findFrontOfLine = (input: string, cursorPosition: number[]): number => {
   let findingIndex = cursorPosition[0];
   let isFindFront = true;
@@ -62,7 +58,7 @@ const findLastOfLine = (input: string, frontIndex: number): number => {
   return lastIndex;
 };
 
-const insertTextFront = ({ input, cursorPosition, insertText, setInput, iconClicked }: IInsertFrontProps): number[] => {
+const insertTextFront = ({ input, cursorPosition, insertText, setInput }: IInsertFrontProps): number[] => {
   const positionToInsert = findFrontOfLine(input, cursorPosition);
 
   const textToCheckOverlap = input.slice(positionToInsert, positionToInsert + 4);
@@ -92,7 +88,7 @@ const insertTextFront = ({ input, cursorPosition, insertText, setInput, iconClic
   return [lastIndexOfLine, lastIndexOfLine];
 };
 
-const insertTextSide = ({ input, cursorPosition, insertText, setInput, iconClicked }: IInsertSideProps): number[] => {
+const insertTextSide = ({ input, cursorPosition, insertText, setInput }: IInsertSideProps): number[] => {
   const isSelected = cursorPosition[0] !== cursorPosition[1];
   let textToInsert = insertText;
   let cursorPositionToGo = [0, 0];
