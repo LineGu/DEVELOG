@@ -1,4 +1,4 @@
-import React, { ReactElement, Dispatch, SetStateAction } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
 import {
@@ -14,7 +14,16 @@ import {
   BsCode,
   BsCheckBox,
 } from 'react-icons/bs';
-import axios from 'axios';
+
+import { IOnClickSvgFun, IOnChangeFileFunc } from '@eventInterfaces';
+import { SetStateProcess, SetStateString } from '@types';
+import uploadImg from '@utils/uploadImg';
+
+interface IEditButtonProps {
+  onClick: IOnClickSvgFun;
+  setImageUrl: SetStateString;
+  setUploadState: SetStateProcess;
+}
 
 const StyledEditButtonBox = styled.div`
   display: flex;
@@ -38,6 +47,8 @@ const StyledEditButtonBox = styled.div`
     pointer-events: visibleFill;
     width: 2rem;
     height: 2rem;
+    min-width: 1rem;
+    min-height: 1rem;
     margin: 0 1rem;
     color: ${() => Theme.INTRO};
     opacity: 60%;
@@ -50,76 +61,32 @@ const StyledEditButtonBox = styled.div`
   }
 `;
 
-interface IEditButtonProps {
-  onClick: (event: React.MouseEvent<SVGElement, MouseEvent>) => void;
-  setImageUrl: Dispatch<SetStateAction<string>>;
-}
+function EditButtonBox({ onClick, setImageUrl, setUploadState }: IEditButtonProps): ReactElement {
+  const createImgUrl: IOnChangeFileFunc = async (event) => {
+    const fileList = event.target.files;
+    if (fileList === null) return;
+    const imgToUpload = fileList[0];
+    uploadImg(imgToUpload, setUploadState, setImageUrl);
+  };
 
-const headerOption = {
-  Authorization: 'Client-ID 3c6eb25140b4f20',
-  Accept: 'application/json',
-};
+  const triggerInputElem: IOnClickSvgFun = (event) => {
+    (event.currentTarget.nextSibling as HTMLButtonElement).click();
+  };
 
-const upload = async (file: File): Promise<string> => {
-  if (file && file.size > 5000000) {
-    console.error('파일 용량 초과');
-    return '';
-  }
-  const formData = new FormData();
-  formData.append('image', file);
-
-  const imgUrl: string = await axios
-    .post('https://api.imgur.com/3/image', formData, {
-      headers: headerOption,
-      onUploadProgress: (ProgressEvent) => {
-        console.log(`uploading${Math.round((ProgressEvent.loaded / ProgressEvent.total) * 100)}%`);
-      },
-    })
-    .then((response) => response.data.data.link)
-    .catch((err) => console.log(err));
-
-  return imgUrl;
-};
-
-function EditButtonBox({ onClick, setImageUrl }: IEditButtonProps): ReactElement {
   return (
-    <StyledEditButtonBox
-      onMouseDown={(event) => {
-        event.stopPropagation();
-        event.preventDefault();
-      }}
-    >
-      <BsTypeH1 className="h1" onClick={(event) => onClick(event)} />
-      <BsTypeH2 className="h2" onClick={(event) => onClick(event)} />
-      <BsTypeH3 className="h3" onClick={(event) => onClick(event)} />
-      <BsTypeBold className="bold" onClick={(event) => onClick(event)} />
-      <BsTypeItalic className="italic" onClick={(event) => onClick(event)} />
-      <BsLink45Deg className="link" onClick={(event) => onClick(event)} />
-
-      <BsFillImageFill
-        className="img"
-        onClick={(event) => {
-          (event.currentTarget.nextSibling as HTMLButtonElement).click();
-        }}
-      />
-      <input
-        className="finder"
-        type="file"
-        accept="image/*,.pdf"
-        onChange={async (event) => {
-          const fileList = event.target.files;
-          if (fileList === null) return;
-
-          const imgUrl = await upload(fileList[0]);
-          setImageUrl(imgUrl);
-        }}
-        multiple
-      />
-
-      <BsBlockquoteLeft className="quote" onClick={(event) => onClick(event)} />
-      <BsTable className="table" onClick={(event) => onClick(event)} />
-      <BsCode className="code" onClick={(event) => onClick(event)} />
-      <BsCheckBox className="checkbox" onClick={(event) => onClick(event)} />
+    <StyledEditButtonBox>
+      <BsTypeH1 className="h1" onClick={onClick} />
+      <BsTypeH2 className="h2" onClick={onClick} />
+      <BsTypeH3 className="h3" onClick={onClick} />
+      <BsTypeBold className="bold" onClick={onClick} />
+      <BsTypeItalic className="italic" onClick={onClick} />
+      <BsLink45Deg className="link" onClick={onClick} />
+      <BsFillImageFill className="img" onClick={triggerInputElem} />
+      <input className="finder" type="file" accept="image/*,.pdf" onChange={createImgUrl} />
+      <BsBlockquoteLeft className="quote" onClick={onClick} />
+      <BsTable className="table" onClick={onClick} />
+      <BsCode className="code" onClick={onClick} />
+      <BsCheckBox className="checkbox" onClick={onClick} />
     </StyledEditButtonBox>
   );
 }

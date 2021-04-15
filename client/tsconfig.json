@@ -43,6 +43,9 @@
       "@hook/*": ["src/hooks/*"],
       "@icons/*": ["src/components/icons/*"],
       "@interfaces": ["src/interfaces/index"],
+      "@types": ["src/interfaces/Types/index"],
+      "@config/*": ["src/config/*"],
+      "@eventInterfaces": ["src/interfaces/Events/index"],
       "@construction/*": ["src/assets/construction/*"],
       "@message": ["src/assets/construction/message.ts"],
     }

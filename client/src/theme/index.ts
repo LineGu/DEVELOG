@@ -35,6 +35,7 @@ export const LightMode: ThemeType = {
   CODE: `#C0CAD2`,
   SUBMIT_BTN: '#86c975',
   QUOTE_BOX: 'rgb(248, 249, 250)',
+  TAG_PLACEHOLDER: '#a2acb4',
 };
 
 export const DarkMode: ThemeType = {
@@ -60,6 +61,7 @@ export const DarkMode: ThemeType = {
   CODE: `#C0CAD2`,
   SUBMIT_BTN: '#86c975',
   QUOTE_BOX: 'rgb(248, 249, 250)',
+  TAG_PLACEHOLDER: '#a2acb4',
 };
 
 export default Theme;

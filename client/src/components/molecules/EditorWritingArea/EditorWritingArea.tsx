@@ -1,17 +1,7 @@
-import React, { ReactElement, SetStateAction, Dispatch } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
-import { IComponentProps } from '@interfaces';
-
-interface IWritingAreaProps extends IComponentProps {
-  propsAboutTextComponent: {
-    input: string;
-    setInput: Dispatch<SetStateAction<string>>;
-    setCursorPosition: Dispatch<SetStateAction<number[]>>;
-    findCursorPoint: (element: HTMLTextAreaElement) => number[];
-    inputAreaElem: React.RefObject<HTMLTextAreaElement>;
-  };
-}
+import { IEditorProps } from '@interfaces';
 
 const StyledMarkdownArea = styled.textarea`
   width: 100%;
@@ -37,8 +27,9 @@ const StyledMarkdownArea = styled.textarea`
   }
 `;
 
-function WritingArea({ propsAboutTextComponent, className }: IWritingAreaProps): ReactElement {
+function EditorWritingArea({ propsAboutTextComponent, className }: IEditorProps): ReactElement {
   const { input, setInput, setCursorPosition, findCursorPoint, inputAreaElem } = propsAboutTextComponent;
+
   return (
     <StyledMarkdownArea
       className={className}
@@ -61,4 +52,4 @@ function WritingArea({ propsAboutTextComponent, className }: IWritingAreaProps):
   );
 }
 
-export default WritingArea;
+export default EditorWritingArea;

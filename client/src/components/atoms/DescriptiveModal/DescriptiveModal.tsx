@@ -1,10 +1,10 @@
 import { IComponentProps } from '@interfaces';
-import React, { ReactElement, useState, useRef, useEffect } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
 
 interface IModalProps extends IComponentProps {
-  state: string;
+  visibleState: string;
 }
 
 const StyledDescriptiveModal = styled.div<{ state: string }>`
@@ -17,9 +17,9 @@ const StyledDescriptiveModal = styled.div<{ state: string }>`
   padding: 10px 20px;
 `;
 
-function DescriptiveModal({ state, className, children }: IModalProps): ReactElement {
+function DescriptiveModal({ visibleState, className, children }: IModalProps): ReactElement {
   return (
-    <StyledDescriptiveModal className={className} state={state}>
+    <StyledDescriptiveModal className={className} state={visibleState}>
       {children}
     </StyledDescriptiveModal>
   );

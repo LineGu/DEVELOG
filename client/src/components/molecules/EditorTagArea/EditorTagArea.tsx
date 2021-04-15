@@ -1,9 +1,10 @@
 import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
-import DescriptiveModal from '@molecules/DescriptiveModal/index';
-import TagAreaToAdd from '@molecules/TagAreaToAdd/index';
+import DescriptiveModal from '@atoms/DescriptiveModal/index';
+import PostTagInput from '@molecules/PostTagInput/index';
 import message from '@message';
+import { IOnKeyboardFunc } from '@eventInterfaces';
 
 const StyledTagContainer = styled.div`
   display: flex;
@@ -25,12 +26,23 @@ const StyledTagUnit = styled.div`
   }
 `;
 
-function TagAddingBox(): ReactElement {
-  const [tagInput, setTagInput] = useState('');
+function EditorTagArea(): ReactElement {
+  const [tagInput, setTagInput] = useState<string>('');
   const [tagList, setTagList] = useState<string[]>([]);
-  const [modalState, setModalState] = useState('hidden');
+  const [modalState, setModalState] = useState<string>('hidden');
 
-  const propsForTagArea = { tagInput, setTagInput, tagList, setTagList, setModalState };
+  const addTag: IOnKeyboardFunc = (event) => {
+    const isNotValidTag = !event || event.currentTarget.value.length < 2;
+    if (isNotValidTag) return;
+    const isRequestToAdd = event.key === ' ' || event.key === 'Enter';
+    if (isRequestToAdd) {
+      const tagListCopied: string[] = [...tagList];
+      tagListCopied.push(tagInput.slice(1));
+      setTagList(tagListCopied);
+      setTagInput('');
+      setModalState('hidden');
+    }
+  };
 
   const deleteTagUnit = (index: number) => {
     const tagIndex = index;
@@ -46,12 +58,12 @@ function TagAddingBox(): ReactElement {
           {tag}
         </StyledTagUnit>
       ))}
-      <TagAreaToAdd propsForTagArea={propsForTagArea} />
-      <DescriptiveModal className={`tagModal ${modalState}`} state={modalState}>
+      <PostTagInput addTag={addTag} setModalState={setModalState} />
+      <DescriptiveModal className={`tagModal ${modalState}`} visibleState={modalState}>
         {message.DESCRIPTION_TAG}
       </DescriptiveModal>
     </StyledTagContainer>
   );
 }
 
-export default TagAddingBox;
+export default EditorTagArea;

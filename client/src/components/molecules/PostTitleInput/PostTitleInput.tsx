@@ -1,17 +1,15 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
+import TextInput from '@atoms/TextInput/index';
 import Theme from '@theme/index';
+import message from '@message';
 
-const TextAreaForTitle = styled.textarea`
+const TextAreaForTitle = styled(TextInput)`
   width: 100%;
-  height: auto;
   font-size: 3.5em;
   font-weight: 700;
   padding: 5vh 0 0 3vw;
-  border: none;
-  outline: none;
-  resize: none;
-  pointer-events: auto;
+
   background-color: ${() => Theme.HEADER_BACK};
   color: ${() => Theme.INTRO};
   &::placeholder {
@@ -20,16 +18,7 @@ const TextAreaForTitle = styled.textarea`
 `;
 
 function PostTitleInput(): ReactElement {
-  const [title, setTitle] = useState('');
-
-  return (
-    <TextAreaForTitle
-      placeholder="제목을 입력하세요"
-      value={title}
-      onChange={(event) => setTitle(event.target.value)}
-      spellCheck="false"
-    />
-  );
+  return <TextAreaForTitle placeholder={message.TITLE_PLACEHOLDER} />;
 }
 
 export default PostTitleInput;
