@@ -6,6 +6,7 @@ import gfm from 'remark-gfm';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import useDependencyTheme from '@hook/useDependencyTheme';
 import { atelierCaveLight, a11yDark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import { ILinkProps } from '@interfaces';
 
 interface ICodeBoxProps {
   value: string;
@@ -107,6 +108,12 @@ const CodeBox = ({ value, language }: ICodeBoxProps): ReactElement => {
   );
 };
 
+const LinkRenderer = (props: ILinkProps): ReactElement => (
+  <a href={`http://${props.href}`} target="_blank" rel="external nofollow noopener noreferrer">
+    {props.children}
+  </a>
+);
+
 function MarkdownPreview({ input }: IPreviewProps): ReactElement {
   return (
     <StyledPreviewBox>
@@ -114,7 +121,7 @@ function MarkdownPreview({ input }: IPreviewProps): ReactElement {
         plugins={[[gfm, { tableCellPadding: 'true' }]]}
         source={input}
         className="preview"
-        renderers={{ code: CodeBox }}
+        renderers={{ code: CodeBox, link: LinkRenderer }}
       />
     </StyledPreviewBox>
   );

@@ -10,3 +10,4 @@ export type { default as IEditorProps } from './Editor';
 export type { default as IPostInputProps } from './PostInput';
 export type { default as ITextInputProps } from './TextInput';
 export type { default as IUploadState } from './Process';
+export type { default as ILinkProps } from './Link';
