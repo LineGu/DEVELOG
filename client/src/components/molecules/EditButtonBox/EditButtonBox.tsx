@@ -18,6 +18,7 @@ import {
 import { IOnClickSvgFun, IOnChangeFileFunc } from '@eventInterfaces';
 import { SetStateProcess, SetStateString } from '@types';
 import uploadImg from '@utils/uploadImg';
+import TableModal from '@atoms/TableModal/index';
 
 interface IEditButtonProps {
   onClick: IOnClickSvgFun;
@@ -27,6 +28,7 @@ interface IEditButtonProps {
 
 const StyledEditButtonBox = styled.div`
   display: flex;
+  position: relative;
   -webkit-box-align: center;
   align-items: center;
   margin: 0 0 2.5rem 3rem;
@@ -61,6 +63,11 @@ const StyledEditButtonBox = styled.div`
   }
 `;
 
+const StyledTableModal = styled(TableModal)`
+  top: 40px;
+  margin-left: 95%;
+`;
+
 function EditButtonBox({ onClick, setImageUrl, setUploadState }: IEditButtonProps): ReactElement {
   const createImgUrl: IOnChangeFileFunc = async (event) => {
     const fileList = event.target.files;
@@ -85,6 +92,7 @@ function EditButtonBox({ onClick, setImageUrl, setUploadState }: IEditButtonProp
       <input className="finder" type="file" accept="image/*,.pdf" onChange={createImgUrl} />
       <BsBlockquoteLeft className="quote" onClick={onClick} />
       <BsTable className="table" onClick={onClick} />
+      <StyledTableModal />
       <BsCode className="code" onClick={onClick} />
       <BsCheckBox className="checkbox" onClick={onClick} />
     </StyledEditButtonBox>
