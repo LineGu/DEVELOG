@@ -36,6 +36,8 @@ export const LightMode: ThemeType = {
   SUBMIT_BTN: '#86c975',
   QUOTE_BOX: 'rgb(248, 249, 250)',
   TAG_PLACEHOLDER: '#a2acb4',
+  MODAL_EDIT: '#1E1E1E',
+  OUT_LINE: '#37628A',
 };
 
 export const DarkMode: ThemeType = {
@@ -62,6 +64,8 @@ export const DarkMode: ThemeType = {
   SUBMIT_BTN: '#86c975',
   QUOTE_BOX: 'rgb(248, 249, 250)',
   TAG_PLACEHOLDER: '#a2acb4',
+  MODAL_EDIT: '#1E1E1E',
+  OUT_LINE: '#37628A',
 };
 
 export default Theme;

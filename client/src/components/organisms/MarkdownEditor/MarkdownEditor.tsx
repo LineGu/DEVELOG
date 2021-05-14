@@ -77,7 +77,7 @@ function MarkDownEditor({ input, setInput }: IPostInputProps): ReactElement {
   };
 
   const controlInputAndCursor = useCallback(
-    (event: React.MouseEvent<SVGElement, MouseEvent>) => {
+    (event) => {
       const cursorPositionToGo = editInputText({ event, input, setInput, cursorPosition });
       infoOfCursorToGo.current = [true, cursorPositionToGo];
       inputAreaElem.current?.focus();
@@ -121,6 +121,7 @@ function MarkDownEditor({ input, setInput }: IPostInputProps): ReactElement {
       <EditorTagArea />
       <EditButtonBox
         onClick={(event) => controlInputAndCursor(event)}
+        tableProps={{ input, setInput, cursorPosition }}
         setImageUrl={setImageUrl}
         setUploadState={setUploadState}
       />

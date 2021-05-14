@@ -14,8 +14,16 @@ export interface IOnClickElemFun {
   (event: React.MouseEvent<HTMLTextAreaElement>): void;
 }
 
+export interface IOnClickDivElemFunc {
+  (event: React.MouseEvent<HTMLDivElement>): void;
+}
+
 export interface IOnClickSvgFun {
   (event: React.MouseEvent<SVGElement, MouseEvent>): void;
+}
+
+export interface IOnClickFunc {
+  (event: React.MouseEvent<HTMLElement, MouseEvent>): void;
 }
 
 export interface IOnHoverDivFunc {

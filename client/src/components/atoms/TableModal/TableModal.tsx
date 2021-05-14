@@ -2,52 +2,83 @@ import { IComponentProps } from '@interfaces';
 import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
-import { IOnHoverDivFunc } from '@eventInterfaces';
+import { IOnHoverDivFunc, IOnClickSvgFun } from '@eventInterfaces';
+import { ITableProps } from '@interfaces';
+import addTable from '@utils/addTable';
 
-const StyledModal = styled.div`
-  display: flex;
+interface ITableModalProps extends IComponentProps {
+  tableProps: ITableProps;
+  isHidden: boolean;
+}
+
+const StyledModal = styled.div<{ isHidden: boolean }>`
+  display: ${({ isHidden }) => (isHidden ? 'none' : 'flex')};
+  flex-direction: column;
+  pointer-events: visibleFill;
   position: absolute;
   margin: 0;
-  padding: 0;
-  & > p {
+  padding: 5px 15px 10px 15px;
+  border-radius: 0.2em;
+  & > span {
+    color: ${() => Theme.HEADER_BACK};
+    margin-bottom: 10px;
+  }
+  & > div {
+    display: flex;
     margin: 0;
     padding: 0;
   }
-  background-color: ${() => Theme.TAG_PLACEHOLDER};
+  background-color: ${() => Theme.MODAL_EDIT};
 `;
 
 const StyledBlock = styled.div<{ colorProps: string }>`
-  pointer-events: visibleFill;
-  width: 10px;
-  height: 10px;
-  border: 1px solid black;
+  width: 20px;
+  height: 20px;
+  border: 1px solid ${({ colorProps }) => (colorProps === Theme.HEADER_BACK ? Theme.OUT_LINE : Theme.HEADER_BACK)};
   background-color: ${({ colorProps }) => colorProps};
-  margin: 0;
+  margin: 2px;
   padding: 0;
 `;
 
-function TableModal({ className }: IComponentProps): ReactElement {
-  const [blockCount, setBlockCount] = useState<number>(5);
+function TableModal({ className, tableProps, isHidden }: ITableModalProps): ReactElement {
   const [check, setCheck] = useState<number[]>([-1, -1]);
-  const blockIds = new Array(blockCount).fill(0);
+  const rowCount = new Array(10).fill(0);
+  const columnCount = new Array(8).fill(0);
 
   const changeCheckPoint: IOnHoverDivFunc = (event) => {
     const newCheckStr: string[] = event.currentTarget.id.split(',');
     const newCheck = [parseInt(newCheckStr[0], 10), parseInt(newCheckStr[1], 10)];
     setCheck(newCheck);
+    event.stopPropagation();
   };
 
   return (
-    <StyledModal className={className}>
-      {blockIds.map((_, index) => {
+    <StyledModal
+      isHidden={isHidden}
+      className={className}
+      onMouseLeave={() => setCheck([-1, -1])}
+      onMouseOver={() => setCheck([-1, -1])}
+    >
+      <span>{check[0] === -1 ? '표 삽입' : `${check[0] + 1} x ${check[1] + 1} 표`}</span>
+      {columnCount.map((__, index) => {
         return (
-          <div key={index}>
-            {blockIds.map((__, subIndex) => (
+          <div
+            className="table"
+            key={index}
+            onMouseLeave={(event) => event.stopPropagation()}
+            onMouseOver={(event) => event.stopPropagation()}
+            onClick={() => {
+              const newTableProps = { tableCount: [check[0] + 1, check[1] + 1], ...tableProps };
+              addTable(newTableProps);
+            }}
+          >
+            {rowCount.map((__, subIndex) => (
               <StyledBlock
                 key={index * 10 + subIndex}
                 id={`${subIndex},${index}`}
                 onMouseOver={changeCheckPoint}
-                colorProps={check[0] >= subIndex && check[1] >= index ? '#000000' : '#ffffff'}
+                onMouseLeave={(event) => event.stopPropagation()}
+                colorProps={check[0] >= subIndex && check[1] >= index ? Theme.HEADER_BACK : Theme.MODAL_EDIT}
               />
             ))}
           </div>

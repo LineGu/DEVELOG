@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
 import {
@@ -17,11 +17,13 @@ import {
 
 import { IOnClickSvgFun, IOnChangeFileFunc } from '@eventInterfaces';
 import { SetStateProcess, SetStateString } from '@types';
+import { ITableProps } from '@interfaces';
 import uploadImg from '@utils/uploadImg';
 import TableModal from '@atoms/TableModal/index';
 
 interface IEditButtonProps {
   onClick: IOnClickSvgFun;
+  tableProps: ITableProps;
   setImageUrl: SetStateString;
   setUploadState: SetStateProcess;
 }
@@ -45,7 +47,8 @@ const StyledEditButtonBox = styled.div`
     visibility: hidden;
   }
 
-  & > svg {
+  & > svg,
+  & > div > svg {
     pointer-events: visibleFill;
     width: 2rem;
     height: 2rem;
@@ -64,11 +67,11 @@ const StyledEditButtonBox = styled.div`
 `;
 
 const StyledTableModal = styled(TableModal)`
-  top: 40px;
-  margin-left: 95%;
+  margin-left: 2%;
 `;
 
-function EditButtonBox({ onClick, setImageUrl, setUploadState }: IEditButtonProps): ReactElement {
+function EditButtonBox({ onClick, tableProps, setImageUrl, setUploadState }: IEditButtonProps): ReactElement {
+  const [isHiddenTableModal, setIsHidden] = useState<boolean>(true);
   const createImgUrl: IOnChangeFileFunc = async (event) => {
     const fileList = event.target.files;
     if (fileList === null) return;
@@ -79,6 +82,10 @@ function EditButtonBox({ onClick, setImageUrl, setUploadState }: IEditButtonProp
   const triggerInputElem: IOnClickSvgFun = (event) => {
     (event.currentTarget.nextSibling as HTMLButtonElement).click();
   };
+
+  useEffect(() => {
+    document.addEventListener('click', () => setIsHidden(true));
+  }, []);
 
   return (
     <StyledEditButtonBox>
@@ -91,8 +98,17 @@ function EditButtonBox({ onClick, setImageUrl, setUploadState }: IEditButtonProp
       <BsFillImageFill className="img" onClick={triggerInputElem} />
       <input className="finder" type="file" accept="image/*,.pdf" onChange={createImgUrl} />
       <BsBlockquoteLeft className="quote" onClick={onClick} />
-      <BsTable className="table" onClick={onClick} />
-      <StyledTableModal />
+      <div>
+        <BsTable
+          id="table"
+          className="table"
+          onClick={(event) => {
+            setIsHidden(!isHiddenTableModal);
+            event.stopPropagation();
+          }}
+        />
+        <StyledTableModal isHidden={isHiddenTableModal} tableProps={tableProps} />
+      </div>
       <BsCode className="code" onClick={onClick} />
       <BsCheckBox className="checkbox" onClick={onClick} />
     </StyledEditButtonBox>
