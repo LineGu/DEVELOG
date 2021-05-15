@@ -1,5 +1,5 @@
 import React, { SetStateAction, Dispatch } from 'react';
-import { IComponentProps } from '@interfaces';
+import { IComponentProps, IUploadState } from '@interfaces';
 
 interface IEditComponentProps extends IComponentProps {
   propsAboutTextComponent: {
@@ -10,6 +10,8 @@ interface IEditComponentProps extends IComponentProps {
     inputAreaElem: React.RefObject<HTMLTextAreaElement>;
     infoOfCursorToGo: React.MutableRefObject<(boolean | number[])[]>;
     cursorPosition: number[];
+    setImageUrl: Dispatch<SetStateAction<string>>;
+    setUploadState: Dispatch<SetStateAction<IUploadState>>;
   };
 }
 

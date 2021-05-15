@@ -26,7 +26,6 @@ const EditorAreaWrapper = styled.div<{ process: number }>`
     left: 3vw;
     width: 9vw;
     border: 4px solid ${() => Theme.EMPHASIS};
-    padding-bottm: 300px;
   }
 
   .tagModal {
@@ -56,7 +55,6 @@ function MarkDownEditor({ input, setInput }: IPostInputProps): ReactElement {
   const [cursorPosition, setCursorPosition] = useState([0, 0]);
   const inputAreaElem = useRef<HTMLTextAreaElement>(null);
   const isUploading = useRef(false);
-  const isErrorToUpload = uploadState.error !== '';
 
   isUploading.current = uploadState.process !== 0;
   useEffect(() => {
@@ -74,6 +72,8 @@ function MarkDownEditor({ input, setInput }: IPostInputProps): ReactElement {
     findCursorPoint,
     inputAreaElem,
     infoOfCursorToGo,
+    setImageUrl,
+    setUploadState,
   };
 
   const controlInputAndCursor = useCallback(

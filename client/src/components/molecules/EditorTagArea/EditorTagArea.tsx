@@ -39,8 +39,8 @@ function EditorTagArea(): ReactElement {
       const tagListCopied: string[] = [...tagList];
       tagListCopied.push(tagInput.slice(1));
       setTagList(tagListCopied);
-      setTagInput('');
       setModalState('hidden');
+      setTagInput('');
     }
   };
 
@@ -58,7 +58,7 @@ function EditorTagArea(): ReactElement {
           {tag}
         </StyledTagUnit>
       ))}
-      <PostTagInput addTag={addTag} setModalState={setModalState} />
+      <PostTagInput addTag={addTag} setModalState={setModalState} setTagInput={setTagInput} tagInput={tagInput} />
       <DescriptiveModal className={`tagModal ${modalState}`} visibleState={modalState}>
         {message.DESCRIPTION_TAG}
       </DescriptiveModal>

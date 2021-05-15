@@ -76,6 +76,7 @@ function EditButtonBox({ onClick, tableProps, setImageUrl, setUploadState }: IEd
     const fileList = event.target.files;
     if (fileList === null) return;
     const imgToUpload = fileList[0];
+    console.log(imgToUpload);
     uploadImg(imgToUpload, setUploadState, setImageUrl);
   };
 
@@ -84,7 +85,11 @@ function EditButtonBox({ onClick, tableProps, setImageUrl, setUploadState }: IEd
   };
 
   useEffect(() => {
-    document.addEventListener('click', () => setIsHidden(true));
+    const hideTableModal = () => setIsHidden(true);
+    document.addEventListener('click', hideTableModal);
+    return () => {
+      document.removeEventListener('click', hideTableModal);
+    };
   }, []);
 
   return (

@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
 import { IEditorProps } from '@interfaces';
+import uploadImg from '@utils/uploadImg';
 
 const StyledMarkdownArea = styled.textarea`
   width: 100%;
@@ -28,7 +29,15 @@ const StyledMarkdownArea = styled.textarea`
 `;
 
 function EditorWritingArea({ propsAboutTextComponent, className }: IEditorProps): ReactElement {
-  const { input, setInput, setCursorPosition, findCursorPoint, inputAreaElem } = propsAboutTextComponent;
+  const {
+    input,
+    setInput,
+    setCursorPosition,
+    findCursorPoint,
+    inputAreaElem,
+    setUploadState,
+    setImageUrl,
+  } = propsAboutTextComponent;
 
   return (
     <StyledMarkdownArea
@@ -48,6 +57,17 @@ function EditorWritingArea({ propsAboutTextComponent, className }: IEditorProps)
         event.target.addEventListener('keyup', () => clearTimeout(cursorFinder));
       }}
       ref={inputAreaElem}
+      onDrop={(event) => {
+        const files = event.dataTransfer.files;
+        const isImage = files[0].type.includes('image');
+        if (!isImage) {
+          alert('이미지가 아닙니다.');
+          return;
+        }
+
+        const imgToUpload = files[0];
+        uploadImg(imgToUpload, setUploadState, setImageUrl);
+      }}
     />
   );
 }

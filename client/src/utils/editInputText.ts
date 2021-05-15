@@ -205,7 +205,7 @@ const insertTable = ({ input, cursorPosition, insertText, setInput, iconClicked 
 
 const editInputText = ({ event, input, setInput, cursorPosition }: IEditTextProps): number[] => {
   const iconClicked = event.currentTarget.className.baseVal;
-  console.log(iconClicked);
+
   let cursorToGo: number[] = [0, 0];
 
   let insertText = '';

@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
-import TextInput from '@atoms/TextInput/index';
 import message from '@construction/message';
 import { SetStateString, ChangeEvent } from '@types';
 import { IOnKeyboardFunc } from '@eventInterfaces';
@@ -9,9 +8,15 @@ import { IOnKeyboardFunc } from '@eventInterfaces';
 interface IPostTagInputProps {
   addTag: IOnKeyboardFunc;
   setModalState: SetStateString;
+  setTagInput: SetStateString;
+  tagInput: string;
 }
 
-const TextAreaForTag = styled(TextInput)`
+const TextAreaForTag = styled.textarea`
+  border: none;
+  outline: none;
+  resize: none;
+  pointer-events: auto;
   font-size: 1.5em;
   font-weight: 400;
   margin-left: 0.4rem;
@@ -34,13 +39,14 @@ const renderTagChanged = (event: ChangeEvent, setTagInput: SetStateString): void
   if (isValidTagForm) setTagInput(newTag);
 };
 
-function PostTagInput({ addTag, setModalState }: IPostTagInputProps): ReactElement {
+function PostTagInput({ addTag, setModalState, setTagInput, tagInput }: IPostTagInputProps): ReactElement {
   return (
     <TextAreaForTag
       placeholder={message.TAG_PLACEHOLDER}
       onFocus={() => setModalState('show')}
       onBlur={() => setModalState('hidden')}
-      onChange={renderTagChanged}
+      value={tagInput}
+      onChange={(event) => renderTagChanged(event, setTagInput)}
       onKeyDown={addTag}
     />
   );

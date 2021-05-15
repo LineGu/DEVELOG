@@ -70,6 +70,7 @@ function TableModal({ className, tableProps, isHidden }: ITableModalProps): Reac
             onClick={() => {
               const newTableProps = { tableCount: [check[0] + 1, check[1] + 1], ...tableProps };
               addTable(newTableProps);
+              setCheck([-1, -1]);
             }}
           >
             {rowCount.map((__, subIndex) => (
