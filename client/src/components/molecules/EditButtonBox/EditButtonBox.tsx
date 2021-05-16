@@ -76,21 +76,12 @@ function EditButtonBox({ onClick, tableProps, setImageUrl, setUploadState }: IEd
     const fileList = event.target.files;
     if (fileList === null) return;
     const imgToUpload = fileList[0];
-    console.log(imgToUpload);
     uploadImg(imgToUpload, setUploadState, setImageUrl);
   };
 
   const triggerInputElem: IOnClickSvgFun = (event) => {
     (event.currentTarget.nextSibling as HTMLButtonElement).click();
   };
-
-  useEffect(() => {
-    const hideTableModal = () => setIsHidden(true);
-    document.addEventListener('click', hideTableModal);
-    return () => {
-      document.removeEventListener('click', hideTableModal);
-    };
-  }, []);
 
   return (
     <StyledEditButtonBox>
@@ -112,7 +103,7 @@ function EditButtonBox({ onClick, tableProps, setImageUrl, setUploadState }: IEd
             event.stopPropagation();
           }}
         />
-        <StyledTableModal isHidden={isHiddenTableModal} tableProps={tableProps} />
+        <StyledTableModal isHidden={isHiddenTableModal} tableProps={tableProps} setIsHidden={setIsHidden} />
       </div>
       <BsCode className="code" onClick={onClick} />
       <BsCheckBox className="checkbox" onClick={onClick} />

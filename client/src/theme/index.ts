@@ -17,6 +17,7 @@ export const LightMode: ThemeType = {
   PC: '960px',
   TABLET: '768px',
   MOBILE: '480px',
+  MIN_WIDTH: '350px',
   BASE: '#707070',
   POINT: '#c17fce',
   LINK_MODAL: '#d0d0d0',
@@ -33,11 +34,12 @@ export const LightMode: ThemeType = {
   CODE_BOX: '#F5F7F8',
   EMPHASIS: '#5A5A5A',
   CODE: `#C0CAD2`,
-  SUBMIT_BTN: '#86c975',
+  SUBMIT_BTN: 'rgb(32, 201, 151)',
   QUOTE_BOX: 'rgb(248, 249, 250)',
   TAG_PLACEHOLDER: '#a2acb4',
   MODAL_EDIT: '#1E1E1E',
   OUT_LINE: '#37628A',
+  PREVIEW_BACK: '#fafafa',
 };
 
 export const DarkMode: ThemeType = {
@@ -45,6 +47,7 @@ export const DarkMode: ThemeType = {
   PC: '960px',
   TABLET: '768px',
   MOBILE: '480px',
+  MIN_WIDTH: '350px',
   BASE: '#ffffff',
   POINT: '#c17fce',
   LINK_MODAL: '#8E8E8E',
@@ -64,8 +67,9 @@ export const DarkMode: ThemeType = {
   SUBMIT_BTN: '#86c975',
   QUOTE_BOX: 'rgb(248, 249, 250)',
   TAG_PLACEHOLDER: '#a2acb4',
-  MODAL_EDIT: '#1E1E1E',
+  MODAL_EDIT: '#5A5A5A',
   OUT_LINE: '#37628A',
+  PREVIEW_BACK: '#222121',
 };
 
 export default Theme;

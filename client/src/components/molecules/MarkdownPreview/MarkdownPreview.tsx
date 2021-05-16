@@ -20,7 +20,10 @@ interface IPreviewProps {
 
 const StyledPreviewBox = styled.div`
   width: 50%;
-
+  background-color: ${() => Theme.PREVIEW_BACK};
+  @media (max-width: ${() => Theme.PC}) {
+    display: none;
+  }
   .preview {
     height: 79vh;
     font-size: 1.2rem;
@@ -81,10 +84,6 @@ const StyledPreviewBox = styled.div`
     }
     & > *::selection {
       background-color: inherit;
-    }
-
-    @media (max-width: ${() => Theme.TABLET}) {
-      display: none;
     }
   }
 `;

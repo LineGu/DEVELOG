@@ -88,7 +88,9 @@ function MarkDownEditor({ input, setInput }: IPostInputProps): ReactElement {
   const insertImageMarkdown = useCallback(() => {
     const isNotVaildUrl = imageUrl === null || imageUrl === undefined || imageUrl.length === 0;
     if (isNotVaildUrl) return;
-    const inputWithNewImg = `${input.slice(0, cursorPosition[0])}![](${imageUrl})${input.slice(cursorPosition[0])}`;
+    const inputWithNewImg = `${input.slice(0, cursorPosition[0])}\n![](${imageUrl})\n${input.slice(
+      cursorPosition[0] + 15,
+    )}`;
     setInput(inputWithNewImg);
     setImageUrl('');
   }, [imageUrl]);

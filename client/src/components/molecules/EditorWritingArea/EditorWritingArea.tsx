@@ -58,6 +58,8 @@ function EditorWritingArea({ propsAboutTextComponent, className }: IEditorProps)
       }}
       ref={inputAreaElem}
       onDrop={(event) => {
+        event.stopPropagation();
+        event.preventDefault();
         const files = event.dataTransfer.files;
         const isImage = files[0].type.includes('image');
         if (!isImage) {

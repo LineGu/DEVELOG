@@ -15,6 +15,10 @@ const StyledPostBox = styled.div`
   word-break: normal;
   pointer-events: none;
 
+  @media (max-width: 690px) and (min-height: 1000px) {
+    display: none;
+  }
+
   @keyframes bounce {
     0% {
       transform: translate(0%, -50%);
@@ -34,26 +38,46 @@ const StyledPostBox = styled.div`
 
 const StyledThemeButton = styled(ThemeButton)`
   pointer-events: auto;
-  bottom: 7vh;
+  bottom: 2rem;
 `;
 
 const StyledButtonBox = styled.div`
   position: absolute;
-  right: 42%;
-  bottom: 2rem;
+  right: 50%;
+  bottom: 1rem;
+  @media (max-width: ${() => Theme.PC}) {
+    right: 0;
+  }
+  .back {
+    background-color: ${() => Theme.LINK_MODAL};
+  }
   .save {
+    background-color: ${() => Theme.LINK_MODAL};
   }
   .submit {
-    background-color: ${() => Theme.SUBMIT_BTN};
+    background-color: ${() => Theme.POINT};
   }
 `;
 
 const StyledButton = styled(Button)`
   pointer-events: auto;
   margin-right: 0.8em;
+  width: 7rem;
+  height: 3rem;
+  font-size: 1.125rem;
   &:hover {
-    opacity: 50%;
+    opacity: 70%;
     cursor: pointer;
+  }
+`;
+
+const StyledErrorBox = styled.div`
+  display: none;
+  @media (max-width: 690px) and (min-height: 1000px) {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 35%;
   }
 `;
 
@@ -62,19 +86,25 @@ function PostEditor(): ReactElement {
   const { changeMode } = useDependencyTheme();
 
   return (
-    <StyledPostBox>
-      <MarkDownEditor input={input} setInput={setInput} />
-      <MarkdownPreview input={input} />
-      <StyledThemeButton onClick={changeMode} />
-      <StyledButtonBox>
-        <StyledButton onClick={() => console.log('임시저장')} className="save">
-          임시저장
-        </StyledButton>
-        <StyledButton onClick={() => console.log('등록')} className="submit">
-          등록
-        </StyledButton>
-      </StyledButtonBox>
-    </StyledPostBox>
+    <>
+      <StyledErrorBox className="error">현재 디스플레이는 너무 작아요ㅠㅠㅠ</StyledErrorBox>
+      <StyledPostBox>
+        <MarkDownEditor input={input} setInput={setInput} />
+        <MarkdownPreview input={input} />
+        <StyledThemeButton onClick={changeMode} />
+        <StyledButtonBox>
+          <StyledButton onClick={() => console.log('나가기')} className="back">
+            나가기
+          </StyledButton>
+          <StyledButton onClick={() => console.log('임시저장')} className="save">
+            임시저장
+          </StyledButton>
+          <StyledButton onClick={() => console.log('등록')} className="submit">
+            등록
+          </StyledButton>
+        </StyledButtonBox>
+      </StyledPostBox>
+    </>
   );
 }
 

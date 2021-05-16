@@ -1,14 +1,16 @@
 import { IComponentProps } from '@interfaces';
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
-import { IOnHoverDivFunc, IOnClickSvgFun } from '@eventInterfaces';
+import { IOnHoverDivFunc } from '@eventInterfaces';
 import { ITableProps } from '@interfaces';
+import { setStateBool } from '@types';
 import addTable from '@utils/addTable';
 
 interface ITableModalProps extends IComponentProps {
   tableProps: ITableProps;
   isHidden: boolean;
+  setIsHidden: setStateBool;
 }
 
 const StyledModal = styled.div<{ isHidden: boolean }>`
@@ -40,7 +42,7 @@ const StyledBlock = styled.div<{ colorProps: string }>`
   padding: 0;
 `;
 
-function TableModal({ className, tableProps, isHidden }: ITableModalProps): ReactElement {
+function TableModal({ className, tableProps, isHidden, setIsHidden }: ITableModalProps): ReactElement {
   const [check, setCheck] = useState<number[]>([-1, -1]);
   const rowCount = new Array(10).fill(0);
   const columnCount = new Array(8).fill(0);
@@ -51,6 +53,18 @@ function TableModal({ className, tableProps, isHidden }: ITableModalProps): Reac
     setCheck(newCheck);
     event.stopPropagation();
   };
+
+  useEffect(() => {
+    const hideTableModal = () => {
+      setIsHidden(true);
+      setCheck([-1, -1]);
+    };
+    document.addEventListener('click', hideTableModal);
+    document.addEventListener('mouseover', (event) => {
+      setCheck([-1, -1]);
+      event.stopPropagation();
+    });
+  }, []);
 
   return (
     <StyledModal
