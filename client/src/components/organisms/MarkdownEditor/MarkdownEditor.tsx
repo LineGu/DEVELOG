@@ -11,6 +11,14 @@ import { IPostInputProps, IUploadState } from '@interfaces';
 const EditorAreaWrapper = styled.div<{ process: number }>`
   width: 50%;
   height: 100vh;
+  @media (max-width: ${() => Theme.MOBILE}) {
+    width: 100%;
+  }
+
+  @media (max-width: ${() => Theme.PC}) {
+    width: 100%;
+  }
+
   .processBar {
     position: fixed;
     visibility: ${({ process }) => (process === 0 ? 'hidden' : 'visible')};
@@ -26,10 +34,24 @@ const EditorAreaWrapper = styled.div<{ process: number }>`
     left: 3vw;
     width: 9vw;
     border: 4px solid ${() => Theme.EMPHASIS};
+    @media (max-width: ${() => Theme.MOBILE}) {
+      top: 2.7em;
+      left: 0.8em;
+      width: 4em;
+      border: 2px solid ${() => Theme.EMPHASIS};
+    }
   }
 
   .tagModal {
-    top: 13.5em;
+    bottom: -4em;
+    @media (max-width: ${() => Theme.MOBILE}) {
+      font-size: 0.43em;
+      height: 4.7em;
+      width: 60vw;
+      padding: 0.5em 0.8em;
+      margin-left: 1.7em;
+      bottom: -5.3em;
+    }
   }
 
   .show {

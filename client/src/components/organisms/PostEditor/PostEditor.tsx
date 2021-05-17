@@ -14,6 +14,10 @@ const StyledPostBox = styled.div`
   white-space: pre-wrap;
   word-break: normal;
   pointer-events: none;
+  @media (max-width: ${() => Theme.MOBILE}) {
+    width: 100%;
+    height: 100%;
+  }
 
   @media (max-width: 690px) and (min-height: 1000px) {
     display: none;
@@ -38,7 +42,11 @@ const StyledPostBox = styled.div`
 
 const StyledThemeButton = styled(ThemeButton)`
   pointer-events: auto;
-  bottom: 2rem;
+  bottom: 2.7rem;
+  @media (max-width: ${() => Theme.MOBILE}) {
+    bottom: 1rem;
+    left: 0.3em;
+  }
 `;
 
 const StyledButtonBox = styled.div`
@@ -48,6 +56,16 @@ const StyledButtonBox = styled.div`
   @media (max-width: ${() => Theme.PC}) {
     right: 0;
   }
+  @media (max-width: ${() => Theme.MOBILE}) {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 3.7em;
+    bottom: 0;
+    background-color: ${() => Theme.PREVIEW_BACK};
+  }
+
   .back {
     background-color: ${() => Theme.LINK_MODAL};
   }
@@ -68,6 +86,11 @@ const StyledButton = styled(Button)`
   &:hover {
     opacity: 70%;
     cursor: pointer;
+  }
+  @media (max-width: ${() => Theme.MOBILE}) {
+    width: 5rem;
+    height: 2rem;
+    font-size: 1rem;
   }
 `;
 

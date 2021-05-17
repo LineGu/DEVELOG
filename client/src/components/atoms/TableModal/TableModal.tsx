@@ -23,7 +23,7 @@ const StyledModal = styled.div<{ isHidden: boolean }>`
   border-radius: 0.2em;
   & > span {
     color: ${() => Theme.HEADER_BACK};
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
   & > div {
     display: flex;
@@ -71,13 +71,17 @@ function TableModal({ className, tableProps, isHidden, setIsHidden }: ITableModa
       isHidden={isHidden}
       className={className}
       onMouseLeave={() => setCheck([-1, -1])}
-      onMouseOver={() => setCheck([-1, -1])}
+      onMouseOver={(event) => {
+        setCheck([-1, -1]);
+        console.log(1);
+        event.stopPropagation();
+      }}
     >
       <span>{check[0] === -1 ? '표 삽입' : `${check[0] + 1} x ${check[1] + 1} 표`}</span>
       {columnCount.map((__, index) => {
         return (
           <div
-            className="table"
+            className="tablePre"
             key={index}
             onMouseLeave={(event) => event.stopPropagation()}
             onMouseOver={(event) => event.stopPropagation()}

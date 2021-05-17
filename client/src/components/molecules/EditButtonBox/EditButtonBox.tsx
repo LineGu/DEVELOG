@@ -33,13 +33,28 @@ const StyledEditButtonBox = styled.div`
   position: relative;
   -webkit-box-align: center;
   align-items: center;
-  margin: 0 0 2.5rem 3rem;
+
+  margin: 0 0 20px 60px;
   pointer-events: none;
+  flex-wrap: wrap;
+
+  @media (max-width: ${() => Theme.MOBILE}) {
+    margin: 0.2em 0.5em 1em 0.5em;
+    pointer-events: auto;
+    flex-wrap: nowrap;
+  }
+
+  @media (max-width: ${() => Theme.PC}) {
+    flex-wrap: nowrap;
+  }
 
   .h3,
   .italic {
     border-right: 1px solid ${() => Theme.INTRO};
-    padding-right: 2rem;
+    padding-right: 1.6vw;
+    @media (max-width: ${() => Theme.MOBILE}) {
+      padding-right: 1em;
+    }
   }
 
   .finder {
@@ -50,13 +65,23 @@ const StyledEditButtonBox = styled.div`
   & > svg,
   & > div > svg {
     pointer-events: visibleFill;
-    width: 2rem;
-    height: 2rem;
-    min-width: 1rem;
-    min-height: 1rem;
-    margin: 0 1rem;
+    width: 20px;
+    height: 20px;
+    margin: 0 20px 15px 20px;
     color: ${() => Theme.INTRO};
     opacity: 60%;
+    @media (max-width: ${() => Theme.MOBILE}) {
+      width: 15px;
+      height: 15px;
+      margin: 0 0.5em;
+    }
+  }
+
+  .table {
+    margin-top: 0.3em;
+    @media (max-width: ${() => Theme.MOBILE}) {
+      display: none;
+    }
   }
 
   & > svg:hover,

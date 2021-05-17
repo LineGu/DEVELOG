@@ -30,6 +30,12 @@ const TextAreaForTag = styled.textarea`
     background-color: inherit;
     color: ${() => Theme.TAG_PLACEHOLDER};
   }
+
+  @media (max-width: ${() => Theme.MOBILE}) {
+    font-size: 1em;
+    margin-left: 1em;
+    height: 1.5em;
+  }
 `;
 
 const renderTagChanged = (event: ChangeEvent, setTagInput: SetStateString): void => {

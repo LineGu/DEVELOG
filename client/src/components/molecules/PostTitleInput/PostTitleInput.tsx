@@ -15,6 +15,14 @@ const TextAreaForTitle = styled(TextInput)`
   &::placeholder {
     color: #a2acb4;
   }
+
+  @media (max-width: ${() => Theme.MOBILE}) {
+    width: 95%;
+    font-size: 1.8em;
+    font-weight: 700;
+    height: 2em;
+    padding: 0.6em 0 0 0.6em;
+  }
 `;
 
 function PostTitleInput(): ReactElement {

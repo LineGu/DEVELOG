@@ -5,7 +5,7 @@ import { IEditorProps } from '@interfaces';
 import uploadImg from '@utils/uploadImg';
 
 const StyledMarkdownArea = styled.textarea`
-  width: 100%;
+  width: 93%;
   height: 68vh;
   padding-left: 3vw;
   font-size: 1.5rem;
@@ -25,6 +25,12 @@ const StyledMarkdownArea = styled.textarea`
 
   &::selection {
     background-color: #dfdfdf;
+  }
+  @media (max-width: ${() => Theme.MOBILE}) {
+    width: 91%;
+    height: 65vh;
+    font-size: 1rem;
+    padding: 1.2em 0 0 1.2em;
   }
 `;
 

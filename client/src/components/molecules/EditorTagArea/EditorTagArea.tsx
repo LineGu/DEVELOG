@@ -8,9 +8,14 @@ import { IOnKeyboardFunc } from '@eventInterfaces';
 
 const StyledTagContainer = styled.div`
   display: flex;
+  position: relative;
   flex-wrap: wrap;
   align-items: space-beetween;
-  margin: 1.2rem 0 1.2rem 2.5vw;
+  margin: 1.2rem 0 0.4rem 2.5vw;
+  @media (max-width: ${() => Theme.MOBILE}) {
+    margin: 0 0 1em 0;
+    width: 100%;
+  }
 `;
 
 const StyledTagUnit = styled.div`
@@ -23,6 +28,10 @@ const StyledTagUnit = styled.div`
   &:hover {
     opacity: 60%;
     cursor: pointer;
+  }
+  @media (max-width: ${() => Theme.MOBILE}) {
+    font-size: 0.7em;
+    margin: 0 0.4em 0.3rem 1rem;
   }
 `;
 
