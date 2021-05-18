@@ -83,6 +83,7 @@ const StyledButton = styled(Button)`
   width: 7rem;
   height: 3rem;
   font-size: 1.125rem;
+  border-radius: 0.3em;
   &:hover {
     opacity: 70%;
     cursor: pointer;
@@ -105,7 +106,7 @@ const StyledErrorBox = styled.div`
 `;
 
 function PostEditor(): ReactElement {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState<string>('');
   const { changeMode } = useDependencyTheme();
 
   return (

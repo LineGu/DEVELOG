@@ -10,11 +10,15 @@ interface IModalProps extends IComponentProps {
 const StyledDescriptiveModal = styled.div<{ state: string }>`
   visibility: ${({ state }) => (state === 'hidden' ? 'hidden' : 'visible')};
   position: absolute;
+  display: flex;
+  align-items: center;
+  align-content: space-between;
   z-index: 15;
   width: 400px;
   background-color: ${() => Theme.EMPHASIS};
   color: ${() => Theme.HEADER_BACK};
-  padding: 10px 20px;
+  padding: 15px 20px;
+  line-height: 1.5em;
 `;
 
 function DescriptiveModal({ visibleState, className, children }: IModalProps): ReactElement {

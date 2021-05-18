@@ -49,7 +49,7 @@ const StyledToggle = styled.div`
     }
   }
 
-  &: hover {
+  &:hover {
     justify-content: flex-end;
     width: 130px;
     height: 30px;
@@ -66,7 +66,12 @@ const StyledToggle = styled.div`
       transition: color 0.3s linear;
     }
     .mode {
-      display: block;
+      display: inline-block;
+      position: absolute;
+      left: 10%;
+      top: 15%;
+      white-space: nowrap;
+      word-break: nowrap;
       visibility: visible;
       opacity: 100%;
       margin: 2px 35px 0 0;

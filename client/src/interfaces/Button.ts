@@ -1,5 +1,6 @@
 interface IButtonProps {
-  onClick: ((event?: Event) => void) | undefined;
+  onClick?: ((event?: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined;
+  type?: 'button' | 'submit' | 'reset' | undefined;
 }
 
 export default IButtonProps;
