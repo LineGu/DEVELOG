@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
-import DescriptiveModal from '@atoms/DescriptiveModal/index';
+import Modal from '@atoms/Modal/index';
 import PostTagInput from '@molecules/PostTagInput/index';
 import message from '@message';
 import { IOnKeyboardFunc } from '@eventInterfaces';
@@ -32,6 +32,24 @@ const StyledTagUnit = styled.div`
   @media (max-width: ${() => Theme.MOBILE}) {
     font-size: 0.7em;
     margin: 0 0.4em 0.3rem 1rem;
+  }
+`;
+
+const StyledTagModal = styled(Modal)`
+  z-index: 2;
+  width: 400px;
+  background-color: ${() => Theme.EMPHASIS};
+  color: ${() => Theme.HEADER_BACK};
+  padding: 15px 20px;
+  line-height: 1.5em;
+  bottom: -4em;
+  @media (max-width: ${() => Theme.MOBILE}) {
+    font-size: 0.43em;
+    height: 4.7em;
+    width: 60vw;
+    padding: 0.5em 0.8em;
+    margin-left: 1.7em;
+    bottom: -5.3em;
   }
 `;
 
@@ -68,9 +86,9 @@ function EditorTagArea(): ReactElement {
         </StyledTagUnit>
       ))}
       <PostTagInput addTag={addTag} setModalState={setModalState} setTagInput={setTagInput} tagInput={tagInput} />
-      <DescriptiveModal className={`tagModal ${modalState}`} visibleState={modalState}>
+      <StyledTagModal className={modalState} visibleState={modalState}>
         {message.DESCRIPTION_TAG}
-      </DescriptiveModal>
+      </StyledTagModal>
     </StyledTagContainer>
   );
 }

@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { ITextInputProps } from '@interfaces';
 
@@ -10,33 +10,30 @@ const StyledTextInput = styled.textarea`
 `;
 
 function TextInput(textAreaProperty: ITextInputProps): ReactElement {
-  const [text, setText] = useState('');
-  const { placeholder, onChange, onFocus, onBlur, onKeyDown, className } = textAreaProperty;
+  const { placeholder, onChange, onFocus, onBlur, onKeyDown, className, state, setState } = textAreaProperty;
 
   return (
     <StyledTextInput
       className={className}
       placeholder={placeholder}
       spellCheck="false"
-      value={text}
+      value={state}
       onChange={(event) => {
         if (onChange) {
-          onChange(event, setText);
+          onChange(event);
           return;
         }
-        setText(event.target.value);
+        const TextAreaValue = event.target.value;
+        setState(TextAreaValue);
       }}
       onFocus={() => {
-        if (!onFocus) return;
-        onFocus();
+        if (onFocus) onFocus();
       }}
       onBlur={() => {
-        if (!onBlur) return;
-        onBlur();
+        if (onBlur) onBlur();
       }}
       onKeyDown={(event) => {
-        if (!onKeyDown) return;
-        onKeyDown(event, setText, text);
+        if (onKeyDown) onKeyDown(event);
       }}
     />
   );

@@ -42,7 +42,7 @@ const StyledPostBox = styled.div`
 
 const StyledThemeButton = styled(ThemeButton)`
   pointer-events: auto;
-  bottom: 2.7rem;
+  bottom: 1.8rem;
   @media (max-width: ${() => Theme.MOBILE}) {
     bottom: 1rem;
     left: 0.3em;

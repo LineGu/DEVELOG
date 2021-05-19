@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
 import message from '@construction/message';
+import TextInput from '@atoms/TextInput/index';
 import { SetStateString, ChangeEvent } from '@types';
 import { IOnKeyboardFunc } from '@eventInterfaces';
 
@@ -12,7 +13,7 @@ interface IPostTagInputProps {
   tagInput: string;
 }
 
-const TextAreaForTag = styled.textarea`
+const TextAreaForTag = styled(TextInput)`
   border: none;
   outline: none;
   resize: none;
@@ -51,7 +52,8 @@ function PostTagInput({ addTag, setModalState, setTagInput, tagInput }: IPostTag
       placeholder={message.TAG_PLACEHOLDER}
       onFocus={() => setModalState('show')}
       onBlur={() => setModalState('hidden')}
-      value={tagInput}
+      state={tagInput}
+      setState={setTagInput}
       onChange={(event) => renderTagChanged(event, setTagInput)}
       onKeyDown={addTag}
     />

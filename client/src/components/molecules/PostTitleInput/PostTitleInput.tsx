@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import TextInput from '@atoms/TextInput/index';
 import Theme from '@theme/index';
@@ -26,7 +26,8 @@ const TextAreaForTitle = styled(TextInput)`
 `;
 
 function PostTitleInput(): ReactElement {
-  return <TextAreaForTitle placeholder={message.TITLE_PLACEHOLDER} />;
+  const [title, setTitle] = useState<string>('');
+  return <TextAreaForTitle placeholder={message.TITLE_PLACEHOLDER} state={title} setState={setTitle} />;
 }
 
 export default PostTitleInput;

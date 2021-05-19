@@ -19,13 +19,13 @@ const insertTable = ({ input, cursorPosition, insertText, setInput }: IInsertSid
   return cursorPositionToGo;
 };
 
-const addTable = ({ tableCount, input, setInput, cursorPosition }: ITableProps) => {
-  const [row, column] = tableCount!;
+const addTable = ({ tableCount, input, setInput, cursorPosition }: ITableProps): number[] => {
+  const [row, column] = tableCount ?? [-1, -1];
 
-  const rowText = '|' + '    |'.repeat(row) + '\n|' + '----|'.repeat(row);
-  const columnText = '\n' + '|' + '    |'.repeat(row);
+  const rowText = `|${'    |'.repeat(row)}\n|${'----|'.repeat(row)}`;
+  const columnText = `${'\n'}${'|'}${'    |'.repeat(row)}`;
 
-  const insertText = '\n\n' + rowText + columnText.repeat(column - 1);
+  const insertText = `\n\n${rowText}${columnText.repeat(column - 1)}\n\n`;
 
   const cursorToGo = insertTable({ input, cursorPosition, insertText, setInput });
 

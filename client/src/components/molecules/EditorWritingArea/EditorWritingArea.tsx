@@ -6,7 +6,7 @@ import uploadImg from '@utils/uploadImg';
 
 const StyledMarkdownArea = styled.textarea`
   width: 93%;
-  height: 68vh;
+  height: 64vh;
   padding-left: 3vw;
   font-size: 1.5rem;
   pointer-events: auto;
@@ -66,7 +66,7 @@ function EditorWritingArea({ propsAboutTextComponent, className }: IEditorProps)
       onDrop={(event) => {
         event.stopPropagation();
         event.preventDefault();
-        const files = event.dataTransfer.files;
+        const { files } = event.dataTransfer;
         const isImage = files[0].type.includes('image');
         if (!isImage) {
           alert('이미지가 아닙니다.');

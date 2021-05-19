@@ -1,25 +1,25 @@
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
 import {
-  BsTypeH1,
-  BsTypeH2,
-  BsTypeH3,
-  BsTypeBold,
-  BsTypeItalic,
-  BsLink45Deg,
-  BsFillImageFill,
-  BsBlockquoteLeft,
-  BsTable,
-  BsCode,
-  BsCheckBox,
-} from 'react-icons/bs';
-
+  H1Icon,
+  H2Icon,
+  H3Icon,
+  BoldIcon,
+  ItalicIcon,
+  LinkIcon,
+  ImageIcon,
+  QuoteIcon,
+  TableIcon,
+  CodeIcon,
+  CheckBoxIcon,
+} from '@icons/index';
 import { IOnClickSvgFun, IOnChangeFileFunc } from '@eventInterfaces';
 import { SetStateProcess, SetStateString } from '@types';
 import { ITableProps } from '@interfaces';
 import uploadImg from '@utils/uploadImg';
-import TableModal from '@atoms/TableModal/index';
+import TableModal from '@molecules/TableModal/index';
+import Finder from '@atoms/Finder';
 
 interface IEditButtonProps {
   onClick: IOnClickSvgFun;
@@ -33,105 +33,75 @@ const StyledEditButtonBox = styled.div`
   position: relative;
   -webkit-box-align: center;
   align-items: center;
-
+  flex-wrap: wrap;
   margin: 0 0 20px 60px;
   pointer-events: none;
-  flex-wrap: wrap;
 
   @media (max-width: ${() => Theme.MOBILE}) {
+    flex-wrap: nowrap;
     margin: 0.2em 0.5em 1em 0.5em;
     pointer-events: auto;
-    flex-wrap: nowrap;
   }
 
   @media (max-width: ${() => Theme.PC}) {
     flex-wrap: nowrap;
   }
 
-  .h3,
-  .italic {
-    border-right: 1px solid ${() => Theme.INTRO};
-    padding-right: 1.6vw;
-    @media (max-width: ${() => Theme.MOBILE}) {
-      padding-right: 1em;
-    }
-  }
-
-  .finder {
-    position: absolute;
-    visibility: hidden;
-  }
-
   & > svg,
   & > div > svg {
-    pointer-events: visibleFill;
-    width: 20px;
-    height: 20px;
     margin: 0 20px 15px 20px;
-    color: ${() => Theme.INTRO};
-    opacity: 60%;
     @media (max-width: ${() => Theme.MOBILE}) {
-      width: 15px;
-      height: 15px;
       margin: 0 0.5em;
     }
   }
-
-  .table {
-    margin-top: 0.3em;
-    @media (max-width: ${() => Theme.MOBILE}) {
-      display: none;
-    }
-  }
-
-  & > svg:hover,
-  & > div > svg:hover {
-    opacity: 100%;
-    cursor: pointer;
-  }
 `;
 
-const StyledTableModal = styled(TableModal)`
-  margin-left: 2%;
+const TableWrapper = styled.div`
+  & > div:not(#table) {
+    margin-left: 2%;
+  }
+  @media (max-width: ${() => Theme.MOBILE}) {
+    display: none;
+  }
 `;
 
 function EditButtonBox({ onClick, tableProps, setImageUrl, setUploadState }: IEditButtonProps): ReactElement {
   const [isHiddenTableModal, setIsHidden] = useState<boolean>(true);
+
   const createImgUrl: IOnChangeFileFunc = async (event) => {
     const fileList = event.target.files;
-    if (fileList === null) return;
+    if (!fileList) return;
     const imgToUpload = fileList[0];
     uploadImg(imgToUpload, setUploadState, setImageUrl);
   };
 
-  const triggerInputElem: IOnClickSvgFun = (event) => {
-    (event.currentTarget.nextSibling as HTMLButtonElement).click();
+  const openFinder: IOnClickSvgFun = (event) => {
+    const finderElem = event.currentTarget.nextSibling as HTMLButtonElement;
+    finderElem.click();
+  };
+
+  const controlTableModal: IOnClickSvgFun = (event) => {
+    setIsHidden(!isHiddenTableModal);
+    event.stopPropagation();
   };
 
   return (
     <StyledEditButtonBox>
-      <BsTypeH1 className="h1" onClick={onClick} />
-      <BsTypeH2 className="h2" onClick={onClick} />
-      <BsTypeH3 className="h3" onClick={onClick} />
-      <BsTypeBold className="bold" onClick={onClick} />
-      <BsTypeItalic className="italic" onClick={onClick} />
-      <BsLink45Deg className="link" onClick={onClick} />
-      <BsFillImageFill className="img" onClick={triggerInputElem} />
-      <input className="finder" type="file" accept="image/*,.pdf" onChange={createImgUrl} />
-      <BsBlockquoteLeft className="quote" onClick={onClick} />
-      <div>
-        <BsTable
-          id="table"
-          className="table"
-          onClick={(event) => {
-            setIsHidden(!isHiddenTableModal);
-            event.stopPropagation();
-          }}
-        />
-        <StyledTableModal isHidden={isHiddenTableModal} tableProps={tableProps} setIsHidden={setIsHidden} />
-      </div>
-      <BsCode className="code" onClick={onClick} />
-      <BsCheckBox className="checkbox" onClick={onClick} />
+      <H1Icon onClick={onClick} />
+      <H2Icon onClick={onClick} />
+      <H3Icon onClick={onClick} />
+      <BoldIcon onClick={onClick} />
+      <ItalicIcon onClick={onClick} />
+      <LinkIcon onClick={onClick} />
+      <ImageIcon onClick={openFinder} />
+      <Finder onChange={createImgUrl} />
+      <QuoteIcon onClick={onClick} />
+      <TableWrapper>
+        <TableIcon onClick={controlTableModal} />
+        <TableModal isHidden={isHiddenTableModal} tableProps={tableProps} setIsHidden={setIsHidden} />
+      </TableWrapper>
+      <CodeIcon onClick={onClick} />
+      <CheckBoxIcon onClick={onClick} />
     </StyledEditButtonBox>
   );
 }

@@ -3,14 +3,12 @@ import { IComponentProps } from '@interfaces';
 
 interface ITextInputProps extends IComponentProps {
   placeholder: string;
-  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>, setText: Dispatch<SetStateAction<string>>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onFocus?: () => void;
   onBlur?: () => void;
-  onKeyDown?: (
-    event: React.KeyboardEvent<HTMLTextAreaElement>,
-    setText: Dispatch<SetStateAction<string>>,
-    text: string,
-  ) => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  state: string;
+  setState: Dispatch<SetStateAction<string>>;
 }
 
 export default ITextInputProps;

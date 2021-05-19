@@ -12,3 +12,4 @@ export type { default as ITextInputProps } from './TextInput';
 export type { default as IUploadState } from './Process';
 export type { default as ILinkProps } from './Link';
 export type { default as ITableProps } from './Table';
+export type { default as EditorIconProps } from './EditorIcon';

@@ -1,9 +1,9 @@
-import { IComponentProps } from '@interfaces';
+import { IComponentProps, ITableProps } from '@interfaces';
 import React, { ReactElement, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
 import { IOnHoverDivFunc } from '@eventInterfaces';
-import { ITableProps } from '@interfaces';
+
 import { setStateBool } from '@types';
 import addTable from '@utils/addTable';
 
@@ -85,13 +85,14 @@ function TableModal({ className, tableProps, isHidden, setIsHidden }: ITableModa
             key={index}
             onMouseLeave={(event) => event.stopPropagation()}
             onMouseOver={(event) => event.stopPropagation()}
+            onFocus={() => setCheck([-1, -1])}
             onClick={() => {
               const newTableProps = { tableCount: [check[0] + 1, check[1] + 1], ...tableProps };
               addTable(newTableProps);
               setCheck([-1, -1]);
             }}
           >
-            {rowCount.map((__, subIndex) => (
+            {rowCount.map((_, subIndex) => (
               <StyledBlock
                 key={index * 10 + subIndex}
                 id={`${subIndex},${index}`}

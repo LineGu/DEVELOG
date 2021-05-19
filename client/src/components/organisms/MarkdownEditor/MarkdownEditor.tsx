@@ -42,18 +42,6 @@ const EditorAreaWrapper = styled.div<{ process: number }>`
     }
   }
 
-  .tagModal {
-    bottom: -4em;
-    @media (max-width: ${() => Theme.MOBILE}) {
-      font-size: 0.43em;
-      height: 4.7em;
-      width: 60vw;
-      padding: 0.5em 0.8em;
-      margin-left: 1.7em;
-      bottom: -5.3em;
-    }
-  }
-
   .show {
     animation-name: bounce;
     animation-duration: 0.5s;
@@ -144,7 +132,7 @@ function MarkDownEditor({ input, setInput }: IPostInputProps): ReactElement {
       <hr />
       <EditorTagArea />
       <EditButtonBox
-        onClick={(event) => controlInputAndCursor(event)}
+        onClick={controlInputAndCursor}
         tableProps={{ input, setInput, cursorPosition }}
         setImageUrl={setImageUrl}
         setUploadState={setUploadState}
