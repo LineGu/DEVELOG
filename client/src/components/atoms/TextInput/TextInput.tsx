@@ -35,6 +35,16 @@ function TextInput(textAreaProperty: ITextInputProps): ReactElement {
       onKeyDown={(event) => {
         if (onKeyDown) onKeyDown(event);
       }}
+      onKeyUp={(event) => {
+        if (textAreaProperty.onKeyUp) textAreaProperty.onKeyUp(event);
+      }}
+      ref={textAreaProperty.refElem ?? null}
+      onDrop={(event) => {
+        if (textAreaProperty.onDrop) textAreaProperty.onDrop(event);
+      }}
+      onClick={() => {
+        if (textAreaProperty.onClick) textAreaProperty.onClick();
+      }}
     />
   );
 }

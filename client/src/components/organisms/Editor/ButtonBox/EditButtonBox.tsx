@@ -1,19 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
-import {
-  H1Icon,
-  H2Icon,
-  H3Icon,
-  BoldIcon,
-  ItalicIcon,
-  LinkIcon,
-  ImageIcon,
-  QuoteIcon,
-  TableIcon,
-  CodeIcon,
-  CheckBoxIcon,
-} from '@icons/index';
+import { H1, H2, H3, Bold, Italic, Link, Image, Quote, Table, Code, CheckBox } from '@icons/index';
 import { IOnClickSvgFun, IOnChangeFileFunc } from '@eventInterfaces';
 import { SetStateProcess, SetStateString } from '@types';
 import { ITableProps } from '@interfaces';
@@ -68,11 +56,10 @@ const TableWrapper = styled.div`
 function EditButtonBox({ onClick, tableProps, setImageUrl, setUploadState }: IEditButtonProps): ReactElement {
   const [isHiddenTableModal, setIsHidden] = useState<boolean>(true);
 
-  const createImgUrl: IOnChangeFileFunc = async (event) => {
-    const fileList = event.target.files;
-    if (!fileList) return;
-    const imgToUpload = fileList[0];
-    uploadImg(imgToUpload, setUploadState, setImageUrl);
+  const selectImgAndUpload: IOnChangeFileFunc = async (event) => {
+    const { 0: file } = event.target.files as FileList;
+    if (!file) return;
+    uploadImg(file, setUploadState, setImageUrl);
   };
 
   const openFinder: IOnClickSvgFun = (event) => {
@@ -87,21 +74,21 @@ function EditButtonBox({ onClick, tableProps, setImageUrl, setUploadState }: IEd
 
   return (
     <StyledEditButtonBox>
-      <H1Icon onClick={onClick} />
-      <H2Icon onClick={onClick} />
-      <H3Icon onClick={onClick} />
-      <BoldIcon onClick={onClick} />
-      <ItalicIcon onClick={onClick} />
-      <LinkIcon onClick={onClick} />
-      <ImageIcon onClick={openFinder} />
-      <Finder onChange={createImgUrl} />
-      <QuoteIcon onClick={onClick} />
+      <H1 onClick={onClick} />
+      <H2 onClick={onClick} />
+      <H3 onClick={onClick} />
+      <Bold onClick={onClick} />
+      <Italic onClick={onClick} />
+      <Link onClick={onClick} />
+      <Image onClick={openFinder} />
+      <Finder onChange={selectImgAndUpload} />
+      <Quote onClick={onClick} />
       <TableWrapper>
-        <TableIcon onClick={controlTableModal} />
+        <Table onClick={controlTableModal} />
         <TableModal isHidden={isHiddenTableModal} tableProps={tableProps} setIsHidden={setIsHidden} />
       </TableWrapper>
-      <CodeIcon onClick={onClick} />
-      <CheckBoxIcon onClick={onClick} />
+      <Code onClick={onClick} />
+      <CheckBox onClick={onClick} />
     </StyledEditButtonBox>
   );
 }

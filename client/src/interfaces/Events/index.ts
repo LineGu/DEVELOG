@@ -29,3 +29,7 @@ export interface IOnClickFunc {
 export interface IOnHoverDivFunc {
   (event: React.MouseEvent<HTMLDivElement, MouseEvent>): void;
 }
+
+export interface IOnDragEventFunc {
+  (event: React.DragEvent<HTMLElement>): void;
+}

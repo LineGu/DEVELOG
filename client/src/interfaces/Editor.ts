@@ -1,15 +1,14 @@
 import React, { SetStateAction, Dispatch } from 'react';
 import { IComponentProps, IUploadState } from '@interfaces';
+import { IOnKeyboardFunc } from '@eventInterfaces';
 
 interface IEditComponentProps extends IComponentProps {
-  propsAboutTextComponent: {
+  writingAreaProps: {
     input: string;
     setInput: Dispatch<SetStateAction<string>>;
-    setCursorPosition: Dispatch<SetStateAction<number[]>>;
-    findCursorPoint: (element: HTMLTextAreaElement) => number[];
+    updateCusorByClick: () => void;
+    updateCusorByKeyboard: IOnKeyboardFunc;
     inputAreaElem: React.RefObject<HTMLTextAreaElement>;
-    infoOfCursorToGo: React.MutableRefObject<(boolean | number[])[]>;
-    cursorPosition: number[];
     setImageUrl: Dispatch<SetStateAction<string>>;
     setUploadState: Dispatch<SetStateAction<IUploadState>>;
   };

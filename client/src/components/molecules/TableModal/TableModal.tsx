@@ -73,7 +73,6 @@ function TableModal({ className, tableProps, isHidden, setIsHidden }: ITableModa
       onMouseLeave={() => setCheck([-1, -1])}
       onMouseOver={(event) => {
         setCheck([-1, -1]);
-        console.log(1);
         event.stopPropagation();
       }}
     >

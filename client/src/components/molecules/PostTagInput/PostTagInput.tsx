@@ -1,7 +1,8 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
-import message from '@construction/message';
+import MESSAGE from '@construction/message';
+import STATE from '@construction/state';
 import TextInput from '@atoms/TextInput/index';
 import { SetStateString, ChangeEvent } from '@types';
 import { IOnKeyboardFunc } from '@eventInterfaces';
@@ -39,22 +40,24 @@ const TextAreaForTag = styled(TextInput)`
   }
 `;
 
-const renderTagChanged = (event: ChangeEvent, setTagInput: SetStateString): void => {
-  if (!event) return;
-  const newTag = event.target.value;
-  const isValidTagForm = newTag[0] === '#' || newTag.length === 0;
-  if (isValidTagForm) setTagInput(newTag);
-};
-
 function PostTagInput({ addTag, setModalState, setTagInput, tagInput }: IPostTagInputProps): ReactElement {
+  const renderTagChanged = (event: ChangeEvent): void => {
+    const newTag = event.target.value;
+    const isEmptyInput = newTag.length === 0;
+    const isValidStart = newTag[0] === '#';
+
+    const isValidTagForm = isValidStart || isEmptyInput;
+    if (isValidTagForm) setTagInput(newTag);
+  };
+
   return (
     <TextAreaForTag
-      placeholder={message.TAG_PLACEHOLDER}
-      onFocus={() => setModalState('show')}
-      onBlur={() => setModalState('hidden')}
+      placeholder={MESSAGE.TAG_PLACEHOLDER}
+      onFocus={() => setModalState(STATE.SHOW)}
+      onBlur={() => setModalState(STATE.HIDE)}
       state={tagInput}
       setState={setTagInput}
-      onChange={(event) => renderTagChanged(event, setTagInput)}
+      onChange={renderTagChanged}
       onKeyDown={addTag}
     />
   );

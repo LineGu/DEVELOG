@@ -9,6 +9,10 @@ interface ITextInputProps extends IComponentProps {
   onKeyDown?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
   state: string;
   setState: Dispatch<SetStateAction<string>>;
+  onDrop?: (event: React.DragEvent<HTMLTextAreaElement>) => void;
+  refElem?: React.RefObject<HTMLTextAreaElement>;
+  onKeyUp?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  onClick?: () => void;
 }
 
 export default ITextInputProps;

@@ -40,6 +40,7 @@ export const LightMode: ThemeType = {
   MODAL_EDIT: '#1E1E1E',
   OUT_LINE: '#37628A',
   PREVIEW_BACK: '#fafafa',
+  TEXT_SELECT: '#dfdfdf',
 };
 
 export const DarkMode: ThemeType = {
@@ -70,6 +71,7 @@ export const DarkMode: ThemeType = {
   MODAL_EDIT: '#5A5A5A',
   OUT_LINE: '#37628A',
   PREVIEW_BACK: '#222121',
+  TEXT_SELECT: '#dfdfdf',
 };
 
 export default Theme;

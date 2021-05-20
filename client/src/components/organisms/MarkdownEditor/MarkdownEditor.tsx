@@ -1,12 +1,13 @@
 import React, { ReactElement, useCallback, useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
-import WritingArea from '@molecules/EditorWritingArea/index';
+import WritingArea from '@organisms/Editor/WritingArea/index';
 import PostTitleInput from '@molecules/PostTitleInput/index';
-import EditorTagArea from '@molecules/EditorTagArea/index';
-import EditButtonBox from '@molecules/EditButtonBox/index';
+import EditorTagArea from '@organisms/Editor/TagArea/index';
+import EditButtonBox from '@organisms/Editor/ButtonBox/index';
 import editInputText from '@utils/editInputText';
 import { IPostInputProps, IUploadState } from '@interfaces';
+import { IOnKeyboardFunc } from '@eventInterfaces';
 
 const EditorAreaWrapper = styled.div<{ process: number }>`
   width: 50%;
@@ -18,7 +19,6 @@ const EditorAreaWrapper = styled.div<{ process: number }>`
   @media (max-width: ${() => Theme.PC}) {
     width: 100%;
   }
-
   .processBar {
     position: fixed;
     visibility: ${({ process }) => (process === 0 ? 'hidden' : 'visible')};
@@ -74,14 +74,24 @@ function MarkDownEditor({ input, setInput }: IPostInputProps): ReactElement {
     setInput(inputInsertedUploading);
   }, [isUploading.current]);
 
-  const propsAboutTextComponent = {
+  const updateCusorByClick = () => {
+    setCursorPosition(findCursorPoint(inputAreaElem.current as HTMLTextAreaElement));
+  };
+
+  const updateCusorByKeyboard: IOnKeyboardFunc = (event) => {
+    const cursorFinder = setTimeout(
+      () => setCursorPosition(findCursorPoint(inputAreaElem.current as HTMLTextAreaElement)),
+      400,
+    );
+    event.target.addEventListener('keyup', () => clearTimeout(cursorFinder));
+  };
+
+  const writingAreaProps = {
     input,
     setInput,
-    cursorPosition,
-    setCursorPosition,
-    findCursorPoint,
+    updateCusorByClick,
+    updateCusorByKeyboard,
     inputAreaElem,
-    infoOfCursorToGo,
     setImageUrl,
     setUploadState,
   };
@@ -97,13 +107,21 @@ function MarkDownEditor({ input, setInput }: IPostInputProps): ReactElement {
 
   const insertImageMarkdown = useCallback(() => {
     const isNotVaildUrl = imageUrl === null || imageUrl === undefined || imageUrl.length === 0;
+    if (uploadState.error) {
+      alert('이미지 업로드 실패');
+      const previousInput = `${input.slice(0, cursorPosition[0])}${input.slice(cursorPosition[0] + 15)}`;
+      setInput(previousInput);
+      setImageUrl('');
+      setUploadState(uploadStateInit);
+      return;
+    }
     if (isNotVaildUrl) return;
     const inputWithNewImg = `${input.slice(0, cursorPosition[0])}\n![](${imageUrl})\n${input.slice(
       cursorPosition[0] + 15,
     )}`;
     setInput(inputWithNewImg);
     setImageUrl('');
-  }, [imageUrl]);
+  }, [imageUrl, uploadState]);
 
   const moveCursorAfterEdit = useCallback(() => {
     const didClickedEditButton = infoOfCursorToGo.current[0];
@@ -123,7 +141,7 @@ function MarkDownEditor({ input, setInput }: IPostInputProps): ReactElement {
 
   useEffect(() => {
     insertImageMarkdown();
-  }, [imageUrl]);
+  }, [imageUrl, uploadState]);
 
   return (
     <EditorAreaWrapper process={isUploading.current ? uploadState.process : 0}>
@@ -137,7 +155,7 @@ function MarkDownEditor({ input, setInput }: IPostInputProps): ReactElement {
         setImageUrl={setImageUrl}
         setUploadState={setUploadState}
       />
-      <WritingArea className="textInput" propsAboutTextComponent={propsAboutTextComponent} />
+      <WritingArea className="textInput" writingAreaProps={writingAreaProps} />
     </EditorAreaWrapper>
   );
 }
