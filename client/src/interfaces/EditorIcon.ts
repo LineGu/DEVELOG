@@ -1,7 +1,7 @@
-import { IOnClickSvgFun } from '@eventInterfaces';
+import { IOnClickSvgFunc } from '@eventInterfaces';
 
 interface EditorIconProps {
-  onClick: IOnClickSvgFun;
+  onClick: IOnClickSvgFunc;
 }
 
 export default EditorIconProps;

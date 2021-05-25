@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import Theme from '@theme/index';
 import { IEditorProps } from '@interfaces';
 import uploadImg from '@utils/uploadImg';
+import getImgByDrag from '@utils/getImgByDrag';
 import TextInput from '@atoms/TextInput';
 import { IOnDragEventFunc } from '@eventInterfaces';
+import MESSAGE from '@construction/message';
 
 const StyledMarkdownArea = styled(TextInput)`
   width: 93%;
@@ -33,21 +35,16 @@ function EditorWritingArea({ writingAreaProps: props, className }: IEditorProps)
   const { input, setInput, inputAreaElem, setImageUrl, setUploadState } = props;
 
   const uploadImgByDrag: IOnDragEventFunc = (event) => {
-    event.stopPropagation();
-    event.preventDefault();
-    const { files } = event.dataTransfer;
-    const { 0: imgFile } = files;
+    const imgFile = getImgByDrag(event);
     uploadImg(imgFile, setUploadState, setImageUrl);
   };
 
   return (
     <StyledMarkdownArea
       className={className}
-      placeholder="이야기를 적어보세요.."
+      placeholder={MESSAGE.POST_PLACEHOLDER}
       state={input}
       setState={setInput}
-      onClick={props.updateCusorByClick}
-      onKeyUp={props.updateCusorByKeyboard}
       refElem={inputAreaElem}
       onDrop={uploadImgByDrag}
     />

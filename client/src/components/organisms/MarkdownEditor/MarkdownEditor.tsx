@@ -6,156 +6,67 @@ import PostTitleInput from '@molecules/PostTitleInput/index';
 import EditorTagArea from '@organisms/Editor/TagArea/index';
 import EditButtonBox from '@organisms/Editor/ButtonBox/index';
 import editInputText from '@utils/editInputText';
-import { IPostInputProps, IUploadState } from '@interfaces';
-import { IOnKeyboardFunc } from '@eventInterfaces';
+import { IPostInputProps, IEditFuncProps } from '@interfaces';
+import ProcessBar from '@molecules/ProcessBar';
+import useCursorPoint from '@hook/useCursorPoint';
+import Devider from '@atoms/Devider';
+import useUloadingImg from '@hook/useUploadingImg';
+import { IOnClickSvgFunc } from '@eventInterfaces';
+import editByButton from '@utils/markdownEditor/index';
 
-const EditorAreaWrapper = styled.div<{ process: number }>`
+const EditorAreaWrapper = styled.div`
   width: 50%;
   height: 100vh;
+
   @media (max-width: ${() => Theme.MOBILE}) {
     width: 100%;
   }
+`;
 
-  @media (max-width: ${() => Theme.PC}) {
-    width: 100%;
-  }
-  .processBar {
-    position: fixed;
-    visibility: ${({ process }) => (process === 0 ? 'hidden' : 'visible')};
-    margin: 0;
-    top: 0;
-    left: 0;
-    width: ${({ process }) => process}vw;
-    border: 8px solid ${() => Theme.HOVER_POINT};
-  }
-  & > hr:not(processBar) {
-    position: absolute;
-    top: 13vh;
-    left: 3vw;
-    width: 9vw;
-    border: 4px solid ${() => Theme.EMPHASIS};
-    @media (max-width: ${() => Theme.MOBILE}) {
-      top: 2.7em;
-      left: 0.8em;
-      width: 4em;
-      border: 2px solid ${() => Theme.EMPHASIS};
-    }
-  }
-
-  .show {
-    animation-name: bounce;
-    animation-duration: 0.5s;
+const StyeldDevider = styled(Devider)`
+  top: 13vh;
+  left: 3vw;
+  @media (max-width: ${() => Theme.MOBILE}) {
+    top: 2.7em;
+    left: 0.8em;
   }
 `;
 
-const findCursorPoint = (element: HTMLTextAreaElement): number[] => {
-  const cursorPointStart = element?.selectionStart;
-  const cursorPointEnd = element?.selectionEnd;
-  const cursorPosition = [cursorPointStart, cursorPointEnd];
-
-  return cursorPosition;
-};
-
-const uploadStateInit = { process: 0, error: '' };
-
-function MarkDownEditor({ input, setInput }: IPostInputProps): ReactElement {
-  const [imageUrl, setImageUrl] = useState<string>('');
-  const [uploadState, setUploadState] = useState<IUploadState>(uploadStateInit);
-  const infoOfCursorToGo = useRef<[boolean, number[]]>([false, [0, 0]]);
-  const [cursorPosition, setCursorPosition] = useState([0, 0]);
+function MarkDownEditor(MarkDownProps: IPostInputProps): ReactElement {
+  const { input, setInput } = MarkDownProps;
   const inputAreaElem = useRef<HTMLTextAreaElement>(null);
-  const isUploading = useRef(false);
-
-  isUploading.current = uploadState.process !== 0;
+  const { cursorPosition, moveCursor } = useCursorPoint(inputAreaElem.current);
+  const [cursorToGoByEditButton, setCursorToGo] = useState(cursorPosition); // 반성하세요
+  const { setImageUrl, setUploadState, uploadState } = useUloadingImg(input, cursorPosition, setInput, setCursorToGo);
   useEffect(() => {
-    if (!isUploading.current) return;
-    const currentCursor = cursorPosition[0];
-    const inputInsertedUploading = `${input.slice(0, currentCursor)}![Loading...]()${input.slice(currentCursor)}`;
-    setInput(inputInsertedUploading);
-  }, [isUploading.current]);
+    moveCursor(cursorToGoByEditButton);
+  }, [cursorToGoByEditButton]);
 
-  const updateCusorByClick = () => {
-    setCursorPosition(findCursorPoint(inputAreaElem.current as HTMLTextAreaElement));
-  };
+  const textInputProps = { ...MarkDownProps, inputAreaElem, setImageUrl, setUploadState };
 
-  const updateCusorByKeyboard: IOnKeyboardFunc = (event) => {
-    const cursorFinder = setTimeout(
-      () => setCursorPosition(findCursorPoint(inputAreaElem.current as HTMLTextAreaElement)),
-      400,
-    );
-    event.target.addEventListener('keyup', () => clearTimeout(cursorFinder));
-  };
-
-  const writingAreaProps = {
-    input,
-    setInput,
-    updateCusorByClick,
-    updateCusorByKeyboard,
-    inputAreaElem,
-    setImageUrl,
-    setUploadState,
-  };
-
-  const controlInputAndCursor = useCallback(
-    (event) => {
-      const cursorPositionToGo = editInputText({ event, input, setInput, cursorPosition });
-      infoOfCursorToGo.current = [true, cursorPositionToGo];
+  const updateByEditButton: IEditFuncProps = useCallback(
+    (event, tableCount = [0, 0]) => {
+      const { updatedText, cursorToGo } = editByButton({ input, event, cursorPosition, tableCount }); // 새로운 포인터의 위치와 로직 분리
+      setInput(updatedText);
       inputAreaElem.current?.focus();
+      setCursorToGo(cursorToGo);
     },
     [input, cursorPosition],
   );
 
-  const insertImageMarkdown = useCallback(() => {
-    const isNotVaildUrl = imageUrl === null || imageUrl === undefined || imageUrl.length === 0;
-    if (uploadState.error) {
-      alert('이미지 업로드 실패');
-      const previousInput = `${input.slice(0, cursorPosition[0])}${input.slice(cursorPosition[0] + 15)}`;
-      setInput(previousInput);
-      setImageUrl('');
-      setUploadState(uploadStateInit);
-      return;
-    }
-    if (isNotVaildUrl) return;
-    const inputWithNewImg = `${input.slice(0, cursorPosition[0])}\n![](${imageUrl})\n${input.slice(
-      cursorPosition[0] + 15,
-    )}`;
-    setInput(inputWithNewImg);
-    setImageUrl('');
-  }, [imageUrl, uploadState]);
-
-  const moveCursorAfterEdit = useCallback(() => {
-    const didClickedEditButton = infoOfCursorToGo.current[0];
-    if (!didClickedEditButton) return;
-    const cursorPositionToGo = infoOfCursorToGo.current[1];
-    const [startPosition, endPosition] = cursorPositionToGo as number[];
-
-    inputAreaElem.current?.focus();
-    inputAreaElem.current?.setSelectionRange(startPosition, endPosition);
-    infoOfCursorToGo.current = [false, [0, 0]];
-    setCursorPosition(findCursorPoint(inputAreaElem.current as HTMLTextAreaElement));
-  }, [input]);
-
-  useEffect(() => {
-    moveCursorAfterEdit();
-  }, [input]);
-
-  useEffect(() => {
-    insertImageMarkdown();
-  }, [imageUrl, uploadState]);
-
   return (
-    <EditorAreaWrapper process={isUploading.current ? uploadState.process : 0}>
-      <hr className="processBar" />
+    <EditorAreaWrapper>
+      <ProcessBar uploadState={uploadState} />
       <PostTitleInput />
-      <hr />
+      <StyeldDevider />
       <EditorTagArea />
       <EditButtonBox
-        onClick={controlInputAndCursor}
+        onClick={updateByEditButton}
         tableProps={{ input, setInput, cursorPosition }}
         setImageUrl={setImageUrl}
         setUploadState={setUploadState}
       />
-      <WritingArea className="textInput" writingAreaProps={writingAreaProps} />
+      <WritingArea className="textInput" writingAreaProps={textInputProps} />
     </EditorAreaWrapper>
   );
 }

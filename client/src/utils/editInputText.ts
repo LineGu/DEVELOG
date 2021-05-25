@@ -204,6 +204,7 @@ const insertTable = ({ input, cursorPosition, insertText, setInput, iconClicked 
 };
 
 const editInputText = ({ event, input, setInput, cursorPosition }: IEditTextProps): number[] => {
+  // 스트레티지 패턴
   const iconClicked = event.currentTarget.id;
 
   let cursorToGo: number[] = [0, 0];

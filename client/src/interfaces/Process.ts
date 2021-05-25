@@ -1,5 +1,5 @@
 interface IUploadState {
-  process: number;
+  progress: number;
   error: string;
 }
 

@@ -19,10 +19,10 @@ const useTextLoop = (introduceList: string[]): ITextLoopReturn => {
     let isMounted = true;
     const propsOfAnimateFunc = { textList: introduceList, isMounted, color, setMargin, setColor, setOpacity, setIntro };
     animateIntroduceText(propsOfAnimateFunc);
-    function cleanUp() {
+
+    return () => {
       isMounted = false;
-    }
-    return cleanUp;
+    };
   }, []);
 
   return { margin, color, opacity, introduce };

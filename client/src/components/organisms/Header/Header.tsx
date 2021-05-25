@@ -36,7 +36,7 @@ const StyledHeaderBaseLine = styled.div`
     margin-left: 3%;
     margin-bottom: 1%;
   }
-  &>span: hover {
+  & > span:hover {
     cursor: pointer;
   }
 `;

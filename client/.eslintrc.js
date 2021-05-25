@@ -20,6 +20,8 @@ module.exports = {
     'import/no-unresolved': 'off',
     'click-events-have-key-events': 'off',
     'jsx-a11y/click-events-have-key-events': ['off'],
+    'jsx-a11y/mouse-events-have-key-events': ['off'],
+    'react/jsx-key': ['off'],
     'jsx-a11y/no-static-element-interactions': [
       'error',
       {

@@ -2,15 +2,15 @@ import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
 import { H1, H2, H3, Bold, Italic, Link, Image, Quote, Table, Code, CheckBox } from '@icons/index';
-import { IOnClickSvgFun, IOnChangeFileFunc } from '@eventInterfaces';
+import { IOnClickSvgFunc, IOnChangeFileFunc } from '@eventInterfaces';
 import { SetStateProcess, SetStateString } from '@types';
-import { ITableProps } from '@interfaces';
+import { ITableProps, IEditFuncProps } from '@interfaces';
 import uploadImg from '@utils/uploadImg';
 import TableModal from '@molecules/TableModal/index';
 import Finder from '@atoms/Finder';
 
 interface IEditButtonProps {
-  onClick: IOnClickSvgFun;
+  onClick: IEditFuncProps;
   tableProps: ITableProps;
   setImageUrl: SetStateString;
   setUploadState: SetStateProcess;
@@ -62,12 +62,12 @@ function EditButtonBox({ onClick, tableProps, setImageUrl, setUploadState }: IEd
     uploadImg(file, setUploadState, setImageUrl);
   };
 
-  const openFinder: IOnClickSvgFun = (event) => {
+  const openFinder: IOnClickSvgFunc = (event) => {
     const finderElem = event.currentTarget.nextSibling as HTMLButtonElement;
     finderElem.click();
   };
 
-  const controlTableModal: IOnClickSvgFun = (event) => {
+  const controlTableModal: IOnClickSvgFunc = (event) => {
     setIsHidden(!isHiddenTableModal);
     event.stopPropagation();
   };
@@ -80,12 +80,14 @@ function EditButtonBox({ onClick, tableProps, setImageUrl, setUploadState }: IEd
       <Bold onClick={onClick} />
       <Italic onClick={onClick} />
       <Link onClick={onClick} />
-      <Image onClick={openFinder} />
-      <Finder onChange={selectImgAndUpload} />
+      <>
+        <Image onClick={openFinder} />
+        <Finder onChange={selectImgAndUpload} />
+      </>
       <Quote onClick={onClick} />
       <TableWrapper>
         <Table onClick={controlTableModal} />
-        <TableModal isHidden={isHiddenTableModal} tableProps={tableProps} setIsHidden={setIsHidden} />
+        <TableModal isHidden={isHiddenTableModal} onClick={onClick} setIsHidden={setIsHidden} />
       </TableWrapper>
       <Code onClick={onClick} />
       <CheckBox onClick={onClick} />

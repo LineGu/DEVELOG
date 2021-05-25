@@ -13,10 +13,18 @@ const useScroll: () => IUseScrollProps = () => {
     setScroll(document.documentElement.scrollTop);
   }, [scroll]);
 
+  const applyWindowHeight = () => {
+    screenHeight.current = window.innerHeight;
+  };
+
   useEffect(() => {
     document.addEventListener('scroll', notifyLocation);
-    screenHeight.current = window.innerHeight;
-    return () => document.removeEventListener('scroll', notifyLocation);
+    document.addEventListener('resize', applyWindowHeight);
+    applyWindowHeight();
+    return () => {
+      document.removeEventListener('scroll', notifyLocation);
+      document.removeEventListener('resize', applyWindowHeight);
+    };
   }, []);
 
   const percentagePosition = (scroll / screenHeight.current) * 100;

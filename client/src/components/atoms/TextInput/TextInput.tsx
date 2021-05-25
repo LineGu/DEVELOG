@@ -45,6 +45,7 @@ function TextInput(textAreaProperty: ITextInputProps): ReactElement {
       onClick={() => {
         if (textAreaProperty.onClick) textAreaProperty.onClick();
       }}
+      onDoubleClick={(event) => event.preventDefault()}
     />
   );
 }

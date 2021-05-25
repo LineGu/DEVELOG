@@ -13,3 +13,4 @@ export type { default as IUploadState } from './Process';
 export type { default as ILinkProps } from './Link';
 export type { default as ITableProps } from './Table';
 export type { default as EditorIconProps } from './EditorIcon';
+export type { default as IEditFuncProps } from './EditFunc';

@@ -19,6 +19,11 @@ const StyledTagContainer = styled.div`
     margin: 0 0 1em 0;
     width: 100%;
   }
+
+  & > .show {
+    animation-name: bounce;
+    animation-duration: 0.5s;
+  }
 `;
 
 const StyledTagUnit = styled.div`
@@ -46,6 +51,7 @@ const StyledTagModal = styled(Modal)`
   bottom: -4em;
   background-color: ${() => Theme.EMPHASIS};
   color: ${() => Theme.HEADER_BACK};
+
   @media (max-width: ${() => Theme.MOBILE}) {
     height: 4.7em;
     width: 60vw;
@@ -53,6 +59,22 @@ const StyledTagModal = styled(Modal)`
     margin-left: 1.7em;
     bottom: -5.3em;
     font-size: 0.43em;
+  }
+
+  @keyframes bounce {
+    0% {
+      transform: translate(0%, -50%);
+      opacity: 0;
+    }
+    40% {
+      transform: translate(0%, 0%);
+    }
+    55% {
+      transform: translate(0%, -5%);
+    }
+    100% {
+      opacity: 1;
+    }
   }
 `;
 
