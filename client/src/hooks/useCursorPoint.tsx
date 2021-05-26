@@ -23,8 +23,7 @@ const useCursorPoint = (inputElem: HTMLTextAreaElement | null): ICursorHookRetur
     const [startPosition, endPosition] = positionToGo;
     inputElem?.focus();
     inputElem?.setSelectionRange(startPosition, endPosition);
-
-    updateCusorPoint();
+    setCursorPosition(positionToGo);
   };
 
   useEffect(() => {

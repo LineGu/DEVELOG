@@ -12,7 +12,7 @@ const StyledFinder = styled.input`
 `;
 
 function Finder({ onChange }: IFinderProps): ReactElement {
-  return <StyledFinder type="file" accept="image/*,.pdf" onChange={onChange} />;
+  return <StyledFinder id="img" type="file" accept="image/*,.pdf" onChange={onChange} />;
 }
 
 export default Finder;

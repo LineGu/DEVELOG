@@ -1,51 +1,25 @@
-import FrontInsertEditor from './FrontInsertEditor';
-import CurrentInsertEditor from './CurrentInsertEditor';
-import ImgEditor from './ImgEditor';
+import { EditorType } from '@interfaces';
+import BoldEditor from './Editors/Bold';
+import CheckBoxEditor from './Editors/CheckBox';
+import CodeEditor from './Editors/Code';
+import HeadEditor from './Editors/Head';
+import ImgEditor from './Editors/Img';
+import ItalicEditor from './Editors/Italic';
+import LinkEditor from './Editors/Link';
+import QuoteEditor from './Editors/Quote';
+import TableEditor from './Editors/Table';
 
-interface IEditTextProps {
-  event?: React.MouseEvent<SVGElement, MouseEvent>;
-  input: string;
-  cursorPosition: number[];
-  tableCount?: number[];
-}
-
-interface IResultOfEditor {
-  updatedText: string;
-  cursorToGo: number[];
-}
-
-type editorType = {
-  [editorName: string]: FrontInsertEditor | CurrentInsertEditor;
+export const Editors: EditorType = {
+  h1: new HeadEditor(1),
+  h2: new HeadEditor(2),
+  h3: new HeadEditor(3),
+  bold: new BoldEditor(),
+  italic: new ItalicEditor(),
+  link: new LinkEditor(),
+  code: new CodeEditor(),
+  checkbox: new CheckBoxEditor(),
+  quote: new QuoteEditor(),
+  img: new ImgEditor(),
 };
 
-const Editors: editorType = {
-  h1Editor: new FrontInsertEditor('h1'),
-  h2Editor: new FrontInsertEditor('h2'),
-  h3Editor: new FrontInsertEditor('h3'),
-  quoteEditor: new FrontInsertEditor('quote'),
-  checkboxEditor: new FrontInsertEditor('checkbox'),
-  boldEditor: new CurrentInsertEditor('bold'),
-  italicEditor: new CurrentInsertEditor('italic'),
-  linkEditor: new CurrentInsertEditor('link'),
-  codeEditor: new CurrentInsertEditor('code'),
-  tableEditor: new CurrentInsertEditor('table'),
-  imgEditor: new ImgEditor('img'),
-};
-
-const editByButton = (props: IEditTextProps): IResultOfEditor => {
-  const { input, event, cursorPosition, tableCount } = props;
-  const editType = event?.currentTarget.id ?? 'img';
-  const editorName = `${editType}Editor`;
-  const editInputFunc = Editors[editorName].editInput;
-
-  if (editType === 'table') {
-    const tableEditor = Editors.tableEditor as CurrentInsertEditor;
-    tableEditor.setTableText(tableCount ?? [0, 0]);
-  }
-
-  const { updatedText, cursorToGo } = editInputFunc(input, cursorPosition);
-
-  return { updatedText, cursorToGo };
-};
-
-export default editByButton;
+export const tableEditor = new TableEditor();

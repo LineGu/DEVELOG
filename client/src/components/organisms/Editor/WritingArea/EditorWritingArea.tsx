@@ -2,11 +2,11 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
 import { IEditorProps } from '@interfaces';
-import uploadImg from '@utils/uploadImg';
 import getImgByDrag from '@utils/getImgByDrag';
 import TextInput from '@atoms/TextInput';
 import { IOnDragEventFunc } from '@eventInterfaces';
 import MESSAGE from '@construction/message';
+import { Editors } from '@utils/markdownEditor/index';
 
 const StyledMarkdownArea = styled(TextInput)`
   width: 93%;
@@ -31,12 +31,20 @@ const StyledMarkdownArea = styled(TextInput)`
   }
 `;
 
-function EditorWritingArea({ writingAreaProps: props, className }: IEditorProps): ReactElement {
-  const { input, setInput, inputAreaElem, setImageUrl, setUploadState } = props;
+function EditorWritingArea({ editButtonProps: props, className }: IEditorProps): ReactElement {
+  const { input, setInput, inputAreaElem, setUploadState } = props;
+  const imgEditor = Editors.img;
+  const { uploadImg } = Editors.img;
 
-  const uploadImgByDrag: IOnDragEventFunc = (event) => {
+  const uploadImgByDrag: IOnDragEventFunc = async (event) => {
     const imgFile = getImgByDrag(event);
-    uploadImg(imgFile, setUploadState, setImageUrl);
+    const timer = setInterval(() => {
+      setUploadState(imgEditor.uploadingState);
+    }, 10);
+    await uploadImg(imgFile);
+    // updateByEditButton();
+    setUploadState(imgEditor.uploadingState);
+    clearInterval(timer);
   };
 
   return (

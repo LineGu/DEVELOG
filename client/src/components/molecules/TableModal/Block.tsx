@@ -1,17 +1,15 @@
 import React, { ReactElement, useCallback } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
-import addTable from '@utils/addTable';
 import { setStateNumberArr } from '@types';
-import { IOnHoverDivFunc, IOnClickSvgFunc } from '@eventInterfaces';
-import { IEditFuncProps } from '@interfaces';
+import { IOnHoverDivFunc } from '@eventInterfaces';
 
 interface IBlockProps {
   blockPorps: {
     checkedPoint: number[];
     setCheckedPoint: setStateNumberArr;
     resetCheckedPoint: () => void;
-    onClick: IEditFuncProps;
+    onClick: (tableCount: number[]) => void;
   };
 }
 
@@ -31,21 +29,18 @@ const BlockBox = styled.div`
 `;
 
 function Block({ blockPorps }: IBlockProps): ReactElement {
-  const { checkedPoint, onClick, setCheckedPoint, resetCheckedPoint } = blockPorps;
+  const { checkedPoint, setCheckedPoint, resetCheckedPoint, onClick } = blockPorps;
   const rowBlockLength = 10;
   const columnBlockLength = 8;
   const rowBlockCount = new Array(rowBlockLength).fill(0);
   const columnBlockCount = new Array(columnBlockLength).fill(0);
   const [xPoint, yPoint] = checkedPoint;
 
-  const addTableByClick = useCallback(
-    (event) => {
-      const [rowCount, columnCount] = [xPoint + 1, yPoint + 1];
-      onClick(event, [rowCount, columnCount]);
-      resetCheckedPoint();
-    },
-    [checkedPoint],
-  );
+  const addTableByClick = useCallback(() => {
+    const [rowCount, columnCount] = [xPoint + 1, yPoint + 1];
+    onClick([rowCount, columnCount]);
+    resetCheckedPoint();
+  }, [checkedPoint]);
 
   const updateCheckedPoint: IOnHoverDivFunc = useCallback((event) => {
     const [xPointStr, yPointStr] = event.currentTarget.id.split(',');

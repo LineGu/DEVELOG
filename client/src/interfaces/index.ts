@@ -14,3 +14,6 @@ export type { default as ILinkProps } from './Link';
 export type { default as ITableProps } from './Table';
 export type { default as EditorIconProps } from './EditorIcon';
 export type { default as IEditFuncProps } from './EditFunc';
+export type { default as IOnClickEditButton } from './EditButton';
+export type { default as EditorType } from './MarkdownEditors';
+export type { default as ITableOnClick } from './TableEdit';

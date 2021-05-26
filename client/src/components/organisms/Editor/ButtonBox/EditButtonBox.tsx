@@ -1,19 +1,22 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
-import { H1, H2, H3, Bold, Italic, Link, Image, Quote, Table, Code, CheckBox } from '@icons/index';
-import { IOnClickSvgFunc, IOnChangeFileFunc } from '@eventInterfaces';
-import { SetStateProcess, SetStateString } from '@types';
-import { ITableProps, IEditFuncProps } from '@interfaces';
-import uploadImg from '@utils/uploadImg';
-import TableModal from '@molecules/TableModal/index';
-import Finder from '@atoms/Finder';
+import { H1, H2, H3, Bold, Italic, Link, Quote, Code, CheckBox } from '@icons/index';
+import { IUploadState } from '@interfaces';
+import { Editors, tableEditor } from '@utils/markdownEditor';
+import TableEditor from '@utils/markdownEditor/Editors/Table';
+import TableButton from './TableButton';
+import ImgButton from './ImgButtons';
 
 interface IEditButtonProps {
-  onClick: IEditFuncProps;
-  tableProps: ITableProps;
-  setImageUrl: SetStateString;
-  setUploadState: SetStateProcess;
+  editButtonProps: {
+    inputAreaElem: React.RefObject<HTMLTextAreaElement>;
+    setUploadState: React.Dispatch<React.SetStateAction<IUploadState>>;
+    moveCursor: (positionToGo: number[]) => void;
+    input: string;
+    setInput: Dispatch<SetStateAction<string>>;
+    cursorPosition: number[];
+  };
 }
 
 const StyledEditButtonBox = styled.div`
@@ -44,53 +47,34 @@ const StyledEditButtonBox = styled.div`
   }
 `;
 
-const TableWrapper = styled.div`
-  & > div:not(#table) {
-    margin-left: 2%;
-  }
-  @media (max-width: ${() => Theme.MOBILE}) {
-    display: none;
-  }
-`;
+function EditButtonBox({ editButtonProps }: IEditButtonProps): ReactElement {
+  const { input, setInput, setUploadState, moveCursor, cursorPosition } = editButtonProps;
+  const currentCursorIndex = cursorPosition[0];
 
-function EditButtonBox({ onClick, tableProps, setImageUrl, setUploadState }: IEditButtonProps): ReactElement {
-  const [isHiddenTableModal, setIsHidden] = useState<boolean>(true);
-
-  const selectImgAndUpload: IOnChangeFileFunc = async (event) => {
-    const { 0: file } = event.target.files as FileList;
-    if (!file) return;
-    uploadImg(file, setUploadState, setImageUrl);
+  const onClickEditButton = (editType: string): void => {
+    const editor = Editors[editType];
+    const updatedInput = editor.onClickEditButton({ input, currentCursorIndex, moveCursor });
+    setInput(updatedInput);
   };
 
-  const openFinder: IOnClickSvgFunc = (event) => {
-    const finderElem = event.currentTarget.nextSibling as HTMLButtonElement;
-    finderElem.click();
-  };
-
-  const controlTableModal: IOnClickSvgFunc = (event) => {
-    setIsHidden(!isHiddenTableModal);
-    event.stopPropagation();
+  const onClickTableButton = (tableCount: number[]) => {
+    const updatedInput = tableEditor.onClickEditButton({ input, currentCursorIndex, moveCursor, tableCount });
+    setInput(updatedInput);
   };
 
   return (
     <StyledEditButtonBox>
-      <H1 onClick={onClick} />
-      <H2 onClick={onClick} />
-      <H3 onClick={onClick} />
-      <Bold onClick={onClick} />
-      <Italic onClick={onClick} />
-      <Link onClick={onClick} />
-      <>
-        <Image onClick={openFinder} />
-        <Finder onChange={selectImgAndUpload} />
-      </>
-      <Quote onClick={onClick} />
-      <TableWrapper>
-        <Table onClick={controlTableModal} />
-        <TableModal isHidden={isHiddenTableModal} onClick={onClick} setIsHidden={setIsHidden} />
-      </TableWrapper>
-      <Code onClick={onClick} />
-      <CheckBox onClick={onClick} />
+      <H1 onClick={() => onClickEditButton('h1')} />
+      <H2 onClick={() => onClickEditButton('h2')} />
+      <H3 onClick={() => onClickEditButton('h3')} />
+      <Bold onClick={() => onClickEditButton('bold')} />
+      <Italic onClick={() => onClickEditButton('italic')} />
+      <Link onClick={() => onClickEditButton('link')} />
+      <ImgButton onClick={onClickEditButton} setUploadState={setUploadState} />
+      <Quote onClick={() => onClickEditButton('quote')} />
+      <TableButton onClick={onClickTableButton} />
+      <Code onClick={() => onClickEditButton('code')} />
+      <CheckBox onClick={() => onClickEditButton('checkbox')} />
     </StyledEditButtonBox>
   );
 }

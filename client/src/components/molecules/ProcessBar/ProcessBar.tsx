@@ -7,10 +7,10 @@ interface IPropcessBarProps {
   uploadState: IUploadState;
 }
 
-const StyledProcessBar = styled.hr<{ process: number }>`
+const StyledProcessBar = styled.hr<{ progress: number }>`
   position: fixed;
-  visibility: ${({ process }) => (process === 0 ? 'hidden' : 'visible')};
-  width: ${({ process }) => process}vw;
+  visibility: ${({ progress }) => (progress === 0 ? 'hidden' : 'visible')};
+  width: ${({ progress }) => progress}vw;
   border: 8px solid ${() => Theme.HOVER_POINT};
   margin: 0;
   top: 0;
@@ -18,7 +18,7 @@ const StyledProcessBar = styled.hr<{ process: number }>`
 `;
 
 function ProcessBar({ uploadState }: IPropcessBarProps): ReactElement {
-  return <StyledProcessBar process={uploadState.process !== 0 ? uploadState.process : 0} />;
+  return <StyledProcessBar progress={uploadState.progress !== 0 ? uploadState.progress : 0} />;
 }
 
 export default ProcessBar;

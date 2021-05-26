@@ -1,4 +1,4 @@
-import { IComponentProps, IEditFuncProps } from '@interfaces';
+import { IComponentProps } from '@interfaces';
 import React, { ReactElement, useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import Theme from '@theme/index';
@@ -6,9 +6,9 @@ import { setStateBool } from '@types';
 import Block from './Block';
 
 interface ITableModalProps extends IComponentProps {
-  onClick: IEditFuncProps;
   isHidden: boolean;
   setIsHidden: setStateBool;
+  onClick: (tableCount: number[]) => void;
 }
 
 const StyledModal = styled.div<{ isHidden: boolean }>`
@@ -27,7 +27,7 @@ const StyledModal = styled.div<{ isHidden: boolean }>`
   }
 `;
 
-function TableModal({ className, onClick, isHidden, setIsHidden }: ITableModalProps): ReactElement {
+function TableModal({ className, isHidden, setIsHidden, onClick }: ITableModalProps): ReactElement {
   const initValueCheckedPoint = [-1, -1];
   const [checkedPoint, setCheckedPoint] = useState<number[]>(initValueCheckedPoint);
   const [xPoint, yPoint] = checkedPoint;
@@ -39,7 +39,7 @@ function TableModal({ className, onClick, isHidden, setIsHidden }: ITableModalPr
     resetCheckedPoint();
   }, []);
 
-  const blockPorps = { checkedPoint, onClick, setCheckedPoint, resetCheckedPoint };
+  const blockPorps = { checkedPoint, setCheckedPoint, resetCheckedPoint, onClick };
 
   const printCurrentCheckedPoint = useCallback(() => {
     const isChecked = checkedPoint[0] !== initValueCheckedPoint[0];

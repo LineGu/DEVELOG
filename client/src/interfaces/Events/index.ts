@@ -33,3 +33,7 @@ export interface IOnHoverDivFunc {
 export interface IOnDragEventFunc {
   (event: React.DragEvent<HTMLElement>): void;
 }
+
+export interface IEditImgFunc {
+  (event: React.ChangeEvent<HTMLInputElement>): void;
+}
