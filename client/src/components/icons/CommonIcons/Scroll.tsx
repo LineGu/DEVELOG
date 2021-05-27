@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { CgScrollV } from 'react-icons/cg';
-import { IIconProps } from '@interfaces';
-import Theme from '@theme/index';
+import { IIconProps } from '@types';
+import Theme from 'src/constants/Theme';
 
 const StyledScroll = styled(CgScrollV)<IIconProps>`
   width: 3vw;

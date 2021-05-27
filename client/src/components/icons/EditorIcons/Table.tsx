@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { BsTable } from 'react-icons/bs';
-import { EditorIconProps } from '@interfaces';
-import Theme from '@theme/index';
+import { EditorIconProps } from '@types';
+import Theme from 'src/constants/Theme';
 
 const StyledTableIcon = styled(BsTable)`
   width: 20px;

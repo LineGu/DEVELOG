@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { DiCss3 } from 'react-icons/di';
-import { IIconProps } from '@interfaces';
+import { IIconProps } from '@types';
 
 const StyledCss = styled(DiCss3)<IIconProps>`
   width: 12vw;

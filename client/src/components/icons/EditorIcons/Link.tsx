@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { BsLink45Deg } from 'react-icons/bs';
-import { EditorIconProps } from '@interfaces';
-import Theme from '@theme/index';
+import { EditorIconProps } from '@types';
+import Theme from 'src/constants/Theme';
 
 const StyledLinkIcon = styled(BsLink45Deg)`
   width: 20px;

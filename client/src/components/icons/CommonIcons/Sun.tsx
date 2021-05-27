@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { BiSun } from 'react-icons/bi';
-import { IIconProps } from '@interfaces';
+import { IIconProps } from '@types';
 
 const StyledSun = styled(BiSun)`
   width: 22px;

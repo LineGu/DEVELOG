@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { IoIosMenu } from 'react-icons/io';
-import { IIconProps } from '@interfaces';
+import { IIconProps } from '@types';
 
 const StyledMenuIcon = styled(IoIosMenu)`
   width: 8vw;

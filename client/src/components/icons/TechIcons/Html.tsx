@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { DiHtml5 } from 'react-icons/di';
-import { IIconProps } from '@interfaces';
+import { IIconProps } from '@types';
 
 const StyledHtml = styled(DiHtml5)<IIconProps>`
   width: 12vw;

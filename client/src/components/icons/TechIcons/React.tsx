@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { DiReact } from 'react-icons/di';
-import { IIconProps } from '@interfaces';
+import { IIconProps } from '@types';
 
 const StyledReact = styled(DiReact)<IIconProps>`
   width: 12vw;

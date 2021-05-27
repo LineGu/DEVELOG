@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import PostPageComponent from '@pages/Post';
+import PostPageComponent from 'src/components/write/Post';
 
 interface IPageProps {
   mode: string;

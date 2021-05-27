@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { BsTypeH3 } from 'react-icons/bs';
-import { EditorIconProps } from '@interfaces';
-import Theme from '@theme/index';
+import { EditorIconProps } from '@types';
+import Theme from 'src/constants/Theme';
 
 const StyledH3Icon = styled(BsTypeH3)`
   width: 20px;

@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { SiNextDotJs } from 'react-icons/si';
-import { IIconProps } from '@interfaces';
+import { IIconProps } from '@types';
 
 const StyledNext = styled(SiNextDotJs)<IIconProps>`
   width: 10vw;

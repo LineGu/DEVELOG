@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { ThemeContext } from '@theme/themeProvider';
-import { IThemeContextType } from '@interfaces';
+import { ThemeContext } from 'src/components/common/themeProvider';
+import { IThemeContextType } from '@types';
 
 const useDependencyTheme: () => IThemeContextType = () => {
   const { mode, changeMode } = useContext(ThemeContext);

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import Theme from '@theme/index';
-import { IDynamicStyledProps, IColorProps } from '@interfaces';
-import animateIntroduceText from '@utils/animateText';
+import Theme from 'src/constants/Theme';
+import { IDynamicStyledProps, IColorProps } from '@types';
+import animateIntroduceText from '@utils/animaiton/animateText';
 import useDependencyTheme from './useDependencyTheme';
 
 interface ITextLoopReturn extends IDynamicStyledProps, IColorProps {

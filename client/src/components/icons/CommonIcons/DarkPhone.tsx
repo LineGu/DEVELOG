@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import { IIconProps } from '@interfaces';
-import Theme from '@theme/index';
+import { IIconProps } from '@types';
+import Theme from 'src/constants/Theme';
 
 const StyledParentBox = styled.div`
   display: flex;

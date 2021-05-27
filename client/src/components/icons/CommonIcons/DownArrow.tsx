@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { IoIosArrowDown } from 'react-icons/io';
-import { IIconProps } from '@interfaces';
+import { IIconProps } from '@types';
 
 const StyledDownArrow = styled(IoIosArrowDown)`
   width: 8vmin;

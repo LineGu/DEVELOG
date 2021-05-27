@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { SiRedux } from 'react-icons/si';
-import { IIconProps } from '@interfaces';
+import { IIconProps } from '@types';
 
 const StyledRedux = styled(SiRedux)<IIconProps>`
   width: 10vw;

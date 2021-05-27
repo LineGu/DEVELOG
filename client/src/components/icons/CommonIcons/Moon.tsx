@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { IoIosMoon } from 'react-icons/io';
-import { IIconProps } from '@interfaces';
+import { IIconProps } from '@types';
 
 const StyledMoon = styled(IoIosMoon)`
   width: 27px;

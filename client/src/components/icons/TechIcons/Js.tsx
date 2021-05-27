@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { DiJsBadge } from 'react-icons/di';
-import { IIconProps } from '@interfaces';
+import { IIconProps } from '@types';
 
 const StyledJs = styled(DiJsBadge)<IIconProps>`
   width: 10vw;
