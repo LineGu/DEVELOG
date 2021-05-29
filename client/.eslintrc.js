@@ -16,7 +16,20 @@ module.exports = {
     'no-use-before-define': 'off',
     'import/prefer-default-export': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
+    'no-underscore-dangle': 'off',
     'react/require-default-props': 'off',
+    'import/no-unresolved': 'off',
+    'click-events-have-key-events': 'off',
+    'jsx-a11y/click-events-have-key-events': ['off'],
+    'jsx-a11y/mouse-events-have-key-events': ['off'],
+    'react/jsx-key': ['off'],
+    'jsx-a11y/no-static-element-interactions': [
+      'error',
+      {
+        handlers: ['onMouseDown', 'onMouseUp', 'onKeyPress', 'onKeyDown', 'onKeyUp'],
+      },
+    ],
+
     // airbnb ESLint 구성의 문제를 해결하기 위함
     'import/extensions': [
       'error',

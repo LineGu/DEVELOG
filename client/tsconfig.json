@@ -7,7 +7,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "lib": ["dom", "es2017"],
-    "module": "esnext",
+    "module": "ESNext",
     "moduleResolution": "node",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
@@ -21,15 +21,28 @@
     "strictFunctionTypes": true /* Enable strict checking of function types. */,
     "strictBindCallApply": true /* Enable strict 'bind', 'call', and 'apply' methods on functions. */,
     "strictPropertyInitialization": true /* Enable strict checking of property initialization in classes. */,
-    "target": "esnext",
+    "target": "ESNext",
     "checkJs": true,
     "noImplicitThis": true /* Raise error on 'this' expressions with an implied 'any' type. */,
-    //"noUncheckedIndexedAccess": true /* Include 'undefined' in index signature results */,
-    // "noPropertyAccessFromIndexSignature": true /* Require undeclared properties from index signatures to use element accesses. */,
-    /* Experimental Options */
+            //"noUncheckedIndexedAccess": true /* Include 'undefined' in index signature results */,
+            // "noPropertyAccessFromIndexSignature": true /* Require undeclared properties from index signatures to use element accesses. */,
+            /* Experimental Options */
     "experimentalDecorators": true /* Enables experimental support for ES7 decorators. */,
-    "emitDecoratorMetadata": true /* Enables experimental support for emitting type metadata for decorators. */
+    "emitDecoratorMetadata": true /* Enables experimental support for emitting type metadata for decorators. */,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@types": ["src/@types/index.d.ts"],
+      "@components/*": ["src/components/*"],
+      "@icons": ["src/assets/icons/index.ts"],
+      "@config/*": ["src/config/*"],
+      "@constants/*": ["src/constants/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@utils/*": ["src/utils/*"],
+      "@img/*": ["src/assets/images/*"],
+    }
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts","**/*.tsx","**/*.jsx"]
 }
+

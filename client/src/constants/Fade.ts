@@ -1,0 +1,12 @@
+const FADE = {
+  IN: 'IN',
+  OUT: 'OUT',
+  REPEAT_START_TIMING: 3000,
+  TEXT_PERIOD: 4000,
+  MINIMUM_GAP_BOXES: '1%',
+  MAXIMUM_GAP_BOXES: '100%',
+  NUM_HIDE_TEXT: '0%',
+  NUM_SHOW_TEXT: '100%',
+};
+
+export default FADE;
