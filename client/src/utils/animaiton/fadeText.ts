@@ -1,34 +1,10 @@
-import { Dispatch, SetStateAction } from 'react';
-
-interface IFadeInOutProps {
-  isMounted: boolean;
-  setMargin: Dispatch<SetStateAction<string>>;
-  setOpacity: Dispatch<SetStateAction<string>>;
-}
-
-interface IFadeProps extends IFadeInOutProps {
-  timer: NodeJS.Timeout;
-  method: string;
-}
-
-interface IFadeFunc {
-  (props: IFadeProps): void;
-}
-
-interface IFadeInOutFunc {
-  (props: IFadeInOutProps): void;
-}
-
-const REPEAT_START_TIMING = 3000;
-const TEXT_PERIOD = 4000;
-const MINIMUM_GAP_BOXES = '1%';
-const MAXIMUM_GAP_BOXES = '100%';
-const NUM_HIDE_TEXT = '0%';
-const NUM_SHOW_TEXT = '100%';
+import { IFadeFunc, IFadeInOutFunc } from '@types';
+import FADE from '@constants/Fade';
 
 const fadeText: IFadeFunc = (props) => {
   const { isMounted, setMargin, setOpacity, timer, method } = props;
-  const numListToApply = method === 'OUT' ? [MAXIMUM_GAP_BOXES, NUM_HIDE_TEXT] : [MINIMUM_GAP_BOXES, NUM_SHOW_TEXT];
+  const numListToApply =
+    method === FADE.OUT ? [FADE.MAXIMUM_GAP_BOXES, FADE.NUM_HIDE_TEXT] : [FADE.MINIMUM_GAP_BOXES, FADE.NUM_SHOW_TEXT];
   if (!isMounted) {
     clearTimeout(timer);
     return;
@@ -39,15 +15,15 @@ const fadeText: IFadeFunc = (props) => {
 
 export const fadeOutTextBox: IFadeInOutFunc = (props) => {
   const setTimingText = setTimeout(() => {
-    fadeText({ ...props, timer: setTimingText, method: 'OUT' });
+    fadeText({ ...props, timer: setTimingText, method: FADE.OUT });
     const hideText = setInterval(() => {
-      fadeText({ ...props, timer: hideText, method: 'OUT' });
-    }, TEXT_PERIOD);
-  }, REPEAT_START_TIMING);
+      fadeText({ ...props, timer: hideText, method: FADE.OUT });
+    }, FADE.TEXT_PERIOD);
+  }, FADE.REPEAT_START_TIMING);
 };
 
 export const fadeInTextBox: IFadeInOutFunc = (props) => {
   const timerToShow = setInterval(() => {
-    fadeText({ ...props, timer: timerToShow, method: 'IN' });
-  }, TEXT_PERIOD);
+    fadeText({ ...props, timer: timerToShow, method: FADE.IN });
+  }, FADE.TEXT_PERIOD);
 };

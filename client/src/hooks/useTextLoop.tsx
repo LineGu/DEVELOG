@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Theme from 'src/constants/Theme';
+import Theme from '@constants/Theme';
 import { IDynamicStyledProps, IColorProps } from '@types';
 import animateIntroduceText from '@utils/animaiton/animateText';
 import useDependencyTheme from './useDependencyTheme';

@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ThemeContext } from 'src/components/common/themeProvider';
+import { ThemeContext } from '@components/common/ThemeProvider/ThemeProvider';
 import { IThemeContextType } from '@types';
 
 const useDependencyTheme: () => IThemeContextType = () => {

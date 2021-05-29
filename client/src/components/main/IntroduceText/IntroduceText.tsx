@@ -1,7 +1,7 @@
 import React, { Fragment, ReactElement } from 'react';
 import styled from 'styled-components';
-import { pointWord } from 'src/constants/introduceList';
-import Theme from 'src/constants/Theme';
+import { pointWord } from '@constants/introduceList';
+import Theme from '@constants/Theme';
 
 interface IIntroduceTextProps {
   introduce: string;

@@ -1,10 +1,10 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import useTextLoop from '@hooks/useTextLoop';
-import introduceList from 'src/constants/introduceList';
-import Theme from 'src/constants/Theme';
-import FocusBox from 'src/components/main/FocusBox/index';
-import IntroduceText from 'src/components/main/IntroduceText/index';
+import introduceList from '@constants/introduceList';
+import Theme from '@constants/Theme';
+import FocusBox from '@components/main/FocusBox/index';
+import IntroduceText from '@components/main/IntroduceText/index';
 import { IDynamicStyledProps } from '@types';
 
 const StyledFocusBox = styled(FocusBox)`

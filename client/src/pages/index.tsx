@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import MainPage from 'src/components/main/Main';
+import MainPage from '@components/main/Page';
 
 interface IPageProps {
   mode: string;

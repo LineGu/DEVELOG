@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import { MenuIcon } from '@icons/index';
-import Theme from 'src/constants/Theme';
+import { MenuIcon } from '@icons';
+import Theme from '@constants/Theme';
 
 interface IResponsiveMenuProps {
   onClick: () => void;

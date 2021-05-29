@@ -1,6 +1,6 @@
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import Theme from 'src/constants/Theme';
+import Theme from '@constants/Theme';
 
 const StyledFooterSection = styled.header`
   display: flex;

@@ -1,6 +1,6 @@
 import React, { ReactElement, useState, useCallback } from 'react';
 import styled from 'styled-components';
-import Theme from 'src/constants/Theme';
+import Theme from '@constants/Theme';
 import { ILinkPageProps } from '@types';
 import ResponsiveMenu from './ResponsiveMenu';
 import StaticPageNav from './StaticPageNav';

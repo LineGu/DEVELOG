@@ -1,12 +1,12 @@
 import React, { ReactElement } from 'react';
-import BlogPageComponent from 'src/components/blog/Blog';
+import PostPage from '@components/blog/Page';
 
 interface IPageProps {
   mode: string;
 }
 
 const BlogPage = ({ mode = 'LightMode' }: IPageProps): ReactElement => {
-  return <BlogPageComponent mode={mode} />;
+  return <PostPage mode={mode} />;
 };
 
 export default BlogPage;

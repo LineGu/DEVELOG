@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import Theme from 'src/constants/Theme';
+import Theme from '@constants/Theme';
 import { ILinkPageProps, IColorProps } from '@types';
 
 const StyledLink = styled.div<IColorProps>`

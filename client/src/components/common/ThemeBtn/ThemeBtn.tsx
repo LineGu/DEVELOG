@@ -1,8 +1,8 @@
-import React, { ReactElement, useContext } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import Theme from 'src/constants/Theme';
-import { ThemeContext } from 'src/components/common/themeProvider';
-import { SunIcon, MoonIcon } from '@icons/index';
+import Theme from '@constants/Theme';
+import { SunIcon, MoonIcon } from '@icons';
+import useDependencyTheme from '@hooks/useDependencyTheme';
 import { IButtonProps, IComponentProps } from '@types';
 
 const StyledToggle = styled.div`
@@ -14,7 +14,6 @@ const StyledToggle = styled.div`
   flex-wrap: nowrap;
   width: 31px;
   height: 31px;
-  margin: 76vh 0 0 4vw;
   border: 1px solid ${() => Theme.BASE};
   border-radius: 50%;
   overflow: hidden;
@@ -96,12 +95,12 @@ const StyledModeText = styled.span`
   opacity: 100%;
 `;
 
-function ThemeButton({ onClick, className }: IButtonProps & IComponentProps): ReactElement {
-  const { mode } = useContext(ThemeContext);
+function ThemeButton({ className }: IButtonProps & IComponentProps): ReactElement {
+  const { mode, changeMode } = useDependencyTheme();
   const [currentMode, newMode] = mode === 'LightMode' ? ['Light', 'Dark'] : ['Dark', 'Light'];
 
   return (
-    <StyledToggle onClick={onClick} theme={currentMode} className={className}>
+    <StyledToggle onClick={changeMode} theme={currentMode} className={className}>
       <StyledModeText className="mode">{newMode} Mode</StyledModeText>
       <StyledIconBox className={currentMode}>
         <MoonIcon className="moonImg" />

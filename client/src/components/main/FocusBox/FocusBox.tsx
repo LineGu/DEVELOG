@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import Theme from 'src/constants/Theme';
+import Theme from '@constants/Theme';
 import { IDynamicStyledProps, IComponentProps } from '@types';
 
 const StyledFocusBox = styled.div<IDynamicStyledProps>`

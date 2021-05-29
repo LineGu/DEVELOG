@@ -1,11 +1,10 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import PageNav from 'src/components/common/PageNav/PageNav';
-import Theme from 'src/constants/Theme';
-import ThemeButton from 'src/components/common/ThemeBtn/index';
+import Theme from '@constants/Theme';
+import PageNav from '@components/common/PageNav';
+import BlogMarkLink from '@components/common/BlogMarkLink';
 import useDependencyTheme from '@hooks/useDependencyTheme';
 import { ILinkPageProps } from '@types';
-import BlogMarkLink from '../BlogMarkLink/index';
 
 const StyledHeaderSection = styled.header`
   display: flex;
@@ -42,18 +41,15 @@ const StyledHeaderBaseLine = styled.div`
 `;
 
 function Header({ currentPage }: ILinkPageProps): ReactElement {
-  const { changeMode } = useDependencyTheme();
+  useDependencyTheme();
 
   return (
-    <>
-      <StyledHeaderSection>
-        <StyledHeaderBaseLine>
-          <BlogMarkLink />
-          <PageNav currentPage={currentPage} />
-        </StyledHeaderBaseLine>
-      </StyledHeaderSection>
-      <ThemeButton onClick={changeMode} />
-    </>
+    <StyledHeaderSection>
+      <StyledHeaderBaseLine>
+        <BlogMarkLink />
+        <PageNav currentPage={currentPage} />
+      </StyledHeaderBaseLine>
+    </StyledHeaderSection>
   );
 }
 

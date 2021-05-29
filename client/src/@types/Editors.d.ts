@@ -1,11 +1,11 @@
-import BoldEditor from '@utils/markdown/markdownEditor/Editors/Bold';
-import CheckBoxEditor from '@utils/markdown/markdownEditor/Editors/CheckBox';
-import CodeEditor from '@utils/markdown/markdownEditor/Editors/Code';
-import HeadEditor from '@utils/markdown/markdownEditor/Editors/Head';
-import ImgEditor from '@utils/markdown/markdownEditor/Editors/Img';
-import ItalicEditor from '@utils/markdown/markdownEditor/Editors/Italic';
-import LinkEditor from '@utils/markdown/markdownEditor/Editors/Link';
-import QuoteEditor from '@utils/markdown/markdownEditor/Editors/Quote';
+import BoldEditor from 'src/markdownController/ToolBarEditors/Editors/Bold';
+import CheckBoxEditor from 'src/markdownController/ToolBarEditors/Editors/CheckBox';
+import CodeEditor from 'src/markdownController/ToolBarEditors/Editors/Code';
+import HeadEditor from 'src/markdownController/ToolBarEditors/Editors/Head';
+import ImgEditor from 'src/markdownController/ToolBarEditors/Editors/Img';
+import ItalicEditor from 'src/markdownController/ToolBarEditors/Editors/Italic';
+import LinkEditor from 'src/markdownController/ToolBarEditors/Editors/Link';
+import QuoteEditor from 'src/markdownController/ToolBarEditors/Editors/Quote';
 
 export declare interface EditorType {
   h1: HeadEditor;

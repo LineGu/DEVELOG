@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import IconBox from 'src/components/main/IconBox/index';
-import { MysqlIcon, NextIcon, ReduxIcon, ReactIcon, CssIcon, HtmlIcon, JsIcon } from '@icons/index';
+import IconBox from '@components/main/IconBox/index';
+import { MysqlIcon, NextIcon, ReduxIcon, ReactIcon, CssIcon, HtmlIcon, JsIcon } from '@icons';
 import { IComponentProps } from '@types';
 
 const StyledTechnicalStackBox = styled(IconBox)`

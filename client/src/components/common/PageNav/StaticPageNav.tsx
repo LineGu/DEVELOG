@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import pageLinkList from 'src/constants/pageLinkList';
-import LinkButton from 'src/components/common/LinkButton/index';
-import Theme from 'src/constants/Theme';
+import pageLinkList from '@constants/pageLinkList';
+import LinkButton from '@components/common/LinkButton/index';
+import Theme from '@constants/Theme';
 import { IComponentProps, ILinkPageProps } from '@types';
 
 const StyledPageNav = styled.nav`

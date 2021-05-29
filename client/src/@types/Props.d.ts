@@ -21,7 +21,7 @@ export declare interface IDynamicStyledProps extends IColorProps {
 
 export declare interface IOnClickEditButton {
   input: string;
-  currentCursorIndex: number;
+  cursorPosition: number[];
   moveCursor: (positionToGo: number[]) => void;
 }
 
@@ -97,4 +97,22 @@ export declare interface ITextInputProps extends IComponentProps {
 export declare interface IThemeContextType {
   mode?: string;
   changeMode?: () => void;
+}
+
+export declare interface IFadeInOutProps {
+  isMounted: boolean;
+  setMargin: Dispatch<SetStateAction<string>>;
+  setOpacity?: Dispatch<SetStateAction<string>>;
+}
+
+export declare interface IChangeOrderProps extends IColorProps {
+  isMounted: boolean;
+  textList: string[];
+  setColor: Dispatch<SetStateAction<string>>;
+  setIntro: Dispatch<SetStateAction<string>>;
+}
+
+export declare interface IFadeProps extends IFadeInOutProps {
+  timer: NodeJS.Timeout;
+  method: string;
 }

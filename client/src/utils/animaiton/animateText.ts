@@ -1,28 +1,6 @@
-import { Dispatch, SetStateAction } from 'react';
-import { IColorProps } from '@types';
-import Theme from 'src/constants/Theme';
+import Theme from '@constants/Theme';
 import { fadeInTextBox, fadeOutTextBox } from '@utils/animaiton/fadeText';
-
-interface IFadeInOutProps {
-  isMounted: boolean;
-  setMargin: Dispatch<SetStateAction<string>>;
-  setOpacity: Dispatch<SetStateAction<string>>;
-}
-
-interface IChangeOrderProps extends IColorProps {
-  isMounted: boolean;
-  textList: string[];
-  setColor: Dispatch<SetStateAction<string>>;
-  setIntro: Dispatch<SetStateAction<string>>;
-}
-
-interface IChangeOrderFunc {
-  (props: IChangeOrderProps): void;
-}
-
-interface IAnimateTextFunc {
-  (props: IFadeInOutProps & IChangeOrderProps): void;
-}
+import { IAnimateTextFunc, IChangeOrderFunc } from '@types';
 
 const TEXT_PERIOD = 4000;
 const MINIMUM_GAP_BOXES = '1%';

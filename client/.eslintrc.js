@@ -16,6 +16,7 @@ module.exports = {
     'no-use-before-define': 'off',
     'import/prefer-default-export': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
+    'no-underscore-dangle': 'off',
     'react/require-default-props': 'off',
     'import/no-unresolved': 'off',
     'click-events-have-key-events': 'off',
