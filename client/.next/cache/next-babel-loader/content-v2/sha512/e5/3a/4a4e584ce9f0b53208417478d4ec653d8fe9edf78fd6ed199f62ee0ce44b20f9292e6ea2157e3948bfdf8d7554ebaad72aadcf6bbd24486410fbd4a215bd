@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './LinkButton';","map":{"version":3,"sources":["/Users/hyungu/Desktop/front-dev/projects/develog/client/components/UI/atoms/LinkButton/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,cAAxB","sourcesContent":["export { default } from './LinkButton';\n"]},"metadata":{},"sourceType":"module"}

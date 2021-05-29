@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './AnimationBox';","map":{"version":3,"sources":["/Users/hyungu/Desktop/front-dev/projects/develog/client/src/components/UI/organisms/AnimationBox/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,gBAAxB","sourcesContent":["export { default } from './AnimationBox';\n"]},"metadata":{},"sourceType":"module"}

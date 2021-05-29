@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './TagArea';","map":{"version":3,"sources":["/Users/hyungu/Desktop/front-dev/projects/develog/client/src/components/post/TagArea/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,WAAxB","sourcesContent":["export { default } from './TagArea';\n"]},"metadata":{},"sourceType":"module"}

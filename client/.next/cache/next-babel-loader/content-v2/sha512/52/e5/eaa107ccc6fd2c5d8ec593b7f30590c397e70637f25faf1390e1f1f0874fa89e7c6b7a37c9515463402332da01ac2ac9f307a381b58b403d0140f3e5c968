@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './TableModal';","map":{"version":3,"sources":["/Users/hyungu/Desktop/front-dev/projects/develog/client/src/components/atoms/TableModal/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,cAAxB","sourcesContent":["export { default } from './TableModal';\n"]},"metadata":{},"sourceType":"module"}

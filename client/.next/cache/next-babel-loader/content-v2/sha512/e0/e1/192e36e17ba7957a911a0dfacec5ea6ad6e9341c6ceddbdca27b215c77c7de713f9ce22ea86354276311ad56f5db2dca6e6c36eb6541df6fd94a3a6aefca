@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './TabNav';","map":{"version":3,"sources":["/Users/hyungu/Desktop/front-dev/projects/develog/client/components/UI/molecules/TabNav/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,UAAxB","sourcesContent":["export { default } from './TabNav';\n"]},"metadata":{},"sourceType":"module"}
