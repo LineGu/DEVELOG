@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './DescriptiveModal';","map":{"version":3,"sources":["/Users/hyungu/Desktop/front-dev/projects/develog/client/src/components/molecules/DescriptiveModal/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,oBAAxB","sourcesContent":["export { default } from './DescriptiveModal';\n"]},"metadata":{},"sourceType":"module"}

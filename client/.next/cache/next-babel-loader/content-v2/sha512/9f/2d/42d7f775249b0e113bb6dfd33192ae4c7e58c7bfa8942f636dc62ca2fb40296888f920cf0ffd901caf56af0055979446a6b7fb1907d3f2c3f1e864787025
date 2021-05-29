@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './EditBoard';","map":{"version":3,"sources":["/Users/hyungu/Desktop/front-dev/projects/develog/client/src/components/post/EditBoard/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,aAAxB","sourcesContent":["export { default } from './EditBoard';\n"]},"metadata":{},"sourceType":"module"}
