@@ -1,3 +1,3 @@
-const pageLinkList: string[] = ['ABOUT', 'PORTFOLIO', 'BLOG', 'CONTACT', 'LOGIN'];
+const pageLinkList: string[] = ['FEED', 'MY'];
 
 export default pageLinkList;
