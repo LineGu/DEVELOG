@@ -6,7 +6,7 @@ import ThemeButton from '@components/common/ThemeBtn';
 import { IPagePorps } from '@types';
 
 const StyledThemeBtn = styled(ThemeButton)`
-  margin: 90vh 0 0 5vw;
+  margin: 60vh 0 0 5vw;
 `;
 
 function MyPageComponent({ mode }: IPagePorps): ReactElement {

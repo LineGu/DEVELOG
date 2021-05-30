@@ -5,6 +5,10 @@ import { IButtonProps, IComponentProps } from '@types';
 const StyledButton = styled.button`
   outline: none;
   border: none;
+  &:hover {
+    opacity: 80%;
+    cursor: pointer;
+  }
 `;
 
 function Button({ onClick, children, className, type = 'button' }: IButtonProps & IComponentProps): ReactElement {
