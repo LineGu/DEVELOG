@@ -1,8 +1,10 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import pageLinkList from '@constants/pageLinkList';
+import myPageLinkList from '@constants/myPageLinkList';
 import LinkButton from '@components/common/LinkButton/index';
 import Theme from '@constants/Theme';
+import { isInMyPage } from '@utils/common';
 import { IComponentProps, ILinkPageProps } from '@types';
 
 const StyledPageNav = styled.nav`
@@ -22,9 +24,10 @@ const StyledPageNav = styled.nav`
 `;
 
 function StaticPageNav({ currentPage, className }: ILinkPageProps & IComponentProps): ReactElement {
+  const pageList = isInMyPage(currentPage) ? myPageLinkList : pageLinkList;
   return (
     <StyledPageNav className={className}>
-      {pageLinkList.map((linkName, index) => (
+      {pageList.map((linkName, index) => (
         <LinkButton linkName={linkName} currentPage={currentPage} key={index} />
       ))}
     </StyledPageNav>
