@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './PostButton';","map":{"version":3,"sources":["/Users/hyungu/Desktop/front-dev/projects/develog/client/src/components/common/PostButton/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,cAAxB","sourcesContent":["export { default } from './PostButton';\n"]},"metadata":{},"sourceType":"module"}
