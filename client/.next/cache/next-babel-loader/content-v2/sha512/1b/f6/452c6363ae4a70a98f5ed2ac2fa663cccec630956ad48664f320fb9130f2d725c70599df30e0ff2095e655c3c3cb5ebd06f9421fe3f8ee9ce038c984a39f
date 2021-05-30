@@ -1,1 +1,0 @@
-{"ast":null,"code":"export { default } from './TextLoop';","map":{"version":3,"sources":["/Users/hyungu/Desktop/front-dev/projects/develog/client/src/components/UI/molecules/TextLoop/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,YAAxB","sourcesContent":["export { default } from './TextLoop';\n"]},"metadata":{},"sourceType":"module"}

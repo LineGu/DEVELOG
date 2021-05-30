@@ -1,1 +1,0 @@
-{"ast":null,"code":"export { default } from './WritingBoard';","map":{"version":3,"sources":["/Users/hyungu/Desktop/front-dev/projects/develog/client/src/components/post/WritingBoard/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,gBAAxB","sourcesContent":["export { default } from './WritingBoard';\n"]},"metadata":{},"sourceType":"module"}

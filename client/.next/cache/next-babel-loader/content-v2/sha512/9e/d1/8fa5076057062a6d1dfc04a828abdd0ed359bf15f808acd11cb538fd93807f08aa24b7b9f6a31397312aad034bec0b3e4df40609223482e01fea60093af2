@@ -1,1 +1,0 @@
-{"ast":null,"code":"export { default } from './BodyContainer';","map":{"version":3,"sources":["/Users/hyungu/Desktop/front-dev/projects/develog/client/src/components/about/BodyContainer/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,iBAAxB","sourcesContent":["export { default } from './BodyContainer';\n"]},"metadata":{},"sourceType":"module"}

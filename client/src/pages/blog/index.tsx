@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import PostPage from '@components/blog/Page';
+import PostPage from '@components/log/Page';
 
 interface IPageProps {
   mode: string;
