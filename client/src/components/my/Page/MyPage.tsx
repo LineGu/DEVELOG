@@ -6,16 +6,16 @@ import ThemeButton from '@components/common/ThemeBtn';
 import { IPagePorps } from '@types';
 
 const StyledThemeBtn = styled(ThemeButton)`
-  margin: 76vh 0 0 5vw;
+  margin: 60vh 0 0 5vw;
 `;
 
-function BlogPageComponent({ mode }: IPagePorps): ReactElement {
+function MyPageComponent({ mode }: IPagePorps): ReactElement {
   return (
     <PageBase mode={mode} title="Develog">
-      <Header currentPage="blog" />
+      <Header currentPage="my" />
       <StyledThemeBtn />
     </PageBase>
   );
 }
 
-export default BlogPageComponent;
+export default MyPageComponent;
