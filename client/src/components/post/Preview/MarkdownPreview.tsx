@@ -4,7 +4,8 @@ import Theme from '@constants/Theme';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
 import { MarkdownStyleWrapper, CodeBox, LinkRenderer } from '@components/common/MarkdownStyleWrapper/index';
-import Controller from 'src/markdownController/Controller/index';
+import BlankController from 'src/markdownController/blank';
+import useDependencyTheme from '@hooks/useDependencyTheme';
 
 interface IPreviewProps {
   input: string;
@@ -19,8 +20,9 @@ const StyledPreviewBox = styled(MarkdownStyleWrapper)`
 `;
 
 function MarkdownPreview({ input }: IPreviewProps): ReactElement {
-  const markdownController = new Controller();
-  const updatedInput = markdownController.applyBlankToMarkdown(input);
+  useDependencyTheme();
+  const blankController = new BlankController();
+  const updatedInput = blankController.applyBlankToMarkdown(input);
 
   const renderOptions = { code: CodeBox, link: LinkRenderer };
 

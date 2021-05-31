@@ -8,7 +8,7 @@ interface IBlockProps {
     checkedPoint: number[];
     setCheckedPoint: setStateNumberArr;
     resetCheckedPoint: () => void;
-    onClick: (tableCount: number[]) => void;
+    onClick: (editType: string, tableCount: number[]) => void;
   };
 }
 
@@ -37,7 +37,7 @@ function Block({ blockPorps }: IBlockProps): ReactElement {
 
   const addTableByClick = useCallback(() => {
     const [rowCount, columnCount] = [xPoint + 1, yPoint + 1];
-    onClick([rowCount, columnCount]);
+    onClick('table', [rowCount, columnCount]);
     resetCheckedPoint();
   }, [checkedPoint]);
 
