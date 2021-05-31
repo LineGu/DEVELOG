@@ -1,20 +1,10 @@
-import React, { ReactElement, Dispatch, SetStateAction } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import Theme from '@constants/Theme';
 import Buttons from '@components/post/ToolBar/Buttons';
-import { IUploadState } from '@types';
-import { Editors, tableEditor } from 'src/markdownController/ToolBarEditors';
-
-interface IEditButtonProps {
-  editButtonProps: {
-    inputAreaElem: React.RefObject<HTMLTextAreaElement>;
-    setUploadState: React.Dispatch<React.SetStateAction<IUploadState>>;
-    moveCursor: (positionToGo: number[]) => void;
-    input: string;
-    setInput: Dispatch<SetStateAction<string>>;
-    cursorPosition: number[];
-  };
-}
+import { IEditComponentProps } from '@types';
+import ImgEditor from 'src/markdownController/Img';
+import Editors from 'src/markdownController/Editor';
 
 const StyledEditButtonBox = styled.div`
   display: flex;
@@ -44,18 +34,22 @@ const StyledEditButtonBox = styled.div`
   }
 `;
 
-function ToolBar({ editButtonProps }: IEditButtonProps): ReactElement {
-  const { input, setInput, setUploadState, moveCursor, cursorPosition } = editButtonProps;
+function ToolBar({ codemirrorProps }: IEditComponentProps): ReactElement {
+  const { setUploadState, cm } = codemirrorProps;
 
-  const onClickEditButton = (editType: string): void => {
-    const editor = Editors[editType];
-    const updatedInput = editor.onClickEditButton({ input, cursorPosition, moveCursor });
-    setInput(updatedInput);
+  const onClickEditButton = (editType: string, tableCount?: number[]): void => {
+    const editor = new Editors(cm.current);
+    editor.onEdit(editType, tableCount);
   };
 
-  const onClickTableButton = (tableCount: number[]) => {
-    const updatedInput = tableEditor.onClickEditButton({ input, cursorPosition, moveCursor, tableCount });
-    setInput(updatedInput);
+  const onInsertImg = async (file: File): Promise<void> => {
+    const imgEditor = new ImgEditor(cm.current);
+    const uploadChecker = setInterval(() => {
+      setUploadState(imgEditor.uploadingState);
+    }, 10);
+    await imgEditor.execute(file);
+    setUploadState(imgEditor.uploadingState);
+    clearInterval(uploadChecker);
   };
 
   return (
@@ -66,9 +60,9 @@ function ToolBar({ editButtonProps }: IEditButtonProps): ReactElement {
       <Buttons.Bold onClick={() => onClickEditButton('bold')} />
       <Buttons.Italic onClick={() => onClickEditButton('italic')} />
       <Buttons.Link onClick={() => onClickEditButton('link')} />
-      <Buttons.Img onClick={onClickEditButton} setUploadState={setUploadState} />
+      <Buttons.Img onClick={onInsertImg} />
       <Buttons.Quote onClick={() => onClickEditButton('quote')} />
-      <Buttons.Table onClick={onClickTableButton} />
+      <Buttons.Table onClick={onClickEditButton} />
       <Buttons.Code onClick={() => onClickEditButton('code')} />
       <Buttons.CheckBox onClick={() => onClickEditButton('checkbox')} />
     </StyledEditButtonBox>

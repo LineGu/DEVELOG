@@ -7,7 +7,7 @@ import Block from './Block';
 interface ITableModalProps extends IComponentProps {
   isHidden: boolean;
   setIsHidden: setStateBool;
-  onClick: (tableCount: number[]) => void;
+  onClick: (editType: string, tableCount: number[]) => void;
 }
 
 const StyledModal = styled.div<{ isHidden: boolean }>`
@@ -18,6 +18,7 @@ const StyledModal = styled.div<{ isHidden: boolean }>`
   padding: 5px 15px 10px 15px;
   border-radius: 0.2em;
   pointer-events: visibleFill;
+  z-index: 10;
   background-color: ${() => Theme.MODAL_EDIT};
 
   & > span {
