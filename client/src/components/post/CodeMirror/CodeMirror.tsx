@@ -2,7 +2,14 @@ import React, { ReactElement, useCallback } from 'react';
 import { IEditComponentProps, IOnDragEventFunc } from '@types';
 import MESSAGE from '@constants/message';
 import ImgEditor from 'src/markdownController/Img';
-import DivTextArea from '@components/post/DivTextArea';
+import dynamic from 'next/dynamic';
+
+const DivTextArea = dynamic(
+  () => {
+    return import('@components/post/DivTextArea');
+  },
+  { ssr: false },
+);
 
 function CodeMirror({ codemirrorProps: props, className }: IEditComponentProps): ReactElement {
   const { input, setInput, inputAreaElem, setUploadState, cm } = props;

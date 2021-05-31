@@ -79,6 +79,7 @@ function DivTextArea(props: MarkdownEditorProps): ReactElement {
   const initCodeMirror = () => {
     if (!refElem.current) return;
     if (detectJSDOM()) return;
+
     cm.current = CodeMirror.fromTextArea(refElem.current, {
       mode: 'markdown',
       theme: 'one-light',
@@ -87,7 +88,8 @@ function DivTextArea(props: MarkdownEditorProps): ReactElement {
     });
     cm.current.setValue(input);
     cm.current.on('change', (code) => {
-      setInput(code.getValue());
+      const updatedInput = code.getValue();
+      setInput(updatedInput);
     });
     cm.current.on('drop', (_, event) => onDrop(event));
   };
