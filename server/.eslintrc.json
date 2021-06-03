@@ -24,7 +24,8 @@
         "no-use-before-define": "off",
         "import/prefer-default-export": "off",
         "import/no-unresolved": "off",
-        "import/extensions": "off"
+        "import/extensions": "off",
+        "no-underscore-dangle": "off"
     },
     "ignorePatterns": "**/*.spec.ts"
 }

@@ -32,6 +32,10 @@
     "emitDecoratorMetadata": true /* Enables experimental support for emitting type metadata for decorators. */,
     "sourceMap": true,
     "baseUrl": ".",
+    "paths": {
+      "@MESSAGE" :["src/constants/MESSAGE.ts"],
+      "@STATUS" :["src/constants/STATUS.ts"]
+    }
   },
   "exclude": ["node_modules"],
   "include": ["**/*.ts"]
