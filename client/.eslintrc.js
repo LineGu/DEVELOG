@@ -14,6 +14,7 @@ module.exports = {
     'prettier/prettier': 0,
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'no-use-before-define': 'off',
+    'no-restricted-globals': ['error', 'event', 'fdescribe'],
     'import/prefer-default-export': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
     'no-underscore-dangle': 'off',

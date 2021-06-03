@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import Button from '@components/common/Button/index';
 import Theme from '@constants/Theme';
+import { goBackPage } from '@utils/common';
 
 const StyledButtonBox = styled.div`
   position: absolute;
@@ -52,7 +53,7 @@ const StyledButton = styled(Button)`
 function PostButtons(): ReactElement {
   return (
     <StyledButtonBox>
-      <StyledButton onClick={() => console.log('나가기')} className="back">
+      <StyledButton onClick={goBackPage} className="back">
         나가기
       </StyledButton>
       <StyledButton onClick={() => console.log('임시저장')} className="save">
