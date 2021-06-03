@@ -9,17 +9,19 @@ import useDependencyTheme from '@hooks/useDependencyTheme';
 
 interface IPreviewProps {
   input: string;
+  className?: string;
 }
 
 const StyledPreviewBox = styled(MarkdownStyleWrapper)`
   width: 50%;
   background-color: ${() => Theme.PREVIEW_BACK};
+
   @media (max-width: ${() => Theme.PC}) {
     display: none;
   }
 `;
 
-function MarkdownPreview({ input }: IPreviewProps): ReactElement {
+function MarkdownPreview({ input, className }: IPreviewProps): ReactElement {
   useDependencyTheme();
   const blankController = new BlankController();
   const updatedInput = blankController.applyBlankToMarkdown(input);
@@ -27,7 +29,7 @@ function MarkdownPreview({ input }: IPreviewProps): ReactElement {
   const renderOptions = { code: CodeBox, link: LinkRenderer };
 
   return (
-    <StyledPreviewBox>
+    <StyledPreviewBox className={className}>
       <ReactMarkdown
         plugins={[[gfm, { tableCellPadding: 'true' }]]}
         source={updatedInput}
