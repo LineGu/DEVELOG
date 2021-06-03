@@ -35,7 +35,7 @@ export declare interface IOnHoverDivFunc {
 }
 
 export declare interface IOnDragEventFunc {
-  (event: React.DragEvent<HTMLElement>): void;
+  (event: DragEvent): void;
 }
 
 export declare interface IEditImgFunc {
