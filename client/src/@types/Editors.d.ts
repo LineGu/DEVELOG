@@ -2,7 +2,7 @@ import BoldEditor from 'src/markdownController/ToolBarEditors/Editors/Bold';
 import CheckBoxEditor from 'src/markdownController/ToolBarEditors/Editors/CheckBox';
 import CodeEditor from 'src/markdownController/ToolBarEditors/Editors/Code';
 import HeadEditor from 'src/markdownController/ToolBarEditors/Editors/Head';
-import ImgEditor from 'src/markdownController/ToolBarEditors/Editors/Img';
+import ImgEditor from 'src/markdownController/Img';
 import ItalicEditor from 'src/markdownController/ToolBarEditors/Editors/Italic';
 import LinkEditor from 'src/markdownController/ToolBarEditors/Editors/Link';
 import QuoteEditor from 'src/markdownController/ToolBarEditors/Editors/Quote';

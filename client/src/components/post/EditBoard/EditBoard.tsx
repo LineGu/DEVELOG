@@ -1,14 +1,15 @@
-import React, { ReactElement, useState, useRef, useEffect } from 'react';
+import React, { ReactElement, useState, useRef } from 'react';
 import styled from 'styled-components';
 import Theme from '@constants/Theme';
-import TextArea from '@components/post/TextArea';
+import TextArea from '@components/post/CodeMirror';
 import PostTitleInput from '@components/post/TitleArea/index';
 import EditorTagArea from '@components/post/TagArea';
 import EditButtonBox from '@components/post/ToolBar/ToolBar';
+import { EditorFromTextArea } from 'codemirror';
 import { IPostInputProps, IUploadState } from '@types';
 import ProcessBar from '@components/post/ProgressBar';
-import useCursorPoint from '@hooks/useCursorPoint';
 import Devider from '@components/common/Devider';
+import useDependencyTheme from '@hooks/useDependencyTheme';
 
 const EditorAreaWrapper = styled.div`
   width: 50%;
@@ -33,25 +34,21 @@ const StyeldDevider = styled(Devider)`
 `;
 
 function EditBoard(MarkDownProps: IPostInputProps): ReactElement {
+  useDependencyTheme();
   const inputAreaElem = useRef<HTMLTextAreaElement>(null);
-  const { cursorPosition, moveCursor } = useCursorPoint(inputAreaElem.current);
+  const cm = useRef<EditorFromTextArea>(null);
   const initUploadImgState = { progress: 0, error: '' };
   const [uploadState, setUploadState] = useState<IUploadState>(initUploadImgState);
 
-  useEffect(() => {
-    moveCursor(cursorPosition);
-  }, [cursorPosition]);
-
-  const editButtonProps = { ...MarkDownProps, inputAreaElem, setUploadState, moveCursor, cursorPosition };
-
+  const codemirrorProps = { ...MarkDownProps, inputAreaElem, setUploadState, cm };
   return (
     <EditorAreaWrapper>
       <ProcessBar uploadState={uploadState} />
       <PostTitleInput />
       <StyeldDevider />
       <EditorTagArea />
-      <EditButtonBox editButtonProps={editButtonProps} />
-      <TextArea className="textInput" editButtonProps={editButtonProps} />
+      <EditButtonBox codemirrorProps={codemirrorProps} />
+      <TextArea className="textInput" codemirrorProps={codemirrorProps} />
     </EditorAreaWrapper>
   );
 }

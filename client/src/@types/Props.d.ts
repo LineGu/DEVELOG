@@ -26,12 +26,12 @@ export declare interface IOnClickEditButton {
 }
 
 export declare interface IEditComponentProps extends IComponentProps {
-  editButtonProps: {
+  codemirrorProps: {
     inputAreaElem: React.RefObject<HTMLTextAreaElement>;
     setUploadState: React.Dispatch<React.SetStateAction<IUploadState>>;
-    moveCursor: (positionToGo: number[]) => void;
     input: string;
     setInput: Dispatch<SetStateAction<string>>;
+    cm: React.MutableRefObject<EditorFromTextArea>;
   };
 }
 
@@ -77,7 +77,7 @@ export declare interface ITableProps {
 }
 
 export declare interface ITableOnClick {
-  onClick: (tableCount: number[]) => void;
+  onClick: (editType: string, tableCount: number[]) => void;
 }
 
 export declare interface ITextInputProps extends IComponentProps {

@@ -7,14 +7,14 @@ const MarkdownStyleWrapper = styled.div`
   & > * {
     height: 79vh;
     font-size: 1.125rem;
-    padding: 10vh 6vw;
     outline: none;
-    overflow-y: scroll;
     pointer-events: auto;
     color: ${() => Theme.INTRO};
     line-height: 1.7;
     letter-spacing: -0.004em;
     word-break: keep-all;
+    word-wrap: break-word;
+    white-space: pre-wrap;
     overflow-wrap: break-word;
 
     h1 {

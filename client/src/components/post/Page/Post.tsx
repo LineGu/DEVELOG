@@ -47,6 +47,13 @@ const StyledErrorBox = styled.div`
   }
 `;
 
+const StyledPreview = styled(MarkdownPreview)`
+  & > * {
+    overflow-y: scroll;
+    padding: 10vh 6vw;
+  }
+`;
+
 function PostPage({ mode }: IPagePorps): ReactElement {
   const [input, setInput] = useState<string>('');
   const { changeMode } = useDependencyTheme();
@@ -56,7 +63,7 @@ function PostPage({ mode }: IPagePorps): ReactElement {
       <StyledErrorBox className="error">{MESSAGE.DISPLAY_ERROR}</StyledErrorBox>
       <StyledPostBox>
         <MarkDownEditor input={input} setInput={setInput} />
-        <MarkdownPreview input={input} />
+        <StyledPreview input={input} />
         <StyledThemeButton onClick={changeMode} />
         <PostButtons />
       </StyledPostBox>

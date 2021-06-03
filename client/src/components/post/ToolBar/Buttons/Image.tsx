@@ -3,12 +3,10 @@ import styled from 'styled-components';
 import { BsFillImageFill } from 'react-icons/bs';
 import Theme from '@constants/Theme';
 import Finder from '@components/post/ToolBar/Buttons/Finder';
-import { Editors } from 'src/markdownController/ToolBarEditors/index';
-import { IOnClickSvgFunc, IEditImgFunc, SetStateProcess } from '@types';
+import { IOnClickSvgFunc, IEditImgFunc } from '@types';
 
 interface IImgButtonProps {
-  onClick: (editType: string) => void;
-  setUploadState: SetStateProcess;
+  onClick: (file: File) => Promise<void>;
 }
 
 const StyledImageIcon = styled(BsFillImageFill)`
@@ -28,7 +26,7 @@ const StyledImageIcon = styled(BsFillImageFill)`
   }
 `;
 
-function ImgButton({ onClick, setUploadState }: IImgButtonProps): ReactElement {
+function ImgButton({ onClick }: IImgButtonProps): ReactElement {
   const openFinder: IOnClickSvgFunc = (event) => {
     const finderElem = event.currentTarget.nextSibling as HTMLButtonElement;
     finderElem.click();
@@ -38,14 +36,7 @@ function ImgButton({ onClick, setUploadState }: IImgButtonProps): ReactElement {
     const finderElem = event.target as HTMLInputElement;
     const { 0: file } = finderElem.files as FileList;
     if (!file) return;
-    const checkUploadState = setInterval(() => {
-      setUploadState(Editors.img.uploadingState);
-    }, 10);
-
-    await Editors.img.uploadImg(file);
-    onClick('img');
-    setUploadState(Editors.img.uploadingState);
-    clearInterval(checkUploadState);
+    onClick(file);
   };
 
   return (
