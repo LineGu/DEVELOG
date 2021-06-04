@@ -38,5 +38,5 @@
     }
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "src/controllers/post/index"]
 }
