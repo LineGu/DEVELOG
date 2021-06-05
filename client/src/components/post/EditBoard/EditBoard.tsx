@@ -4,12 +4,19 @@ import Theme from '@constants/Theme';
 import TextArea from '@components/post/CodeMirror';
 import PostTitleInput from '@components/post/TitleArea/index';
 import EditorTagArea from '@components/post/TagArea';
-import EditButtonBox from '@components/post/ToolBar/ToolBar';
 import { EditorFromTextArea } from 'codemirror';
 import { IPostInputProps, IUploadState } from '@types';
 import ProcessBar from '@components/post/ProgressBar';
 import Devider from '@components/common/Devider';
 import useDependencyTheme from '@hooks/useDependencyTheme';
+import dynamic from 'next/dynamic';
+
+const EditButtonBox = dynamic(
+  () => {
+    return import('@components/post/ToolBar/ToolBar');
+  },
+  { ssr: false },
+);
 
 const EditorAreaWrapper = styled.div`
   width: 50%;

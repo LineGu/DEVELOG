@@ -1,6 +1,8 @@
 import express from 'express';
+import postController from '../../controllers/post/index';
 
 const router = express.Router();
-router.route('/about').post().get().delete().patch();
 
-module.exports = router;
+router.post('/', postController.create);
+
+export default router;

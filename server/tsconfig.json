@@ -35,8 +35,12 @@
     "paths": {
       "@MESSAGE" :["src/constants/MESSAGE.ts"],
       "@STATUS" :["src/constants/STATUS.ts"]
-    }
+    },
+    "typeRoots": [
+      "./src/@types",
+      "./node_modules/@types"
+    ],
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts", "src/controllers/post/index"]
+  "include": ["**/*.ts", "src/controllers/post/index.ts"]
 }

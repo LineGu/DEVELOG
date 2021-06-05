@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import Button from '@components/common/Button/index';
 import Theme from '@constants/Theme';
 import { goBackPage } from '@utils/common';
@@ -59,7 +60,19 @@ function PostButtons(): ReactElement {
       <StyledButton onClick={() => console.log('임시저장')} className="save">
         임시저장
       </StyledButton>
-      <StyledButton onClick={() => console.log('등록')} className="submit">
+      <StyledButton
+        onClick={async () => {
+          try {
+            await axios.post('http://127.0.0.1:8080/about', {
+              title: 'sdafdasf',
+              content: 'asdfsadfsadfadsf',
+            });
+          } catch (err) {
+            console.log(err);
+          }
+        }}
+        className="submit"
+      >
         등록
       </StyledButton>
     </StyledButtonBox>

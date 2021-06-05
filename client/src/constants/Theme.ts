@@ -31,6 +31,7 @@ export const LightMode: ThemeType = {
   OUT_LINE: '#37628A',
   PREVIEW_BACK: '#fafafa',
   TEXT_SELECT: '#dfdfdf',
+  LOGIN_MODAL: '#212121',
 };
 
 export const DarkMode: ThemeType = {
@@ -62,6 +63,7 @@ export const DarkMode: ThemeType = {
   OUT_LINE: '#37628A',
   PREVIEW_BACK: '#222121',
   TEXT_SELECT: '#dfdfdf',
+  LOGIN_MODAL: '#253343',
 };
 
 export default Theme;

@@ -7,7 +7,7 @@ const startServer = async (): Promise<void> => {
   const { SERVER_PORT } = process.env;
 
   app.listen(SERVER_PORT, async () => {
-    console.log(`${SERVER_PORT} is open`);
+    console.log(`server ${SERVER_PORT} port is open`);
   });
 };
 

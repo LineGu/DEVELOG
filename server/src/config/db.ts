@@ -1,4 +1,7 @@
 import { ConnectionOptions } from 'typeorm';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const connectionOptions: ConnectionOptions = {
   type: 'mysql',
@@ -10,6 +13,14 @@ const connectionOptions: ConnectionOptions = {
   synchronize: true,
   logging: true,
   entities: ['dist/src/entity/**/*.js'],
+};
+
+export const mysqlSessionOption = {
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT),
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DBNAME,
 };
 
 export default connectionOptions;
